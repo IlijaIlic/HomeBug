@@ -1,0 +1,21 @@
+.hb-header{
+    background-color: #214A31;
+    color: white;
+    height: 5vh;
+    text-align: center;
+    align-content: center;
+    position: sticky;
+    top: 0;
+}
+
+.hb-header-button-container{
+    display: flex;
+    flex-direction: row;
+    justify-content: space-around;
+    align-items: center;
+}
+
+.hb-header-button-container h3{
+    color: white;
+    margin: 0;
+}
