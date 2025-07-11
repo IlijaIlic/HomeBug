@@ -1,21 +1,47 @@
-.hb-header{
-    background-color: #214A31;
+.hb-header {
+    background-color: #4D9F71;
     color: white;
-    height: 5vh;
     text-align: center;
     align-content: center;
-    position: sticky;
-    top: 0;
+    font-family: "Josefin Sans", sans-serif;
+
 }
 
-.hb-header-button-container{
+.hb-header-button-container {
     display: flex;
     flex-direction: row;
-    justify-content: space-around;
+    justify-content: space-between;
     align-items: center;
+    padding-inline: 4vw;
+    padding-block: 5vh;
 }
 
-.hb-header-button-container h3{
+.hb-header-button-container h1 {
     color: white;
     margin: 0;
+    font-size: 4rem;
+}
+
+.hb-header-register {
+    background-color: #eff170;
+    color: #153E42;
+    box-shadow: 0 4px 5px 1px rgba(0, 0, 0, 0.479);
+
+    margin: 0;
+    padding: 0.7rem;
+    padding-inline: 1.5rem;
+    
+    border: none;
+    border-radius: 50px;
+
+    font-family: "Josefin Sans", sans-serif;
+    font-size: 2rem;
+    font-weight: 500;
+
+    transition: transform 0.1s ease-in-out;
+    transform: translateY(0) scale(1);
+}
+
+.hb-header-register:hover {
+    transform: translateY(-5px) scale(1.05);
 }

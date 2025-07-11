@@ -1,11 +1,4 @@
-<div class="hb-page-landing">
-    <div class="hb-landing-nomore">
-        <div class="hb-nomore-background">
-            <h2>No more</h2>
-            <h1>{{currWord}}</h1>
-        </div>
-
-        <svg viewBox="2 1.2 141 14.760211" version="1.1" id="svg1">
+ <svg viewBox="2 1.2 141 14.760211" version="1.1" id="svg1">
             <defs id="defs1">
                 <linearGradient id="linearGradient8">
                     <stop style="stop-color:#153e42;stop-opacity:1;" offset="0" id="stop8" />
@@ -30,11 +23,3 @@
                     id="path8" />
             </g>
         </svg>
-
-
-    </div>
-    <div class="hb-landing-findout">
-        <h1>Find out what kind of bug is lurking in your home!  GSAP SCROLL</h1>
-    </div>
-
-</div>
