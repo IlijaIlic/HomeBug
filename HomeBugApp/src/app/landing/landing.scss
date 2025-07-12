@@ -1,44 +1,96 @@
-.hb-landing-nomore{
+.hb-landing-findout {
     display: flex;
     flex-direction: column;
     justify-content: center;
 }
 
-.hb-nomore-background {
-    height: 60vh;
+.hb-findout-background {
     background-image: linear-gradient(#4D9F71, #153E42);
+    padding: 1rem;
     display: flex;
     flex-direction: column;
     justify-content: center;
-    padding-left: 5vw;
+    align-items: center;
 }
 
-.hb-landing-findout{
+.hb-findout-background h1 {
+    text-align: center;
+    color: white;
+    font-weight: 800;
+    font-size: 4rem;
+}
+
+.hb-findout-background h3 {
+    text-align: center;
+    color: rgba(255, 255, 255, 0.664);
+    font-weight: 800;
+    font-size: 2rem;
+}
+
+.hb-landing-nomore {
     height: 60vh;
     padding: 5vh;
-   
-}
-
-.hb-landing-findout h1{
-    font-family: "Josefin Sans", sans-serif;
-    color: #153E42;
-    font-size: clamp(4rem, 8vw, 6rem);
 
 }
 
 
-.hb-nomore-background h1 {
+.hb-image-cont {
+    margin-top: 3rem;
+    z-index: 0;
+}
+
+.hb-findout-text {
     color: white;
-    font-size: clamp(3rem, 7vw, 5rem);
+    z-index: 3;
     font-family: "Josefin Sans", sans-serif;
-
-
-}
-
-.hb-nomore-background h2 {
-    font-family: "Staatliches", sans-serif;
-    font-weight: 400;
+    font-weight: 800;
     font-style: normal;
     font-size: clamp(2rem, 5vw, 3rem);
-    color: rgb(0, 0, 0);
+    margin-inline: 2rem;
+    text-align: center;
+    align-self: safe;
+    font-weight: 800;
+
+}
+
+
+.hb-landing-picture1,
+.hb-landing-picture2 {
+    border: 4px solid white;
+}
+
+.hb-landing-picture1 {
+    width: 19rem;
+    border-radius: 3rem;
+    box-shadow: 0 1rem 50px 3px black;
+    translate: -0.5rem 0rem;
+    transform: rotate(5deg);
+}
+
+.hb-landing-picture2 {
+    width: 15rem;
+    min-width: 5rem;
+    border-radius: 3rem;
+    box-shadow: 0 1rem 50px 3px black;
+    translate: 0.5rem -2rem;
+    transform: rotate(-8deg) rotateY(180deg);
+}
+
+@media only screen and (max-width: 600px) {
+    .hb-landing-picture1 {
+        width: 8rem;
+        border-radius: 1rem;
+        box-shadow: 0 1rem 30px 1px black;
+        translate: -0.5rem 0rem;
+        transform: rotate(5deg);
+    }
+
+    .hb-landing-picture2 {
+        width: 6rem;
+        min-width: 5rem;
+        border-radius: 1rem;
+        box-shadow: 0 1rem 30px 1px black;
+        translate: 0.5rem -1rem;
+        transform: rotate(-8deg) rotateY(180deg);
+    }
 }
