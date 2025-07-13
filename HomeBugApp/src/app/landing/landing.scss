@@ -1,7 +1,13 @@
+.hb-landing-page{
+    
+}
+
 .hb-landing-findout {
     display: flex;
     flex-direction: column;
     justify-content: center;
+    font-family: "Josefin Sans", sans-serif;
+
 }
 
 .hb-findout-background {
@@ -18,6 +24,7 @@
     color: white;
     font-weight: 800;
     font-size: 4rem;
+    margin-bottom: 1.5rem;
 }
 
 .hb-findout-background h3 {
@@ -61,6 +68,11 @@
     box-shadow: 0 1rem 50px 3px black;
     translate: -0.5rem 0rem;
     transform: rotate(5deg);
+}
+
+.hb-landing-picture3 {
+    width: 40rem;
+
 }
 
 .hb-landing-picture2 {

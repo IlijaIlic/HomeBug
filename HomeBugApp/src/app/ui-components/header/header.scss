@@ -7,6 +7,20 @@
 
 }
 
+.hb-logo{
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+}
+
+.hb-logo img{
+    height: 5rem;
+    transform: rotateY(180deg);
+    translate: 1rem -0.5rem;
+
+}
+
 .hb-header-button-container {
     display: flex;
     flex-direction: row;
