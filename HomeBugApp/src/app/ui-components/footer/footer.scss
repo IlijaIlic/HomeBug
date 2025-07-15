@@ -1,5 +1,80 @@
 .hb-footer{
-    background-color: #153E42;
-    width: 100%;
-    height: 20vh;
+    background-image: linear-gradient(#153E42, #4D9F71);
+    padding: 2rem;
+    font-family: "Josefin Sans", sans-serif;
+    color: white;
+margin: 0;
+}
+
+.hb-footer-cont{
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    justify-content: center;
+    align-items: center;
+}
+
+.hb-name-cont{
+    margin-block: 10rem;
+    display: flex;
+    flex-direction: column;
+    margin-block: 5rem ;
+    align-self: center;
+}
+
+.hb-name-cont p{
+    margin-left: 0.7rem;
+}
+
+.hb-footer-name{
+    font-size: clamp(2rem,20vw,8rem);
+}
+
+.hb-copyright{
+    color: rgba(255, 255, 255, 0.5);
+}
+
+.hb-footer-links{
+    display: flex;
+    flex-direction: row;
+    gap: 10rem;
+    padding: 5rem;
+    flex-wrap: wrap;
+    justify-content: center;
+}
+
+.hb-footer-links hr{
+    width: 10rem;
+}
+
+.hb-footer-links h3{
+    color: rgba(255, 255, 255, 0.5);
+}
+
+.hb-footer-links button{
+    border: none;
+    background-color: transparent;
+    color: white;
+    font-family: "Josefin Sans", sans-serif;
+    cursor: pointer;  
+    font-size: 1.2rem;
+    padding: 0;  
+    margin-block: 1rem;
+}
+
+.hb-footer-links button:hover{
+    text-decoration: underline;
+}
+
+
+.hb-links-core{
+    display: flex;
+    flex-direction: column;
+    align-items: start;
+}
+
+.hb-links-info{
+    display: flex;
+    flex-direction: column;
+    align-items: start;
 }

@@ -23,6 +23,7 @@ export class Landing {
       this.currWord = this.words[0]
       this.cycleWords();
     });
+   
   }
 
   cycleWords() {
@@ -36,4 +37,5 @@ export class Landing {
         this.currWord = this.words[randValue];
       })
   }
+
 }
