@@ -1,4 +1,6 @@
-<app-ui-header />
-<app-landing />
-<app-ui-footer />
+
+@if (showHeader) {
+    <app-ui-header />
+}
 <router-outlet />
+<app-ui-footer />

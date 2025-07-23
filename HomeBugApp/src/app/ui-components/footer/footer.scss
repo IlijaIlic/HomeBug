@@ -1,5 +1,11 @@
 .hb-footer{
-    background-image: linear-gradient(#153E42, #4D9F71);
+   
+position: relative;
+overflow: hidden;
+}
+
+.hb-footer-sqarepart{
+ background-image: linear-gradient(#153E42, #4D9F71);
     padding: 2rem;
     font-family: "Josefin Sans", sans-serif;
     color: white;
@@ -12,6 +18,8 @@ margin: 0;
     flex-wrap: wrap;
     justify-content: center;
     align-items: center;
+    position: relative;
+    z-index: 3;
 }
 
 .hb-name-cont{
@@ -22,12 +30,9 @@ margin: 0;
     align-self: center;
 }
 
-.hb-name-cont p{
-    margin-left: 0.7rem;
-}
 
 .hb-footer-name{
-    font-size: clamp(2rem,20vw,8rem);
+    width: clamp(2rem,50vw,40rem);
 }
 
 .hb-copyright{
@@ -77,4 +82,15 @@ margin: 0;
     display: flex;
     flex-direction: column;
     align-items: start;
+}
+
+.hb-footer-logodeco{
+    width: clamp(20rem,20vw,25rem);
+    position: absolute;
+    pointer-events: none;
+    z-index: 0;
+    top: 20%;
+    right: 50%;
+    transform: translate(50%, 30%);
+    rotate: -30deg;
 }

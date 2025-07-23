@@ -1,0 +1,29 @@
+@use '../../styles/variables' as *;
+
+.hb-notfound-page{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    padding-block: 5rem;
+    position: relative;
+}
+
+.hb-header-wave{
+    position: absolute;
+    width: 100%;
+    top: 0;
+    pointer-events: none;
+}
+
+.hb-notfound-page img{
+    width: clamp(10rem, 20vw, 25rem);
+}
+
+.hb-notfound-page h1{
+    text-align: center;
+    font-family: $hb-main-font;
+    font-size: clamp(2rem, 4vw, 5rem);
+
+    color: $hb-dark-green;
+}

@@ -1,0 +1,108 @@
+@use '../../styles/variables' as *;
+
+.hb-deco-wave {
+    position: absolute;
+    z-index: 0;
+     height: 65vh;
+      top: 0;
+  left: 0;
+}
+
+.tr-blob{
+    position: absolute;
+    top: -1rem;
+    right: -1rem;
+    height: 60vh;
+    pointer-events: none;
+}
+
+.hb-register-page {
+    background-color: $hb-background;
+    margin-bottom: -10rem;
+    padding-top: 5rem;
+    padding-inline: 10rem;
+    padding-bottom: 20rem;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    position: relative;
+    overflow: hidden;
+}
+
+.hb-logo {
+    width: clamp(15rem, 30vw, 50rem);
+    cursor: pointer;
+    translate: 0px 0px;
+    transition: translate 0.1s ease-in;
+    border: none;
+    background-color: transparent;
+    margin-bottom: 2rem;
+
+}
+
+.hb-logo:hover {
+    translate: 0px -5px;
+}
+
+.hb-register-main {
+    display: flex;
+    flex-direction: row;
+    border-radius: 50px;
+    box-shadow: 0 0 10px 10px rgba(0, 0, 0, 0.15);
+    height: 65vh;
+}
+
+.hb-register-deco {
+    margin-inline: 0;
+    width: 30vw;
+    border-radius: 50px 0 0 50px;
+    position: relative;
+    background-color: transparent;
+    overflow: hidden;
+
+}
+
+.hb-deco-img {
+    position: absolute;
+    bottom: 0%;
+    left: 25%;
+    translate: (50%, 20%);
+    width: clamp(15rem, 15vw, 20rem);
+}
+
+.hb-register-form {
+    padding: 1rem;
+    background-color: white;
+    width: 30vw;
+    border-radius: 0 50px 50px 0;
+}
+
+
+.hb-register-text {
+    font-family: $hb-main-font;
+    position: absolute;
+    font-size: clamp(2rem, 3vw, 3rem);
+    color: white;
+    text-align: center;
+    margin-top: 3rem;
+    z-index: 2;
+}
+
+.hb-register-button {
+    transition: background-color 0.15s linear;
+    background-color: $hb-light-green;
+    font-family: $hb-main-font;
+    border: none;
+    border-radius: 25px;
+    width: 10vw;
+    height: 5vh;
+    font-size: 2rem;
+    box-shadow: $hb-box-shadow;
+
+    color: white;
+    cursor: pointer;
+}
+
+.hb-register-button:hover {
+    background-color: $hb-dark-green;
+}

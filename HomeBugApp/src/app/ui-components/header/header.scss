@@ -4,16 +4,34 @@
     text-align: center;
     align-content: center;
     font-family: "Josefin Sans", sans-serif;
+    position: relative;
 }
 
-.hb-logo{
+.hb-logo {
     display: flex;
     flex-direction: row;
     justify-content: center;
     align-items: center;
+    width: clamp(15rem,20vw,20rem);
+    cursor: pointer;
+
+    transition: transform 0.1s ease-in-out;
+    transform: translateY(0) scale(1);
+
 }
 
-.hb-logo img{
+.hb-logo:hover{
+     transform: translateY(-1px) scale(1.02);
+}
+
+.hb-logo-text {
+    color: white;
+    font-size: 4rem;
+    font-weight: 800;
+
+}
+
+.hb-logo img {
     height: 5rem;
     transform: rotateY(180deg);
     translate: 1rem -0.5rem;
@@ -29,11 +47,7 @@
     padding-block: 2vh;
 }
 
-.hb-header-button-container h1 {
-    color: white;
-    margin: 0;
-    font-size: 3rem;
-}
+
 
 .hb-header-register {
     background-color: #eff170;
@@ -68,7 +82,12 @@
 .hb-header-links-container {
     display: flex;
     flex-direction: row;
+
     gap: 30px;
+
+    position: absolute;
+  left: 50%;
+  transform: translate(-50%,0%);
 }
 
 .hb-header-links-container button {
