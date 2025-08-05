@@ -3,12 +3,12 @@
 .hb-deco-wave {
     position: absolute;
     z-index: 0;
-     height: 65vh;
-      top: 0;
-  left: 0;
+    height: 65vh;
+    top: 0;
+    left: 0;
 }
 
-.tr-blob{
+.tr-blob {
     position: absolute;
     top: -1rem;
     right: -1rem;
@@ -27,10 +27,12 @@
     align-items: center;
     position: relative;
     overflow: hidden;
+    font-family: $hb-main-font;
+    color: $hb-dark-green;
 }
 
 .hb-logo {
-    width: clamp(15rem, 30vw, 50rem);
+    width: 15rem;
     cursor: pointer;
     translate: 0px 0px;
     transition: translate 0.1s ease-in;
@@ -64,21 +66,26 @@
 
 .hb-deco-img {
     position: absolute;
-    bottom: 0%;
-    left: 25%;
-    translate: (50%, 20%);
-    width: clamp(15rem, 15vw, 20rem);
+    bottom: -5%;
+    left: 50%;
+    translate: -50%;
+    width: clamp(10rem, 18vw, 20rem);
 }
 
 .hb-register-form {
     padding: 1rem;
     background-color: white;
     width: 30vw;
+
     border-radius: 0 50px 50px 0;
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    grid-template-rows: repeat(6, 1fr);
+    justify-items: center;
 }
 
 
-.hb-register-text {
+.hb-register-text1 {
     font-family: $hb-main-font;
     position: absolute;
     font-size: clamp(2rem, 3vw, 3rem);
@@ -86,6 +93,23 @@
     text-align: center;
     margin-top: 3rem;
     z-index: 2;
+    left: 50%;
+    translate: -50%;
+    top: 5%
+}
+
+.hb-register-text2 {
+    font-family: $hb-main-font;
+    position: absolute;
+    font-size: clamp(1rem, 1.5vw, 2rem);
+    color: rgba(255, 255, 255, 0.5);
+    text-align: center;
+    margin-top: 3rem;
+    z-index: 2;
+    left: 50%;
+    translate: -50%;
+    top: 15%;
+    width: 100%;
 }
 
 .hb-register-button {
@@ -99,10 +123,77 @@
     font-size: 2rem;
     box-shadow: $hb-box-shadow;
 
+    align-self: center;
     color: white;
     cursor: pointer;
 }
 
 .hb-register-button:hover {
     background-color: $hb-dark-green;
+}
+
+.hb-already-text {
+    align-self: self-end;
+    justify-self: center;
+    text-align: center;
+}
+
+.hb-create-text {
+    grid-column: 1 / span 2;
+    align-self: center;
+    color: $hb-dark-green;
+}
+
+.hb-create-text span {
+    color: $hb-light-green;
+}
+
+.hb-register-googleacc {
+    grid-column: 1 /span 2;
+    grid-row: 5;
+    align-self: center
+}
+
+.hb-register-gbut {
+    height: 5rem;
+    width: 5rem;
+    border-radius: 50%;
+    grid-column: 1 / span 2;
+    grid-row: 6;
+    position: relative;
+    border: none;
+    scale: 1;
+    transition: scale 0.2s ease-in-out;
+    align-self: baseline;
+}
+
+.hb-register-gbut:hover {
+    background-color: rgb(200, 200, 200);
+    cursor: pointer;
+    scale: 1.1;
+}
+
+.hb-register-gbut img {
+    height: 3rem;
+    width: 3rem;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    translate: -50% -50%;
+}
+
+hr {
+    border: none;
+    height: 1px;
+    background: linear-gradient(to right,
+            transparent 0%,
+            $hb-light-green 10%,
+            $hb-light-green 90%,
+            transparent 100%);
+    width: 90%;
+    margin-top: 0.5rem;
+    border-radius: 50%;
+    grid-column: 1/ span 2;
+    grid-row: 5;
+    align-self: baseline;
 }

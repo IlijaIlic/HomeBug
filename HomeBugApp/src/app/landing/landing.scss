@@ -2,7 +2,7 @@
     margin: 0;
     border: none;
     padding: 0;
-    background-color:  #e8f3ec;
+    background-color:  #feffef;
     margin-bottom: -10rem;
     padding-bottom: 10rem;
 }
@@ -25,7 +25,7 @@ hr {
             transparent 100%);
     width: 90%;
     margin: 2rem auto;
-    border-radius: 2px;
+    border-radius: 50%;
 }
 
 .hb-findout-background {
@@ -135,7 +135,7 @@ hr {
 }
 
 .hb-white-rect {
-    background: linear-gradient(transparent 0%, #e8f3ec 15%, #e8f3ec 100%);
+    background: linear-gradient(transparent 0%, #feffef 15%, #feffef 100%);
     width: 100%;
     height: 11rem;
     translate: 0 13.2rem;
@@ -357,4 +357,6 @@ hr {
         align-items: center;
 
     }
+
+   
 }

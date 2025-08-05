@@ -1,5 +1,5 @@
 import { Component, inject } from '@angular/core';
-import { ActivatedRoute, NavigationEnd, Router, RouterOutlet } from '@angular/router';
+import { ActivatedRoute, NavigationEnd, Router, RouterModule, RouterOutlet } from '@angular/router';
 import { Landing } from './landing/landing';
 import { Header } from './ui-components/header/header';
 import { Footer } from './ui-components/footer/footer';
@@ -20,7 +20,7 @@ export class App {
       .pipe(filter(event => event instanceof NavigationEnd))
       .subscribe(() => {
 
-        if (this, router.url === '/register') {
+        if (this, router.url === '/register' || router.url==="/login") {
           this.showHeader = false
         } else {
           this.showHeader = true

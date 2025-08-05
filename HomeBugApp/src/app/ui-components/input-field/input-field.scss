@@ -1,0 +1,38 @@
+@use '../../../styles/variables' as *;
+
+.input {
+    margin: 1rem;
+    font-family: "Josefin Sans", sans-serif;
+    position: relative;
+    height: 3.5rem;
+    width: 11rem;
+}
+
+p {
+    margin: 0;
+    font-size: 1.5rem;
+    position: absolute;
+    top: 0;
+}
+
+input {
+    font-family: "Josefin Sans", sans-serif;
+    width: inherit;
+    height: 1.5rem;
+    font-size: 1rem;
+    border: none;
+    border-bottom-width: 1px ;
+    border-bottom-style: solid ;
+    border-bottom-color:black;
+
+    margin-top: 2px;
+    position: absolute;
+    bottom: 0;
+}
+
+input:focus{
+    outline: none;
+    border-bottom-width: 3px;
+    border-bottom-color: $hb-light-green;
+    color: $hb-light-green;
+}
