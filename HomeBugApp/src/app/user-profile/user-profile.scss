@@ -1,0 +1,132 @@
+@use '../../styles/variables' as *;
+
+
+.hb-profile-page {
+    background-color: $hb-background;
+    margin-bottom: -15rem;
+    position: relative;
+    padding-bottom: 15rem;
+    padding-top: 10rem;
+    display: flex;
+align-items: center;
+justify-content: center;
+font-family: $hb-main-font;
+}
+
+.hb-header-wave {
+    position: absolute;
+    width: 100%;
+    top: 0;
+    pointer-events: none;
+}
+
+.hb-profile-tabs-cont {
+    position: relative;
+    height: 25rem;
+    width: 30rem;
+}
+
+.hb-profile-tabs {
+    background-color: white;
+    height: 25rem;
+    width: 30rem;
+    border-radius: 25px;
+    box-shadow: $hb-box-shadow;
+    z-index: 3;
+    position: absolute;
+
+}
+
+.hb-avatar-circle#first {
+    position: absolute;
+    top: -10%;
+    left: 50%;
+    translate: -50% 0%;
+    background-color: white;
+    width: 10rem;
+    height: 10rem;
+    border-radius: 50%;
+    box-shadow: $hb-box-shadow;
+    z-index: 1;
+}
+
+.hb-avatar-circle#second {
+    position: absolute;
+    top: -10%;
+    left: 50%;
+    translate: -50% 0%;
+    background-color: white;
+    width: 10rem;
+    height: 10rem;
+    border-radius: 50%;
+    z-index: 4;
+}
+
+
+.hb-profile-tabs-cont img {
+    position: absolute;
+    top: -10%;
+    width: 7rem;
+    left: 50%;
+    translate: -50% 0%;
+    z-index: 5;
+
+}
+
+.hb-profile-tabs button {
+    background-color: transparent;
+    border: none;
+    font-family: $hb-main-font;
+    font-size: 1.5rem;
+    color: $hb-dark-green;
+    cursor: pointer;
+    font-weight: 700;
+}
+
+.hb-profile-tabs button:hover {
+    text-decoration: underline;
+}
+
+.hb-tabs-buttons {
+    display: flex;
+    height: 100%;
+    flex-direction: column;
+    justify-content: center;
+    gap: 1rem;
+    margin-top: 2rem;
+}
+
+.hb-profile-info-tab {
+    margin-right: -3rem;
+    height: 30rem;
+    width: 60rem;
+    translate: -3rem 0;
+    box-shadow: $hb-box-shadow;
+    border-radius: 25px;
+    background-color: white;
+    z-index: 10;
+    position: relative;
+    padding-left: 5rem;
+}
+
+.hb-info-whiterec{
+    height: 25rem;
+    background-color:white;
+    width: 1rem;
+    position: absolute;
+    top: 50%;
+    left: -1%;
+    translate: 0 -50%;
+}
+
+.hb-profile-text{
+    font-size: 1.5rem;
+    margin: 0;
+    margin-bottom: 1rem;
+
+}
+
+.hb-profile-hint-text{
+    margin: 0;
+    color: rgba(0, 0, 0, 0.5);
+}

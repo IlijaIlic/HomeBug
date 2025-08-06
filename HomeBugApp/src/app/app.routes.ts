@@ -3,6 +3,7 @@ import { Landing } from './landing/landing';
 import { Register } from './register/register';
 import { NotFound } from './not-found/not-found';
 import { Login } from './login/login';
+import { UserProfile } from './user-profile/user-profile';
 
 export const routes: Routes = [
     {
@@ -17,6 +18,10 @@ export const routes: Routes = [
     {
         path: 'login',
         component: Login
+    },
+    {
+        path: 'profile',
+        component: UserProfile
     },
     {
         path: '**',

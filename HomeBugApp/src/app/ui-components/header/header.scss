@@ -1,3 +1,6 @@
+@use '../../../styles/variables' as *;
+
+
 .hb-header {
     background-color: #4D9F71;
     color: white;
@@ -14,14 +17,15 @@
     align-items: center;
     width: clamp(15rem,20vw,20rem);
     cursor: pointer;
-
+    background-color: transparent;
+    border: none;
     transition: transform 0.1s ease-in-out;
-    transform: translateY(0) scale(1);
+    transform: translateY(0) scale(1) scaleX(-1);
 
 }
 
 .hb-logo:hover{
-     transform: translateY(-1px) scale(1.02);
+     transform: translateY(-1px) scale(1.02) scaleX(-1);
 }
 
 .hb-logo-text {
@@ -78,6 +82,20 @@
     background-color: #f6f88c;
 }
 
+.hb-header-login{
+    background-color: transparent;
+    border: none;
+    font-family: $hb-main-font;
+    color: white;
+    font-size: clamp(1rem, 1.2vw, 1.5rem);
+    font-weight: bold;
+    cursor: pointer;
+    margin-right: 1rem;
+}
+
+.hb-header-login:hover{
+    text-decoration: underline;
+}
 
 .hb-header-links-container {
     display: flex;

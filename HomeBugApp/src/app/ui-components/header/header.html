@@ -1,11 +1,16 @@
 <header class="hb-header">
   <div class="hb-header-button-container">
-    <img class="hb-logo" src="assets/newlogo.png" alt="logo" />
+    <button class="hb-logo" routerLink="">
+      <img src="assets/newlogo.png" alt="logo" />
+    </button>
     <div class="hb-header-links-container">
       <button>Search</button>
-      <button>More</button>
+      <button routerLink="profile">More</button>
       <button>Upload</button>
     </div>
-    <button class="hb-header-register" routerLink="register">Register</button>
+    <div>
+      <button class="hb-header-login" routerLink="login">Login</button>
+      <button class="hb-header-register" routerLink="register">Register</button>
+    </div>
   </div>
 </header>

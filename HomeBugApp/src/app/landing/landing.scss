@@ -1,8 +1,11 @@
+@use '../../styles/variables' as *;
+
+
 .hb-page-landing {
     margin: 0;
     border: none;
     padding: 0;
-    background-color:  #feffef;
+    background-color: $hb-background;
     margin-bottom: -10rem;
     padding-bottom: 10rem;
 }
@@ -135,7 +138,7 @@ hr {
 }
 
 .hb-white-rect {
-    background: linear-gradient(transparent 0%, #feffef 15%, #feffef 100%);
+    background: linear-gradient(transparent 0%, $hb-background 15%, $hb-background 100%);
     width: 100%;
     height: 11rem;
     translate: 0 13.2rem;
