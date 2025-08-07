@@ -22,19 +22,18 @@ font-family: $hb-main-font;
 
 .hb-profile-tabs-cont {
     position: relative;
-    height: 25rem;
+    height: 30rem;
     width: 30rem;
 }
 
 .hb-profile-tabs {
-    background-color: white;
-    height: 25rem;
+    background-color: rgb(250, 250, 250);
+    height: 30rem;
     width: 30rem;
     border-radius: 25px;
     box-shadow: $hb-box-shadow;
     z-index: 3;
     position: absolute;
-
 }
 
 .hb-avatar-circle#first {
@@ -42,7 +41,7 @@ font-family: $hb-main-font;
     top: -10%;
     left: 50%;
     translate: -50% 0%;
-    background-color: white;
+    background-color: rgb(250, 250, 250);
     width: 10rem;
     height: 10rem;
     border-radius: 50%;
@@ -55,7 +54,7 @@ font-family: $hb-main-font;
     top: -10%;
     left: 50%;
     translate: -50% 0%;
-    background-color: white;
+    background-color: rgb(250, 250, 250);
     width: 10rem;
     height: 10rem;
     border-radius: 50%;
@@ -73,6 +72,9 @@ font-family: $hb-main-font;
 
 }
 
+
+
+
 .hb-profile-tabs button {
     background-color: transparent;
     border: none;
@@ -81,11 +83,17 @@ font-family: $hb-main-font;
     color: $hb-dark-green;
     cursor: pointer;
     font-weight: 700;
+    height: 5vh;
+    width: 50%;
+    align-self: center;
+    border-radius: 25px;
+    transition: box-shadow 0.2s ease-in-out;
+    padding-top:7px;
 }
 
 .hb-profile-tabs button:hover {
-    text-decoration: underline;
-}
+    background-color: white;
+    box-shadow: 0 0px 5px 5px rgba(0, 0, 0, 0.15);}
 
 .hb-tabs-buttons {
     display: flex;
@@ -96,22 +104,33 @@ font-family: $hb-main-font;
     margin-top: 2rem;
 }
 
+.hb-profile-tabs button.btn-selected{
+    background-color: white ;
+    box-shadow: $hb-box-shadow;
+    height: 5vh;
+    width: 50%;
+    color: $hb-light-green;
+}
+
 .hb-profile-info-tab {
     margin-right: -3rem;
-    height: 30rem;
+    height: 35rem;
     width: 60rem;
     translate: -3rem 0;
     box-shadow: $hb-box-shadow;
     border-radius: 25px;
-    background-color: white;
+    background-color: rgb(250, 250, 250);
     z-index: 10;
     position: relative;
-    padding-left: 5rem;
+    padding-block: 2rem;
+    padding-inline: 5rem;
+
+
 }
 
 .hb-info-whiterec{
-    height: 25rem;
-    background-color:white;
+    height: 30rem;
+    background-color: rgb(250, 250, 250);
     width: 1rem;
     position: absolute;
     top: 50%;
@@ -129,4 +148,17 @@ font-family: $hb-main-font;
 .hb-profile-hint-text{
     margin: 0;
     color: rgba(0, 0, 0, 0.5);
+}
+
+.hb-info-title{
+    color: $hb-dark-green;
+    margin-bottom: 1rem;
+}
+
+
+.hb-info-section{
+    display: flex;
+    flex-direction: column;
+    flex-wrap: wrap;
+    height: calc(35rem/2);
 }
