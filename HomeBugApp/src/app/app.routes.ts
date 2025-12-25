@@ -4,6 +4,7 @@ import { Register } from './register/register';
 import { NotFound } from './not-found/not-found';
 import { Login } from './login/login';
 import { UserProfile } from './user-profile/user-profile';
+import { SearchPage } from './search-page/search-page';
 
 export const routes: Routes = [
     {
@@ -22,6 +23,10 @@ export const routes: Routes = [
     {
         path: 'profile',
         component: UserProfile
+    },
+    {
+        path: 'search',
+        component: SearchPage
     },
     {
         path: '**',

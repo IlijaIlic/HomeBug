@@ -5,6 +5,8 @@ import { routes } from './app.routes';
 import {provideHttpClient } from '@angular/common/http';
 import { provideAnimationsAsync } from '@angular/platform-browser/animations/async';
 import { provideAnimations } from '@angular/platform-browser/animations';
+import { NgIcon, provideIcons } from '@ng-icons/core'
+import { featherSearch} from '@ng-icons/feather-icons'
 
 export const appConfig: ApplicationConfig = {
   providers: [
@@ -12,6 +14,9 @@ export const appConfig: ApplicationConfig = {
     provideZoneChangeDetection({ eventCoalescing: true }),
     provideRouter(routes, withComponentInputBinding()),
     provideHttpClient(),
+    provideIcons({
+      featherSearch
+    }),
     provideAnimations()
   ]
 };

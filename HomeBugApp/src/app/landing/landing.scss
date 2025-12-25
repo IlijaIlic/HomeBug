@@ -183,11 +183,30 @@ hr {
     display: grid;
     grid-template-columns: 2fr 1fr;
     font-family: "Josefin Sans", sans-serif;
-    color: #153E42;
+    color: $hb-dark-green;
     font-size: clamp(1rem, 5vw, 2rem);
     text-align: center;
     max-width: 80vw;
 }
+
+.hb-explain-text1{
+    align-self: center;
+    text-align: left;
+}
+
+.hb-explain-text2{
+    align-self: center;
+    text-align: right;
+}
+
+.hb-explain-text1 h2{
+    color: $hb-light-green;
+}
+
+.hb-explain-text2 h2{
+    color: $hb-light-green;
+}
+
 
 .magnifying-image-cont {
     position: relative;

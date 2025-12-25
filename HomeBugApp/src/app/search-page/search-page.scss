@@ -1,0 +1,83 @@
+@use '../../styles/variables' as *;
+
+.hb-search-page {
+    background-color: $hb-background;
+    margin-bottom: -15rem;
+    position: relative;
+    padding-bottom: 15rem;
+    padding-top: 10rem;
+    display: flex;
+    flex-direction: column;
+align-items: center;
+justify-content: center;
+font-family: $hb-main-font;
+gap: 5rem;
+}
+
+.hb-header-wave {
+    position: absolute;
+    width: 100%;
+    top: 0;
+    pointer-events: none;
+}
+
+.hb-search-imgdrop{
+    border: 3px dashed $hb-dark-green;
+    padding-block: 2rem;
+    padding-inline: 10rem;
+    border-radius: 5rem;
+
+}
+
+.hb-search-imgdrop img{
+    width: 15rem;
+
+}
+
+hr {
+    border: none;
+    height: 2px;
+    background: linear-gradient(to right,
+            transparent 0%,
+            $hb-dark-green 10%,
+            $hb-dark-green 90%,
+            transparent 100%);
+    width: 90%;
+    margin-top: 0.5rem;
+    border-radius: 50%;
+    grid-column: 1/ span 2;
+    grid-row: 5;
+    align-self: baseline;
+}
+
+.hb-search-byname{
+    border: none;
+    width: 60%;
+    height: 2rem;
+    font-family: $hb-main-font;
+    background-color: $hb-yellow;
+    padding: 10px;
+    border-radius: 10px;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    gap: 1rem;
+    font-size: 2rem;
+
+}
+
+.hb-byname-input{
+    border: none;
+    width: 60%;
+    height: 2rem;
+    font-family: $hb-main-font;
+    background-color: $hb-yellow;
+    border-radius: 10px;
+    font-size: 1rem;
+
+}
+
+.hb-byname-input:focus{
+    outline: none;
+
+}

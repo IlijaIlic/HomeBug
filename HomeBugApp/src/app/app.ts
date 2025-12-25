@@ -4,11 +4,12 @@ import { Landing } from './landing/landing';
 import { Header } from './ui-components/header/header';
 import { Footer } from './ui-components/footer/footer';
 import { filter } from 'rxjs';
+
 @Component({
   selector: 'app-root',
   imports: [RouterOutlet, Header, Footer],
   templateUrl: './app.html',
-  styleUrl: './app.scss'
+  styleUrl: './app.scss',
 })
 export class App {
   protected title = 'HomeBugApp';
@@ -20,7 +21,7 @@ export class App {
       .pipe(filter(event => event instanceof NavigationEnd))
       .subscribe(() => {
 
-        if (this, router.url === '/register' || router.url==="/login") {
+        if (this, router.url === '/register' || router.url === "/login") {
           this.showHeader = false
         } else {
           this.showHeader = true
