@@ -1,8 +1,27 @@
 @use '../../styles/variables' as *;
 
-.hb-search-page {
+.hb-search-page{
+       position: relative;
     background-color: $hb-background;
+    overflow: hidden;
     margin-bottom: -15rem;
+    width: 100%;
+}
+
+#visual {
+    position: absolute;
+    top: 0;
+    left: 0;
+    background-size: cover ;
+    width: 100%;
+    height: 100%;
+    z-index: 0;
+    pointer-events: none;
+}
+
+
+.hb-search-page-content {
+
     position: relative;
     padding-bottom: 15rem;
     padding-top: 10rem;
@@ -34,28 +53,44 @@ gap: 5rem;
 
 }
 
-hr {
+.hb-search-hrcont{
+    width: 90vw;
+display: flex;
+flex-direction: row;
+}
+
+
+.hb-search-hrcont hr{ 
     border: none;
     height: 2px;
-    background: linear-gradient(to right,
-            transparent 0%,
-            $hb-dark-green 10%,
-            $hb-dark-green 90%,
-            transparent 100%);
-    width: 90%;
+    width: 40%;
     margin-top: 0.5rem;
-    border-radius: 50%;
-    grid-column: 1/ span 2;
-    grid-row: 5;
     align-self: baseline;
 }
+
+
+.hr1 {
+    background: linear-gradient(to left,
+            $hb-light-green 0%,
+            transparent 100%);
+}
+
+.hr2{
+    background: linear-gradient(to right,
+            $hb-light-green 0%,
+            transparent 100%);
+}
+
+
+
+
 
 .hb-search-byname{
     border: none;
     width: 60%;
     height: 2rem;
     font-family: $hb-main-font;
-    background-color: $hb-yellow;
+    background-color: $hb-light-green;
     padding: 10px;
     border-radius: 10px;
     display: flex;
@@ -68,10 +103,10 @@ hr {
 
 .hb-byname-input{
     border: none;
-    width: 60%;
+    width: 90%;
     height: 2rem;
     font-family: $hb-main-font;
-    background-color: $hb-yellow;
+    background-color: $hb-light-green;
     border-radius: 10px;
     font-size: 1rem;
 
