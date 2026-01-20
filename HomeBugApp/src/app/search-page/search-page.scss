@@ -1,7 +1,7 @@
 @use '../../styles/variables' as *;
 
-.hb-search-page{
-       position: relative;
+.hb-search-page {
+    position: relative;
     background-color: $hb-background;
     overflow: hidden;
     margin-bottom: -15rem;
@@ -12,7 +12,7 @@
     position: absolute;
     top: 0;
     left: 0;
-    background-size: cover ;
+    background-size: cover;
     width: 100%;
     height: 100%;
     z-index: 0;
@@ -27,10 +27,10 @@
     padding-top: 10rem;
     display: flex;
     flex-direction: column;
-align-items: center;
-justify-content: center;
-font-family: $hb-main-font;
-gap: 5rem;
+    align-items: center;
+    justify-content: center;
+    font-family: $hb-main-font;
+    gap: 5rem;
 }
 
 .hb-header-wave {
@@ -40,27 +40,27 @@ gap: 5rem;
     pointer-events: none;
 }
 
-.hb-search-imgdrop{
-    border: 3px dashed $hb-dark-green;
+.hb-search-imgdrop {
+    background-color: #e9f7ddc7;
     padding-block: 2rem;
     padding-inline: 10rem;
     border-radius: 5rem;
 
 }
 
-.hb-search-imgdrop img{
+.hb-search-imgdrop img {
     width: 15rem;
 
 }
 
-.hb-search-hrcont{
+.hb-search-hrcont {
     width: 90vw;
-display: flex;
-flex-direction: row;
+    display: flex;
+    flex-direction: row;
 }
 
 
-.hb-search-hrcont hr{ 
+.hb-search-hrcont hr {
     border: none;
     height: 2px;
     width: 40%;
@@ -75,7 +75,7 @@ flex-direction: row;
             transparent 100%);
 }
 
-.hr2{
+.hr2 {
     background: linear-gradient(to right,
             $hb-light-green 0%,
             transparent 100%);
@@ -85,7 +85,7 @@ flex-direction: row;
 
 
 
-.hb-search-byname{
+.hb-search-byname {
     border: none;
     width: 60%;
     height: 2rem;
@@ -101,9 +101,9 @@ flex-direction: row;
 
 }
 
-.hb-byname-input{
+.hb-byname-input {
     border: none;
-    width: 90%;
+    width: 95%;
     height: 2rem;
     font-family: $hb-main-font;
     background-color: $hb-light-green;
@@ -112,7 +112,23 @@ flex-direction: row;
 
 }
 
-.hb-byname-input:focus{
+.hb-byname-input:focus {
     outline: none;
 
+}
+
+.hb-byname-icon{
+    color: $hb-dark-green;
+}
+
+.hb-search-or {
+    color: white;
+    font-size: 1.5rem;
+}
+
+p{
+    margin-block: 10rem;
+    color: $hb-light-green;
+    font-size: 3rem;
+    text-align: center;
 }
