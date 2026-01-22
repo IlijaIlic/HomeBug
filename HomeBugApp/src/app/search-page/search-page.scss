@@ -1,10 +1,18 @@
 @use '../../styles/variables' as *;
 
-.hb-search-page {
+.hb-search-page1 {
     position: relative;
     background-color: $hb-background;
     overflow: hidden;
+    width: 100%;
+}
+
+.hb-search-page2 {
+
+    background-color: $hb-background;
+    overflow: hidden;
     margin-bottom: -15rem;
+
     width: 100%;
 }
 
@@ -99,6 +107,8 @@
     gap: 1rem;
     font-size: 2rem;
 
+    margin-bottom: 10rem;
+
 }
 
 .hb-byname-input {
@@ -117,7 +127,7 @@
 
 }
 
-.hb-byname-icon{
+.hb-byname-icon {
     color: $hb-dark-green;
 }
 
@@ -126,9 +136,23 @@
     font-size: 1.5rem;
 }
 
-p{
-    margin-block: 10rem;
-    color: $hb-light-green;
-    font-size: 3rem;
-    text-align: center;
+.hb-search-unknown {
+    background-color: white;
+    margin-bottom: 15rem;
+
+    display: flex;
+    flex-direction: row;
+    gap: 1rem;
+    flex-wrap: wrap;
+
+    margin-inline: 5rem;
+
+}
+
+.hb-unknown img {
+    width: 15rem;
+    height: 15rem;
+    object-fit: cover;
+    background-color: red;
+    
 }
