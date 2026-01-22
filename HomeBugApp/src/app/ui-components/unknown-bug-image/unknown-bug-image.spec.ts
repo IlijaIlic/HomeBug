@@ -1,18 +1,18 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { UknownBugImage } from './uknown-bug-image';
+import { UnknownBugImage } from './unknown-bug-image';
 
 describe('UknownBugImage', () => {
-  let component: UknownBugImage;
-  let fixture: ComponentFixture<UknownBugImage>;
+  let component: UnknownBugImage;
+  let fixture: ComponentFixture<UnknownBugImage>;
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      imports: [UknownBugImage]
+      imports: [UnknownBugImage]
     })
     .compileComponents();
 
-    fixture = TestBed.createComponent(UknownBugImage);
+    fixture = TestBed.createComponent(UnknownBugImage);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });

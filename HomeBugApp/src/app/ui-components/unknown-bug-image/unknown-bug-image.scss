@@ -1,0 +1,88 @@
+@use '../../../styles/variables' as *;
+
+.hb-unknown {
+    position: relative;
+    overflow: hidden;
+    border-radius: 15%;
+    width: 15rem;
+    height: 15rem;
+
+    display: inline-block;
+    cursor: pointer;
+
+
+}
+
+.hb-unknown img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: transform 0.2s ease;   
+  transform: scale(1);
+  display: block;
+}
+
+.hb-unknown:hover img {
+  transform: scale(1.15);   
+}
+
+.hb-unknown-comments {
+    font-family: $hb-main-font;
+    font-size: 2rem;
+    color: white;
+    pointer-events: none;
+    position: absolute;
+    right: 5%;
+    bottom: 5%;
+
+    display: flex;
+  align-items: center;
+
+}
+
+.hb-unknown-comments ng-icon{
+    transform: translateY(-0.25rem);
+}
+
+.hb-unknown-gradient {
+  position: absolute;
+  inset: 0;                     
+  pointer-events: none;
+  border-radius: 15%;
+  
+  background: linear-gradient(
+    to top,
+    rgba(0,0,0,0.65) 0%,
+    rgba(0,0,0,0.12) 100%,
+    transparent 70%
+  );
+  
+  opacity: 0;
+  transition: opacity 0.35s ease;
+
+}
+
+.hb-unknown:hover .hb-unknown-gradient {
+  opacity: 1;
+}
+
+ .hb-unknown:hover .hb-unknown-country {
+  opacity: 1;
+}
+
+.hb-unknown-country{
+    position: absolute;
+    right: 5%;
+    top: 5%;
+    font-family: $hb-main-font;
+    font-size: 2rem;
+    color: white;
+    opacity: 0;
+    transition: opacity 0.35s ease;
+    align-items: center;
+
+}
+
+.hb-unknown-country ng-icon{
+    transform: translateY(0.25rem);
+}
