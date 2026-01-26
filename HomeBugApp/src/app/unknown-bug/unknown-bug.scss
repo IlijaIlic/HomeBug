@@ -1,4 +1,4 @@
-@use '../../styles/variables' as *;
+@use 'styles/variables' as *;
 
 svg {
     margin-bottom: -5rem;
@@ -8,11 +8,11 @@ svg {
     background-color: $hb-background;
     margin-bottom: -15rem;
 
-        font-family: $hb-main-font;
+    font-family: $hb-main-font;
 
-        display: flex;
-        flex-direction: column;
-        align-items: center;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
 
 }
 
@@ -78,21 +78,30 @@ svg {
     left: 25%;
 }
 
-.unknown-username{
+.unknown-username {
     font-size: clamp(1rem, 1.5vw, 2rem);
     padding-top: 2rem;
-    padding-left: 6rem;
+    padding-inline: 6rem;
+
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
 
 }
 
-.unknown-username span{
+.unknown-comment-flag {
+    width: 5rem;
+}
+
+.unknown-username span {
     color: $hb-light-green;
     text-decoration: underline;
 
     cursor: pointer;
 }
 
-.unknown-comment{
+.unknown-comment {
     align-self: center;
     width: 90%;
     text-align: justify;
@@ -104,12 +113,12 @@ svg {
 
 }
 
-.unknown-community{
+.unknown-community {
     width: 95%;
     height: 20rem;
     background-color: white;
     padding-bottom: 15rem;
     box-shadow: $hb-box-shadow;
-    border-radius: 3rem ;
+    border-radius: 3rem;
 
 }

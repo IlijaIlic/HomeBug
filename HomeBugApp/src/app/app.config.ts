@@ -2,11 +2,11 @@ import { ApplicationConfig, importProvidersFrom, provideBrowserGlobalErrorListen
 import { provideRouter, withComponentInputBinding } from '@angular/router';
 
 import { routes } from './app.routes';
-import {provideHttpClient } from '@angular/common/http';
+import { provideHttpClient } from '@angular/common/http';
 import { provideAnimationsAsync } from '@angular/platform-browser/animations/async';
 import { provideAnimations } from '@angular/platform-browser/animations';
 import { NgIcon, provideIcons } from '@ng-icons/core'
-import { featherSearch, featherMessageCircle, featherGlobe} from '@ng-icons/feather-icons'
+import { featherSearch, featherMessageCircle, featherGlobe, featherArrowDown, featherArrowUp } from '@ng-icons/feather-icons'
 
 export const appConfig: ApplicationConfig = {
   providers: [
@@ -15,7 +15,7 @@ export const appConfig: ApplicationConfig = {
     provideRouter(routes, withComponentInputBinding()),
     provideHttpClient(),
     provideIcons({
-      featherSearch,featherMessageCircle, featherGlobe
+      featherSearch, featherMessageCircle, featherGlobe, featherArrowDown, featherArrowUp
     }),
     provideAnimations()
   ]

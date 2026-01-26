@@ -11,7 +11,9 @@
         <img class="unknown-bug-image" src="../../assets/bee.jpg" alt="image" />
         <div class="unknown-bug-text">
             <div class="unknown-username">
-                User <span>bugfinder123</span> said:
+                <div> User <span>bugfinder123</span> said:</div>
+                <img class="unknown-comment-flag" [src]="'https://flagcdn.com/' + countryCode + '.svg'" alt="countryCode" />
+
             </div>
             <div class="unknown-comment">
                 Lorem ipsum dolor sit amet consectetur adipisicing elit. Tempore, sunt.
@@ -34,5 +36,7 @@
 
     <div class="unknown-community">
         Comments
+
+        <app-comment></app-comment>
     </div>
 </div>
