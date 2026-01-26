@@ -1,0 +1,115 @@
+@use '../../styles/variables' as *;
+
+svg {
+    margin-bottom: -5rem;
+}
+
+.unknown-bug-page {
+    background-color: $hb-background;
+    margin-bottom: -15rem;
+
+        font-family: $hb-main-font;
+
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+
+}
+
+.unknown-bug-image {
+    width: 30rem;
+    height: 30rem;
+    object-fit: contain;
+    margin-inline: 5rem;
+
+
+}
+
+.unknown-user-placed {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    margin-bottom: 5rem;
+    align-items: center;
+
+
+}
+
+
+.unknown-bug-text {
+    width: 50%;
+    height: fit-content;
+    max-height: 28rem;
+    margin-inline: 5rem;
+
+    background-color: white;
+    border-radius: 3rem;
+    box-shadow: $hb-box-shadow;
+
+    padding-bottom: 2rem;
+    display: flex;
+    flex-direction: column;
+
+    position: relative;
+    text-overflow: ellipsis;
+
+
+
+}
+
+.unknown-text-profile {
+    position: absolute;
+    top: -5rem;
+    left: -5rem;
+    background-color: white;
+    box-shadow: $hb-box-shadow;
+    border-radius: 50%;
+
+    width: 10rem;
+    height: 10rem;
+
+}
+
+.unknown-text-profile img {
+    width: 5rem;
+    position: absolute;
+    top: 15%;
+    left: 25%;
+}
+
+.unknown-username{
+    font-size: clamp(1rem, 1.5vw, 2rem);
+    padding-top: 2rem;
+    padding-left: 6rem;
+
+}
+
+.unknown-username span{
+    color: $hb-light-green;
+    text-decoration: underline;
+
+    cursor: pointer;
+}
+
+.unknown-comment{
+    align-self: center;
+    width: 90%;
+    text-align: justify;
+    margin-top: 2rem;
+    font-size: 1.5rem;
+    font-weight: 300;
+
+
+
+}
+
+.unknown-community{
+    width: 95%;
+    height: 20rem;
+    background-color: white;
+    padding-bottom: 15rem;
+    box-shadow: $hb-box-shadow;
+    border-radius: 3rem ;
+
+}
