@@ -2,16 +2,16 @@
 
 .comment {
     border-radius: 1rem;
-    border: 3px solid $hb-light-green;
 
     height: fit-content;
-    width: 70%;
     gap: 2rem;
     padding: 1rem;
 
     display: flex;
     flex-direction: row;
     align-items: center;
+
+    
 }
 
 .rate-section {
@@ -30,9 +30,7 @@
 }
 
 
-.username {
-    font-size: 2rem;
-}
+
 
 .comment-text {
     font-size: 1rem;
@@ -45,4 +43,22 @@
 
 .icon-down:hover{
     color: rgb(194, 58, 5);
+}
+
+.username {
+    font-size: 2rem;
+    display: flex;
+    flex-direction: row;
+    gap: 1rem;
+    align-items: baseline;
+}
+
+.user-rating{
+    font-size: 1rem;
+    font-weight: 300;
+}
+
+.bug-link{
+    color: $hb-light-green;
+    cursor: pointer;
 }
