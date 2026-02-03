@@ -1,0 +1,46 @@
+@use 'styles/variables' as *;
+
+.comment-cont{
+
+    display: flex;
+    flex-wrap: nowrap;
+
+    gap: 1rem;
+    align-items:end;
+}
+
+.input-comment{
+    font-family: $hb-main-font;
+
+    font-size: 1.2rem;
+
+    outline: none;
+    border: none;
+    border-bottom: 1px solid black;
+
+    max-height: 10rem;
+    max-width: 80rem;
+    
+}
+
+.submit-comment{
+    font-family: $hb-main-font;
+
+    cursor: pointer;
+
+    border: none;
+    background-color: $hb-light-green;
+    color: white;
+    padding: 0.5rem;
+
+    font-size: 1rem;
+
+    border-radius: 10px;
+
+    transition: background-color 0.1s ease-in-out;
+
+}
+
+.submit-comment:hover{
+    background-color: $hb-dark-green;
+}
