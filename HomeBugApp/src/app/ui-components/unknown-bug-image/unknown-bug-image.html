@@ -1,7 +1,8 @@
-<div class="hb-unknown">
+<div class="hb-unknown" [style.width.rem]="size" [style.height.rem]="size">
     <img src="../../assets/bee.jpg">
     <div class="hb-unknown-gradient"></div>
     <div class="hb-unknown-comments">35<ng-icon name="featherMessageCircle"></ng-icon></div>
-    <div class="hb-unknown-country"><ng-icon name="featherGlobe"></ng-icon>SRB</div>
-
+    @if (country_show === true) {
+        <div class="hb-unknown-country"><ng-icon name="featherGlobe"></ng-icon>SRB</div>
+    }
 </div>

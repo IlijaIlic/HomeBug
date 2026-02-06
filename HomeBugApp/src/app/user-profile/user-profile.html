@@ -14,7 +14,7 @@
         <div class="hb-profile-tabs">
             <div class="hb-tabs-buttons">
                 <button (click)="selectTab('info')" [class.btn-selected]="active_tab ==='info'">Info</button>
-                <button (click)="selectTab('scans')"  [class.btn-selected]="active_tab ==='scans'">My Scans</button>
+                <button (click)="selectTab('scans')" [class.btn-selected]="active_tab ==='scans'">My Scans</button>
                 <button (click)="selectTab('saved')" [class.btn-selected]="active_tab ==='saved'">Saved Bugs</button>
             </div>
         </div>
@@ -24,33 +24,91 @@
 
     <div class="hb-profile-info-tab">
         <div class="hb-info-whiterec"></div>
-
-        @if(active_tab === 'info'){            
-            <div class="hb-info-section">
-                <h1 class="hb-info-title">My Info</h1>
+        <!-- MORA PREKO GRIDA DA SE URADIIII!!!!-->
+        @if(active_tab === 'info'){
+        <h1 class="hb-info-title">My Info</h1>
+        <div class="hb-info-section">
+            <div>
                 <p class="hb-profile-hint-text">Name</p>
                 <p class="hb-profile-text">John</p>
+            </div>
+            <div>
                 <p class="hb-profile-hint-text">Surname</p>
                 <p class="hb-profile-text">Doe</p>
+            </div>
+            <div>
                 <p class="hb-profile-hint-text">Email</p>
                 <p class="hb-profile-text">john.doe&#64;gmail.com</p>
+            </div>
+            <div>
                 <p class="hb-profile-hint-text">Gender</p>
                 <p class="hb-profile-text">Male</p>
             </div>
-            <div class="hb-info-section">
-                <h1 class="hb-info-title">HomeBug Info</h1>
+        </div>
+        <h1 class="hb-info-title">HomeBug Info</h1>
+        <div class="hb-info-section">
+            <div>
                 <p class="hb-profile-hint-text">Unknown bugs scanned</p>
                 <p class="hb-profile-text">20</p>
+            </div>
+            <div>
                 <p class="hb-profile-hint-text">Comments helping others</p>
                 <p class="hb-profile-text">205</p>
-                <p class="hb-profile-hint-text">Reputation &#9432;</p>
-                <p class="hb-profile-text">Insect Insider 🐝</p>
+            </div>
+            <div>
+                <p class="hb-profile-hint-text">Reputation </p>
+                <p class="hb-profile-text">{{reputations[userReputation]}}</p>
+            </div>
+            <div>
                 <p class="hb-profile-hint-text">Users rated</p>
                 <p class="hb-profile-text">2.2k</p>
             </div>
+        </div>
+        }
+        @else if (active_tab === 'scans') {
+        <div class="hb-images-part">
+            <div>
+
+                <h1 class="hb-info-title">Scanned successfully</h1>
+                <div class="hb-bug-section">
+                    <app-unknown-bug-image [size]="11" [country_show]="false" />
+                    <app-unknown-bug-image [size]="11" [country_show]="false" />
+                    <app-unknown-bug-image [size]="11" [country_show]="false" />
+                    <app-unknown-bug-image [size]="11" [country_show]="false" />
+                    <app-unknown-bug-image [size]="11" [country_show]="false" />
+                    <app-unknown-bug-image [size]="11" [country_show]="false" />
+                    <app-unknown-bug-image [size]="11" [country_show]="false" />
+                </div>
+            </div>
+            <div>
+
+                <h1 class="hb-info-title">Unknown bugs</h1>
+                <div class="hb-bug-section">
+                    <app-unknown-bug-image [size]="11" [country_show]="true" />
+
+                </div>
+            </div>
+        </div>
+        }
+        @else if (active_tab === 'saved') {
+        <div class="hb-images-part">
+            <div>
+                <h1 class="hb-info-title">Saved bugs</h1>
+                <div class="hb-bug-section">
+                    <app-unknown-bug-image [size]="11" [country_show]="false" />
+                    <app-unknown-bug-image [size]="11" [country_show]="false" />
+                    <app-unknown-bug-image [size]="11" [country_show]="false" />
+                    <app-unknown-bug-image [size]="11" [country_show]="false" />
+                    <app-unknown-bug-image [size]="11" [country_show]="false" />
+                    <app-unknown-bug-image [size]="11" [country_show]="false" />
+                    <app-unknown-bug-image [size]="11" [country_show]="false" />
+                </div>
+            </div>
+        </div>
+
         }
 
-        
+
     </div>
 
 

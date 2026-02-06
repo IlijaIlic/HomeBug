@@ -153,6 +153,8 @@ font-family: $hb-main-font;
 .hb-info-title{
     color: $hb-dark-green;
     margin-bottom: 1rem;
+
+
 }
 
 
@@ -160,5 +162,27 @@ font-family: $hb-main-font;
     display: flex;
     flex-direction: column;
     flex-wrap: wrap;
-    height: calc(35rem/2);
+    align-items: start;
+    height: calc(30rem/2);
+}
+
+.hb-bug-section{
+    display: flex;
+    flex-direction: row;
+    gap: 1rem;
+    flex-wrap: nowrap;
+    overflow: scroll;
+    align-items: center;
+
+    scrollbar-width: thin;
+    scrollbar-color: $hb-light-green $hb-background;
+}
+
+.hb-images-part{
+    display: flex;
+    flex-direction: column;
+    flex-wrap: nowrap;
+    justify-content: space-around;
+    height: 100%;
+    width: 100%;
 }

@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, input, Input } from '@angular/core';
 import { NgIcon } from '@ng-icons/core';
 
 @Component({
@@ -8,5 +8,8 @@ import { NgIcon } from '@ng-icons/core';
   styleUrl: './unknown-bug-image.scss',
 })
 export class UnknownBugImage {
+
+  @Input() size = 15;
+  @Input() country_show = true;
 
 }
