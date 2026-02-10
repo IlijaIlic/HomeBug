@@ -1,12 +1,12 @@
 <div class="hb-register-page">
-  
+
     <button class="hb-logo" routerLink="">
         <img class="hb-logo" src="assets/newlogoColored.png" alt="logo" />
     </button>
 
     <div class="hb-register-main">
         <div class="hb-register-deco">
-            <svg class="hb-deco-wave" viewBox="0 0 900 600"  xmlns="http://www.w3.org/2000/svg"
+            <svg class="hb-deco-wave" viewBox="0 0 900 600" xmlns="http://www.w3.org/2000/svg"
                 xmlns:xlink="http://www.w3.org/1999/xlink" version="1.1">
                 <path
                     d="M0 91L13.7 91C27.3 91 54.7 91 82 85C109.3 79 136.7 67 163.8 64C191 61 218 67 245.2 71C272.3 75 299.7 77 327 76C354.3 75 381.7 71 409 73C436.3 75 463.7 83 491 80C518.3 77 545.7 63 573 69C600.3 75 627.7 101 654.8 114C682 127 709 127 736.2 126C763.3 125 790.7 123 818 123C845.3 123 872.7 125 886.3 126L900 127L900 0L886.3 0C872.7 0 845.3 0 818 0C790.7 0 763.3 0 736.2 0C709 0 682 0 654.8 0C627.7 0 600.3 0 573 0C545.7 0 518.3 0 491 0C463.7 0 436.3 0 409 0C381.7 0 354.3 0 327 0C299.7 0 272.3 0 245.2 0C218 0 191 0 163.8 0C136.7 0 109.3 0 82 0C54.7 0 27.3 0 13.7 0L0 0Z"
@@ -33,16 +33,43 @@
         </div>
         <form class="hb-register-form">
             <h1 class="hb-create-text">Create a <span>new</span> account.</h1>
-            <app-input-field placeholder="John" label="First Name" style="grid-column: 1; grid-row: 2;"/>
-            <app-input-field placeholder="Doe" label="Last Name" style="grid-column: 2; grid-row: 2;"/>
-            <app-input-field placeholder="john.doe@gmail.com" label="Email"  style="grid-column: 1; grid-row: 3;"/>
-            <app-input-field placeholder="" label="Password" type="password"  style="grid-column: 2; grid-row: 3;"/>
-            <button type="submit" class="hb-register-button" style="grid-column: 2; grid-row: 4;">Register</button>
+
+
+            <div class="hb-flex-row">
+
+                <button type="button" class="gender-button">
+                    <img src="../../assets/profileavatarfemale.png" alt="female avatar" />
+                </button>
+
+                <button type="button" class="gender-button">
+                    <img src="../../assets/profileavatarmale.png" alt="male avatar" />
+                </button>
+            </div>
+
+            <div class="hb-flex-row">
+                <app-input-field placeholder="John" label="First Name" />
+                <app-input-field placeholder="Doe" label="Last Name" />
+            </div>
+
+            <div class="hb-flex-row">
+                <app-input-field placeholder="john.doe@gmail.com" label="Email" />
+                <app-input-field placeholder="" label="Password" type="password" />
+            </div>
+
+            
+            <button type="submit" class="hb-register-button">Register</button>
+            
+            <p class="hb-already-have">You already have an account? <span class="hb-login-color">Login</span> right here!</p>
             <hr>
-            <div class="hb-register-googleacc">Or sign up using Google</div>
-            <button class="hb-register-gbut">
-                <img src="assets/google.png" />
-            </button>
+
+            <div class="hb-flex-row">
+                <div class="hb-register-googleacc">Or sign up using Google</div>
+
+                <button class="hb-register-gbut">
+                    <img src="assets/google.png" />
+                </button>
+            </div>
+
         </form>
     </div>
 </div>

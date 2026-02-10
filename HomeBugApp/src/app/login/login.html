@@ -33,16 +33,20 @@
         </div>
         <form class="hb-register-form">
             <h1 class="hb-create-text">Sign in to an <span>existing</span> account.</h1>
-            <app-input-field placeholder="john.doe@gmail.com" label="Email"
-                style="grid-column: 1 /span 2; grid-row: 2; justify-self: center;" width="clamp(10rem, 30vw, 20rem)" />
-            <app-input-field placeholder="" label="Password" type="password"
-                style="grid-column: 1/ span 2; grid-row: 3;" width="clamp(10rem, 30vw, 20rem)" />
-            <button type="submit" class="hb-register-button" style="grid-column: 2; grid-row: 4;">Login</button>
+
+            <div class="hb-flex-row">
+
+                <app-input-field placeholder="john.doe@gmail.com" label="Email" />
+                <app-input-field placeholder="" label="Password" type="password" />
+            </div>
+            <button type="submit" class="hb-register-button">Login</button>
             <hr>
-            <div class="hb-register-googleacc">Or sign up using Google</div>
-            <button class="hb-register-gbut">
-                <img src="assets/google.png" />
-            </button>
+            <div class="hb-flex-row">
+                <div class="hb-register-googleacc">Or sign up using Google</div>
+                <button class="hb-register-gbut">
+                    <img src="assets/google.png" />
+                </button>
+            </div>
         </form>
     </div>
 </div>
