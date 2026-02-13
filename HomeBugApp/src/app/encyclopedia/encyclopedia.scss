@@ -1,0 +1,59 @@
+@use 'styles/variables' as *;
+
+.hb-encyclopedia-page {
+    background-color: $hb-background;
+    font-family: $hb-main-font;
+
+    margin-bottom: -15rem;
+    padding-bottom: 15rem;
+
+    display: flex;
+    flex-direction: column;
+}
+
+.hb-encyclopedia-title {
+    font-size: 4rem;
+
+    margin-left: 5rem;
+
+    color: $hb-dark-green;
+}
+
+.hb-encyclopedia-title p {
+    font-size: 2rem;
+    margin: 0;
+
+    color: $hb-light-green;
+}
+
+.hb-cont {
+    display: flex;
+    flex-direction: row;
+
+}
+
+.hb-filters{
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+    
+    padding: 4rem;
+    height: fit-content;
+
+    font-size: 2rem;
+    font-weight: 600;
+
+    color: white;
+    background-color: $hb-light-green;
+    border-radius: 2rem;
+}
+
+.hb-filt-bugs{
+    display: flex;
+    flex-direction: column;
+    
+    width: 100%;
+
+    background-color: aqua;
+    padding: 2rem;
+}
