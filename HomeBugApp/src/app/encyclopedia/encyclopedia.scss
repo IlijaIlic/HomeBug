@@ -14,7 +14,7 @@
 .hb-encyclopedia-title {
     font-size: 4rem;
 
-    margin-left: 5rem;
+    margin-left: 3rem;
 
     color: $hb-dark-green;
 }
@@ -29,7 +29,9 @@
 .hb-cont {
     display: flex;
     flex-direction: row;
-
+    margin-top: 4rem;
+    margin-inline: 3rem;
+    gap: 3rem;
 }
 
 .hb-filters{
@@ -39,6 +41,7 @@
     
     padding: 4rem;
     height: fit-content;
+    margin-top: 6rem;
 
     font-size: 2rem;
     font-weight: 600;
@@ -51,9 +54,36 @@
 .hb-filt-bugs{
     display: flex;
     flex-direction: column;
-    
+    gap: 3rem;
+
     width: 100%;
 
-    background-color: aqua;
-    padding: 2rem;
+}
+
+.hb-applied-filters{
+    width: 100%;
+
+    font-size: 1.5rem;
+    
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    gap: 1rem;
+    align-items: end;
+}
+
+.hb-bugs-cont{
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    gap: 2rem;
+}
+
+.hb-numeration{
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+    gap: 1rem;
+    font-size: 2rem;
 }
