@@ -7,6 +7,7 @@ import { UserProfile } from './user-profile/user-profile';
 import { SearchPage } from './search-page/search-page';
 import { UnknownBug } from './unknown-bug/unknown-bug';
 import { Encyclopedia } from './encyclopedia/encyclopedia';
+import { KnownBug } from './known-bug/known-bug';
 
 export const routes: Routes = [
     {
@@ -29,6 +30,10 @@ export const routes: Routes = [
     {
         path: 'encyclopedia',
         component: Encyclopedia
+    },
+    {
+        path: 'encyclopedia/known',
+        component: KnownBug
     },
     {
         path: 'search',
