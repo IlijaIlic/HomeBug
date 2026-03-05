@@ -2,6 +2,8 @@ import { AfterViewInit, Component } from '@angular/core';
 import * as L from 'leaflet'
 import { Feature, Polygon } from 'geojson';
 
+type HabitatKey = "grass" | "forest" | "garden" | "wet" | "desert" | "mountain" | "rainforest" | "agro";
+
 @Component({
   selector: 'app-known-bug',
   imports: [],
@@ -14,7 +16,7 @@ export class KnownBug implements AfterViewInit {
 
   ngAfterViewInit(): void {
 
-    this.map = L.map('location-map').setView([35, 50],1);
+    this.map = L.map('location-map').setView([35, 50], 1);
 
     L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
       attribution: '© OpenStreetMap'
@@ -48,8 +50,16 @@ export class KnownBug implements AfterViewInit {
         fillOpacity: 0.3
       }
     }).addTo(this.map);
+  }
 
-
-
+  habitats: Record<HabitatKey, string> = {
+    "grass": "🌾 Grasslands",
+    "forest": "🌳 Forests",
+    "garden": "🌺 Gardens",
+    "wet": "🌊 Wetlands",
+    "desert": "🏜️ Deserts",
+    "mountain": "⛰️ Mountains",
+    "rainforest": "🌴 Tropical Rainforests",
+    "agro": "🌾 Agricultural Fields"
   }
 }
