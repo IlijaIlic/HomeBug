@@ -15,6 +15,10 @@
 .known-cont {
     padding-inline: 4rem;
     margin-top: -5rem;
+
+    display: flex;
+    flex-direction: column;
+    gap: 2rem;
 }
 
 .known-name-img {
@@ -26,16 +30,30 @@
     flex-wrap: wrap;
 
     margin-bottom: 6rem;
+
 }
 
 .known-name {
+    color: $hb-dark-green;
+    text-align: left;
+}
+
+.name-common {
     font-size: 5rem;
-    margin-bottom: 3rem;
-    text-align: center;
+    margin-bottom: 1.5rem;
+    font-weight: 700;
+}
+
+.name-latin{
+    font-size: 2rem;
+    color: $hb-light-green;
+
 }
 
 .known-img {
     width: 50rem;
+    border-radius: 3rem;
+
 }
 
 .map-title {
@@ -59,7 +77,7 @@
     height: 25rem;
 }
 
-.known-info{
+.known-info {
     display: flex;
     flex-direction: row;
     flex-wrap: wrap;
@@ -74,23 +92,30 @@
     width: fit-content;
     height: fit-content;
     color: $hb-dark-green;
+
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+
 }
 
-.habitat-title{
+.habitat-title {
     font-size: 2rem;
+    text-align: center;
+
 }
 
-.habitat-info{
+.habitat-info {
     font-size: 1.5rem;
 }
 
-.info-taxonomy{
-     background-color: $hb-yellow;
+.info-taxonomy {
+    background-color: $hb-yellow;
     padding: 2rem;
     border-radius: 2rem;
     box-shadow: $hb-box-shadow;
     width: fit-content;
-        height: fit-content;
+    height: fit-content;
 
     color: $hb-dark-green;
 
@@ -100,7 +125,12 @@
 
 }
 
-.taxonomy-item{
+.taxonomy-title {
+    font-size: 2rem;
+    text-align: center;
+}
+
+.taxonomy-item {
     display: flex;
     flex-direction: row;
     gap: 5rem;
@@ -109,7 +139,83 @@
     font-size: 1.5rem;
 }
 
-.item-link{
+.item-link {
     text-decoration: underline;
+    cursor: pointer;
+}
+
+.info-visual {
+    background-color: $hb-yellow;
+    padding: 2rem;
+    border-radius: 2rem;
+    box-shadow: $hb-box-shadow;
+    width: fit-content;
+    height: fit-content;
+
+    color: $hb-dark-green;
+
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+}
+
+.visual-cont {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+}
+
+.visual-title {
+    font-size: 2rem;
+    text-align: center;
+}
+
+.visual-item {
+    font-size: 1.5rem;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    gap: 5rem;
+}
+
+
+
+
+.known-tags {
+    width: fit-content;
+    height: fit-content;
+
+    color: $hb-dark-green;
+
+    display: flex;
+    flex-direction: row;
+    gap: 1rem;
+    align-items: baseline;
+
+    font-size: 1.5rem;
+}
+
+.tags-cont {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    gap: 1rem;
+}
+
+.tag-item {
+    font-family: $hb-main-font;
+    background-color: $hb-gray;
+    color: white;
+    padding: 0.8rem;
+    padding-inline: 1rem;
+    border-radius: 1rem;
+    box-shadow: $hb-box-shadow;
+    border: none;
+    font-size: 1.5rem;
+
+}
+
+.tag-item:hover {
+    background-color: $hb-gray-hover;
     cursor: pointer;
 }

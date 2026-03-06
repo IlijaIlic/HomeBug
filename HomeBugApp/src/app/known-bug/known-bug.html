@@ -9,7 +9,12 @@
     <div class="known-cont">
         <div class="known-name-img">
             <div class="known-name">
-                Ladybug
+                <div class="name-common">
+                    Ladybug
+                </div>
+                <div class="name-latin">
+                    Coccinella septempunctata
+                </div>
             </div>
             <img class="known-img" src="../../assets/ladybug.jpg" alt="bugimg" />
         </div>
@@ -19,12 +24,13 @@
         </div>
         <div class="known-info">
             <div class="location-habitat">
-                <div class="habitat-title">Prefered habitats:</div>
+                <div class="habitat-title">Prefered habitats</div>
                 <div class="habitat-info">{{habitats["agro"]}}</div>
                 <div class="habitat-info">{{habitats["wet"]}}</div>
                 <div class="habitat-info">{{habitats["forest"]}}</div>
             </div>
             <div class="info-taxonomy">
+                <div class="taxonomy-title">Taxonomy</div>
                 <div class="taxonomy-item">
                     <div>
                         Species:
@@ -66,9 +72,43 @@
                     </div>
                 </div>
             </div>
-            <div class="info-classification">CLASSIFICATION</div>
-            <div class="info-important">IMPORTANT</div>
+            <div class="info-visual">
+                <div class="visual-title">Visual Characteristics</div>
+                <div class="visual-cont">
+                    <div class="visual-item">
+                        <div>Number of legs:</div>
+                        <div class="item-link">8</div>
+                    </div>
+                    <div class="visual-item">
+                        <div>Body Type:</div>
+                        <div class="item-link">Oval</div>
+                    </div>
+                    <div class="visual-item">
+                        <div>Color:</div>
+                        <div class="item-link">Black, red and purple</div>
+                    </div>
+                    <div class="visual-item">
+                        <div>Size:</div>
+                        <div class="item-link">Small</div>
+                    </div>
+                    <div class="visual-item">
+                        <div>Wings:</div>
+                        <div class="item-link">No</div>
+                    </div>
+                </div>
+            </div>
         </div>
-        <div class="known-tags">TAGS</div>
+        <div class="info-important">IMPORTANT</div>
+
+        <div class="known-tags">
+            <div class="tags-title">Tags:</div>
+            <div class="tags-cont">
+                <button type="button" class="tag-item">Insecta</button>
+                <button type="button" class="tag-item">Oval</button>
+                <button type="button" class="tag-item">Color</button>
+                <button type="button" class="tag-item">Size</button>
+                <button type="button" class="tag-item">Wings</button>
+            </div>
+        </div>
     </div>
 </div>
