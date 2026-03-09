@@ -1,6 +1,7 @@
 import { AfterViewInit, Component } from '@angular/core';
 import * as L from 'leaflet'
 import { Feature, Polygon } from 'geojson';
+import { REGIONS } from '../../data/regions';
 
 type HabitatKey = "grass" | "forest" | "garden" | "wet" | "desert" | "mountain" | "rainforest" | "agro";
 
@@ -26,22 +27,9 @@ export class KnownBug implements AfterViewInit {
   }
 
   addRegions() {
+    const southEurope = REGIONS["eastAsia"];
 
-    const southEurope: Feature<Polygon> = {
-      type: "Feature",
-      geometry: {
-        type: "Polygon",
-        coordinates: [[
-          [-10, 35],
-          [30, 35],
-          [30, 45],
-          [-10, 45],
-          [-10, 35]
-        ]]
-      },
-      properties: {}
-    };
-
+   
 
 
     L.geoJSON(southEurope, {
