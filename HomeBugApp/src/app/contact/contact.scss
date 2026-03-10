@@ -1,0 +1,38 @@
+@use 'styles/variables' as *;
+
+.contact-page{
+    background-color: $hb-background;
+
+    margin-bottom: -15rem;
+    padding-bottom: 15rem;
+
+    font-family: $hb-main-font;
+
+}
+
+
+.contact-cont{
+
+    padding-inline: 10rem;
+
+    display: flex;
+    flex-direction: row;
+    justify-content: space-around;
+    height: 100%;
+    align-items: center;
+}
+
+.contact-cont img{
+    width: 30rem;
+}
+
+.text-title{
+    font-size: 4rem;
+    font-weight: 600;
+
+    color: $hb-light-green;
+}
+
+.contact-text{
+    font-size: 2rem;
+}

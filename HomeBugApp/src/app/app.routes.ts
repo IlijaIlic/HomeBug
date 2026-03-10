@@ -8,6 +8,7 @@ import { SearchPage } from './search-page/search-page';
 import { UnknownBug } from './unknown-bug/unknown-bug';
 import { Encyclopedia } from './encyclopedia/encyclopedia';
 import { KnownBug } from './known-bug/known-bug';
+import { Contact } from './contact/contact';
 
 export const routes: Routes = [
     {
@@ -38,6 +39,10 @@ export const routes: Routes = [
     {
         path: 'search',
         component: SearchPage
+    },
+    {
+        path: 'contact',
+        component: Contact
     },
     {
         path: 'search/unknown',
