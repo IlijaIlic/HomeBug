@@ -9,6 +9,7 @@ import { UnknownBug } from './unknown-bug/unknown-bug';
 import { Encyclopedia } from './encyclopedia/encyclopedia';
 import { KnownBug } from './known-bug/known-bug';
 import { Contact } from './contact/contact';
+import { AfterUpload } from './after-upload/after-upload';
 
 export const routes: Routes = [
     {
@@ -39,6 +40,10 @@ export const routes: Routes = [
     {
         path: 'search',
         component: SearchPage
+    },
+    {
+        path: 'search/uploaded',
+        component: AfterUpload
     },
     {
         path: 'contact',

@@ -1,0 +1,14 @@
+@use "styles/variables" as *;
+
+.after-page{
+    background-color: $hb-background;
+
+    padding-bottom: 15rem;
+    margin-bottom: -15rem;
+}
+
+
+.beetle-img{
+    width: 30rem;
+    transform: scaleX(-1);
+}
