@@ -1,0 +1,260 @@
+@use 'styles/variables' as *;
+
+.hb-deco-wave {
+    position: absolute;
+    z-index: 0;
+    height: 50rem;
+    top: 0;
+    left: 0;
+}
+
+
+
+.hb-register-page {
+    background-color: $hb-background;
+    margin-bottom: -10rem;
+    padding-top: 5rem;
+    padding-inline: 10rem;
+    padding-bottom: 20rem;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    position: relative;
+    overflow: hidden;
+    font-family: $hb-main-font;
+    color: $hb-dark-green;
+}
+
+.hb-logo {
+    width: 15rem;
+    cursor: pointer;
+    translate: 0px 0px;
+    transition: translate 0.1s ease-in;
+    border: none;
+    background-color: transparent;
+    margin-bottom: 2rem;
+
+}
+
+.hb-logo:hover {
+    translate: 0px -5px;
+}
+
+.hb-register-main {
+    display: flex;
+    flex-direction: row;
+    border-radius: 50px;
+    box-shadow: 0 0 10px 10px rgba(0, 0, 0, 0.15);
+    height: 40rem;
+}
+
+.hb-register-deco {
+    margin-inline: 0;
+    width: 30vw;
+    border-radius: 50px 0 0 50px;
+    position: relative;
+    background-color: transparent;
+    overflow: hidden;
+
+}
+
+.hb-deco-img {
+    position: absolute;
+    bottom: -5%;
+    left: 50%;
+    translate: -50%;
+    width: clamp(10rem, 18vw, 20rem);
+}
+
+.hb-register-form {
+    padding: 1rem;
+    background-color: white;
+
+    border-radius: 0 50px 50px 0;
+    display: flex;
+    flex-direction: column;
+    justify-items: center;
+
+    gap: 2rem;
+
+    width: 40rem;
+}
+
+.hb-flex-row {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-around;
+}
+
+.hb-register-text1 {
+    font-family: $hb-main-font;
+    position: absolute;
+    font-size: clamp(2rem, 3vw, 3rem);
+    color: white;
+    text-align: center;
+    margin-top: 3rem;
+    z-index: 2;
+    left: 50%;
+    translate: -50%;
+    top: 5%
+}
+
+.hb-register-text2 {
+    font-family: $hb-main-font;
+    position: absolute;
+    font-size: clamp(1rem, 1.5vw, 2rem);
+    color: rgba(255, 255, 255, 0.5);
+    text-align: center;
+    margin-top: 3rem;
+    z-index: 2;
+    left: 50%;
+    translate: -50%;
+    top: 15%;
+    width: 100%;
+}
+
+.hb-register-button {
+    transition: background-color 0.15s linear;
+    background-color: $hb-light-green;
+    font-family: $hb-main-font;
+    border: none;
+    border-radius: 25px;
+    width: 12rem;
+    height: 3rem;
+    font-size: 2rem;
+    box-shadow: $hb-box-shadow;
+    margin-right: 3rem;
+    margin-top: 2rem;
+    align-self: flex-end;
+    color: white;
+    cursor: pointer;
+
+}
+
+.hb-login-color {
+    color: $hb-light-green;
+    font-weight: 800;
+    cursor: pointer;
+}
+
+.hb-already-have {
+    align-self: center;
+    margin-block: 2rem;
+
+}
+
+.hb-register-button:hover {
+    background-color: $hb-dark-green;
+}
+
+
+
+.hb-create-text {
+    align-self: center;
+    color: $hb-dark-green;
+
+    margin-bottom: 2rem;
+}
+
+.hb-create-text span {
+    color: $hb-light-green;
+}
+
+.hb-register-googleacc {
+
+    align-self: center
+}
+
+.hb-register-gbut {
+    height: 5rem;
+    width: 5rem;
+    border-radius: 50%;
+    position: relative;
+    border: none;
+    scale: 1;
+    transition: scale 0.2s ease-in-out;
+    align-self: baseline;
+}
+
+.hb-register-gbut:hover {
+    background-color: rgb(200, 200, 200);
+    cursor: pointer;
+    scale: 1.1;
+}
+
+.hb-register-gbut img {
+    height: 3rem;
+    width: 3rem;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    translate: -50% -50%;
+}
+
+hr {
+    border: none;
+    height: 1px;
+    background: linear-gradient(to right,
+            transparent 0%,
+            $hb-light-green 10%,
+            $hb-light-green 90%,
+            transparent 100%);
+    width: 90%;
+    margin-top: 0.5rem;
+    border-radius: 50%;
+    align-self: baseline;
+}
+
+.gender-button {
+    width: 12rem;
+    height: 12rem;
+    transition: background-color 0.1s linear;
+    background-color: $hb-light-green;
+
+
+    position: relative;
+    border-radius: 50%;
+    box-shadow: $hb-box-shadow;
+
+    margin-bottom: 2rem;
+
+    border: none;
+    cursor: pointer;
+}
+
+
+.gender-button img {
+    position: absolute;
+    height: 10rem;
+    width: 7rem;
+
+    top: calc(50% - 5rem);
+    left: calc(50% - 3.5rem);
+}
+
+
+.gender-button:hover {
+    background-color: $hb-dark-green;
+
+}
+
+.gender-button:hover {
+    background-color: $hb-dark-green;
+}
+
+
+.login-cont {
+    align-self: flex-end;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-end;
+
+
+
+
+    width: 100%;
+}
+
+.login-cont p {
+    align-self: center;
+}

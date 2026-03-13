@@ -2,12 +2,14 @@
 
 
 .hb-header {
-    background-color: #4D9F71;
     color: white;
-    text-align: center;
-    align-content: center;
     font-family: "Josefin Sans", sans-serif;
-    position: relative;
+
+    display: flex;
+    flex-direction: column;
+    flex-wrap: nowrap;
+
+    background-color: $hb-background;
 }
 
 .hb-logo {
@@ -15,7 +17,7 @@
     flex-direction: row;
     justify-content: center;
     align-items: center;
-    width: clamp(15rem,20vw,20rem);
+    width: clamp(15rem, 20vw, 20rem);
     cursor: pointer;
     background-color: transparent;
     border: none;
@@ -24,8 +26,8 @@
 
 }
 
-.hb-logo:hover{
-     transform: translateY(-1px) scale(1.02) scaleX(-1);
+.hb-logo:hover {
+    transform: translateY(-1px) scale(1.02) scaleX(-1);
 }
 
 .hb-logo-text {
@@ -49,6 +51,9 @@
     align-items: center;
     padding-inline: 4vw;
     padding-block: 2vh;
+
+    background-color: #4D9F71;
+
 }
 
 
@@ -82,7 +87,7 @@
     background-color: #f6f88c;
 }
 
-.hb-header-login{
+.hb-header-login {
     background-color: transparent;
     border: none;
     font-family: $hb-main-font;
@@ -93,7 +98,7 @@
     margin-right: 1rem;
 }
 
-.hb-header-login:hover{
+.hb-header-login:hover {
     text-decoration: underline;
 }
 
@@ -104,8 +109,8 @@
     gap: 30px;
 
     position: absolute;
-  left: 50%;
-  transform: translate(-50%,0%);
+    left: 50%;
+    transform: translate(-50%, 0%);
 }
 
 .hb-header-links-container button {

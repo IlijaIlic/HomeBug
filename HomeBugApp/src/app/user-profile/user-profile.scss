@@ -4,13 +4,12 @@
 .hb-profile-page {
     background-color: $hb-background;
     margin-bottom: -15rem;
-    position: relative;
     padding-bottom: 15rem;
-    padding-top: 10rem;
+    position: relative;
     display: flex;
-align-items: center;
-justify-content: center;
-font-family: $hb-main-font;
+    align-items: center;
+    justify-content: center;
+    font-family: $hb-main-font;
 }
 
 .hb-header-wave {
@@ -88,12 +87,13 @@ font-family: $hb-main-font;
     align-self: center;
     border-radius: 25px;
     transition: box-shadow 0.2s ease-in-out;
-    padding-top:7px;
+    padding-top: 7px;
 }
 
 .hb-profile-tabs button:hover {
     background-color: white;
-    box-shadow: 0 0px 5px 5px rgba(0, 0, 0, 0.15);}
+    box-shadow: 0 0px 5px 5px rgba(0, 0, 0, 0.15);
+}
 
 .hb-tabs-buttons {
     display: flex;
@@ -104,8 +104,8 @@ font-family: $hb-main-font;
     margin-top: 2rem;
 }
 
-.hb-profile-tabs button.btn-selected{
-    background-color: white ;
+.hb-profile-tabs button.btn-selected {
+    background-color: white;
     box-shadow: $hb-box-shadow;
     height: 5vh;
     width: 50%;
@@ -128,7 +128,7 @@ font-family: $hb-main-font;
 
 }
 
-.hb-info-whiterec{
+.hb-info-whiterec {
     height: 30rem;
     background-color: rgb(250, 250, 250);
     width: 1rem;
@@ -138,19 +138,19 @@ font-family: $hb-main-font;
     translate: 0 -50%;
 }
 
-.hb-profile-text{
+.hb-profile-text {
     font-size: 1.5rem;
     margin: 0;
     margin-bottom: 1rem;
 
 }
 
-.hb-profile-hint-text{
+.hb-profile-hint-text {
     margin: 0;
     color: rgba(0, 0, 0, 0.5);
 }
 
-.hb-info-title{
+.hb-info-title {
     color: $hb-dark-green;
     margin-bottom: 1rem;
 
@@ -158,7 +158,7 @@ font-family: $hb-main-font;
 }
 
 
-.hb-info-section{
+.hb-info-section {
     display: flex;
     flex-direction: column;
     flex-wrap: wrap;
@@ -166,7 +166,7 @@ font-family: $hb-main-font;
     height: calc(30rem/2);
 }
 
-.hb-bug-section{
+.hb-bug-section {
     display: flex;
     flex-direction: row;
     gap: 1rem;
@@ -178,7 +178,7 @@ font-family: $hb-main-font;
     scrollbar-color: $hb-light-green $hb-background;
 }
 
-.hb-images-part{
+.hb-images-part {
     display: flex;
     flex-direction: column;
     flex-wrap: nowrap;

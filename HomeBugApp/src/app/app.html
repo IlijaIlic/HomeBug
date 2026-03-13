@@ -1,6 +1,11 @@
-
 @if (showHeader) {
-    <app-ui-header />
+@if (showWave) {
+<app-ui-header [wave_show]="true" />
+} @else {
+<app-ui-header [wave_show]="false" />
+
+}
+
 }
 <router-outlet />
 <app-ui-footer />

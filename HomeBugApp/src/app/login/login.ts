@@ -6,7 +6,7 @@ import { RouterModule } from '@angular/router';
   selector: 'app-login',
   imports: [RouterModule, InputField],
   templateUrl: './login.html',
-  styleUrl: '../register/register.scss'
+  styleUrl: '../login/login.scss'
 })
 export class Login {
 

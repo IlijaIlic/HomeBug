@@ -7,6 +7,11 @@
     align-items: center;
     padding-block: 5rem;
     position: relative;
+
+    background-color: $hb-background;
+
+    margin-bottom: -15rem;
+    padding-bottom: 15rem;
 }
 
 .hb-header-wave{
@@ -26,4 +31,6 @@
     font-size: clamp(2rem, 4vw, 5rem);
 
     color: $hb-dark-green;
+
+    margin-top: clamp(0rem, 1vh, 3rem);
 }

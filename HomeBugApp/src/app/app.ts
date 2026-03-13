@@ -15,6 +15,7 @@ export class App {
   protected title = 'HomeBugApp';
   protected activeRoute = inject(ActivatedRoute);
   protected showHeader: Boolean = true;
+  protected showWave: Boolean = false;
 
   constructor(private router: Router) {
     this.router.events
@@ -25,8 +26,13 @@ export class App {
           this.showHeader = false
         } else {
           this.showHeader = true
+          if (this, router.url === '/profile' || router.url === "/encyclopedia" || router.url === "/encyclopedia/known" || router.url === "/search/unknown" || router.url === "/search/uploaded" || router.url === "/contact") {
+            this.showWave = true;
+          } else {
+            this.showWave = false;
+
+          }
         }
-        console.log('Current route URL:', this.router.url);
       });
   }
 }

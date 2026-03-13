@@ -1,6 +1,6 @@
 @use 'styles/variables' as *;
 
-.contact-page{
+.contact-page {
     background-color: $hb-background;
 
     margin-bottom: -15rem;
@@ -11,9 +11,9 @@
 }
 
 
-.contact-cont{
+.contact-cont {
 
-    padding-inline: 10rem;
+    padding-inline: clamp(0rem, 5vw, 10rem);
 
     display: flex;
     flex-direction: row;
@@ -22,17 +22,23 @@
     align-items: center;
 }
 
-.contact-cont img{
-    width: 30rem;
+@media (max-width: 600px) {
+    .contact-cont{
+        flex-wrap: wrap;
+    }
 }
 
-.text-title{
-    font-size: 4rem;
+.contact-cont img {
+    width: clamp(10rem, 30vw, 30rem);
+}
+
+.text-title {
+    font-size: clamp(2rem, 4vw, 4rem);
     font-weight: 600;
 
     color: $hb-light-green;
 }
 
-.contact-text{
-    font-size: 2rem;
+.contact-text {
+    font-size: clamp(1rem, 4vw, 2rem);
 }
