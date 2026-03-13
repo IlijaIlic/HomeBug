@@ -1,14 +1,62 @@
 @use "styles/variables" as *;
 
-.after-page{
+.after-page {
     background-color: $hb-background;
-
+    font-family: $hb-main-font;
     padding-bottom: 15rem;
     margin-bottom: -15rem;
 }
 
+.page-cont {
+    display: flex;
+    flex-direction: column;
+    margin-top: 5rem;
 
-.beetle-img{
+
+}
+
+.beetle-img {
     width: 30rem;
     transform: scaleX(-1);
+    margin-top: -5rem;
+}
+
+.found-cont {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-around;
+    align-items: center;
+}
+
+.found-title {
+    font-size: 4rem;
+    font-weight: 700;
+    color: $hb-dark-green;
+}
+
+.other-title {
+    font-size: 4rem;
+    font-weight: 700;
+    color: $hb-dark-green;
+    align-self: center;
+    margin-bottom: 5rem;
+}
+
+.found-img {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 1rem;
+}
+
+.found-text {
+    font-size: 1.5rem;
+    color: $hb-light-green;
+}
+
+.other-matches {
+    display: flex;
+    flex-direction: row;
+    gap: 2rem;
+    justify-content: center;
 }
