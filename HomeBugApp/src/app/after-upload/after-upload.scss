@@ -15,47 +15,65 @@
 }
 
 .beetle-img {
-    width: 30rem;
-    transform: scaleX(-1);
-    margin-top: -5rem;
+    width: clamp(15rem, 30vw, 30rem);
+    transform: scaleX(-1) rotate(20deg);
+    margin-block: -5rem;
+    margin-inline: -5rem;
 }
 
-.found-cont {
-    display: flex;
-    flex-direction: row;
-    justify-content: space-around;
-    align-items: center;
-}
-
-.found-title {
-    font-size: 4rem;
-    font-weight: 700;
-    color: $hb-dark-green;
-}
-
-.other-title {
-    font-size: 4rem;
-    font-weight: 700;
-    color: $hb-dark-green;
-    align-self: center;
-    margin-bottom: 5rem;
-}
-
-.found-img {
+.img-match {
     display: flex;
     flex-direction: column;
     align-items: center;
     gap: 1rem;
 }
 
+.found-cont {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+    align-items: center;
+    gap: 2rem;
+    margin-bottom: 5rem;
+    position: relative;
+}
+
+.found-title {
+    font-size: clamp(3rem, 5vw, 4rem);
+    font-weight: 700;
+    color: $hb-dark-green;
+    text-align: center;
+}
+
+.other-title {
+    font-size: clamp(3rem, 5vw, 4rem);
+    font-weight: 700;
+    color: $hb-dark-green;
+    align-self: center;
+    margin-bottom: 2rem;
+}
+
+.found-img {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: space-around;
+    gap: 1rem;
+}
+
 .found-text {
-    font-size: 1.5rem;
+    font-size: clamp(0.5rem , 4vw, 1.5rem);
     color: $hb-light-green;
 }
 
 .other-matches {
+
     display: flex;
     flex-direction: row;
+    flex-wrap: wrap;
     gap: 2rem;
-    justify-content: center;
+    justify-content: space-evenly;
+
+    margin-bottom: 3rem;
+
 }

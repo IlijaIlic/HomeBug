@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, HostListener, OnInit } from '@angular/core';
 import { UnknownBugImage } from '../ui-components/unknown-bug-image/unknown-bug-image';
 
 @Component({
@@ -7,6 +7,30 @@ import { UnknownBugImage } from '../ui-components/unknown-bug-image/unknown-bug-
   templateUrl: './after-upload.html',
   styleUrl: './after-upload.scss',
 })
-export class AfterUpload {
+export class AfterUpload implements OnInit {
+  width: number = window.innerWidth;
+  size_of_comp: number = 10;
+
+  ngOnInit(): void {
+    if (this.width < 600) {
+      this.size_of_comp = 10;
+    } else {
+      this.size_of_comp = 15
+    }
+
+
+  }
+
+  @HostListener('window:resize')
+  onResize() {
+    this.width = window.innerWidth;
+    if (this.width < 600) {
+      this.size_of_comp = 10;
+    } else {
+      this.size_of_comp = 15
+    }
+
+
+  }
 
 }

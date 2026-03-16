@@ -1,7 +1,9 @@
-<div>
-    <div class="hb-search-page1">
+<div class="hb-search-page1">
 
-        <svg id="visual" viewBox="0 0 900 1000" preserveAspectRatio="none" xmlns="http://www.w3.org/2000/svg">
+
+    <div class="img-cont">
+
+        <svg id="visual" viewBox="0 0 900 900" preserveAspectRatio="none" xmlns="http://www.w3.org/2000/svg">
 
             <g>
                 <path
@@ -24,35 +26,43 @@
                     fill="#153E42" />
             </g>
 
+
         </svg>
-
-
-        <div class="hb-search-page-content">
-
-            <div class="hb-search-imgdrop">
-                <img src="../../assets/draganddrop.png" alt="Image drag & drop" />
-            </div>
-
-            <div class="hb-search-hrcont">
-                <hr class="hr1">
-                <span class="hb-search-or">or</span>
-                <hr class="hr2">
-            </div>
-
-            <div class="hb-search-byname">
-                <input class="hb-byname-input" type="text" placeholder="Search by name" />
-                <ng-icon class="hb-byname-icon" name="featherSearch"></ng-icon>
-
-            </div>
+        <div class="hb-search-imgdrop">
+            <img src="../../assets/draganddrop.png" alt="Image drag & drop" />
         </div>
 
     </div>
-    <div class="hb-search-page2">
-        <div class="hb-search-unknown">
-            <app-unknown-bug-image routerLink="unknown"/>
-            <app-unknown-bug-image routerLink="uploaded"/>
-            <app-unknown-bug-image/>
-            <app-unknown-bug-image/>
-        </div>>
+
+
+
+
+
+
+
+
+    <div class="hb-search-cont">
+        <div class="hb-filters">
+            FILTERS
+            <button type="button">FILTER1</button>
+            <button type="button">FILTER2</button>
+            <button type="button">FILTER3</button>
+        </div>
+        <div class="applied-results">
+
+            <div class="hb-applied-filters">
+                APPLIED FILTERS:
+                <app-applied-filter filter_name="filter1" />
+                <app-applied-filter filter_name="filter2" />
+                <app-applied-filter filter_name="filter3" />
+
+            </div>
+            <div class="hb-search-unknown">
+                <app-unknown-bug-image [size]="size_of_comp" routerLink="unknown" />
+                <app-unknown-bug-image [size]="size_of_comp" routerLink="uploaded" />
+                <app-unknown-bug-image [size]="size_of_comp" />
+                <app-unknown-bug-image [size]="size_of_comp" />
+            </div>
+        </div>
     </div>
 </div>

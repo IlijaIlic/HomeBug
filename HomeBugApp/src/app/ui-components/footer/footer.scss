@@ -1,18 +1,18 @@
-.hb-footer{
-   
-position: relative;
-overflow: hidden;
+.hb-footer {
+
+    position: relative;
+    overflow: hidden;
 }
 
-.hb-footer-sqarepart{
- background-image: linear-gradient(#153E42, #4D9F71);
+.hb-footer-sqarepart {
+    background-image: linear-gradient(#153E42, #4D9F71);
     padding: 2rem;
     font-family: "Josefin Sans", sans-serif;
     color: white;
-margin: 0;
+    margin: 0;
 }
 
-.hb-footer-cont{
+.hb-footer-cont {
     display: flex;
     flex-direction: row;
     flex-wrap: wrap;
@@ -22,24 +22,24 @@ margin: 0;
     z-index: 3;
 }
 
-.hb-name-cont{
+.hb-name-cont {
     margin-block: 10rem;
     display: flex;
     flex-direction: column;
-    margin-block: 5rem ;
+    margin-block: 5rem;
     align-self: center;
 }
 
 
-.hb-footer-name{
-    width: clamp(2rem,50vw,40rem);
+.hb-footer-name {
+    width: clamp(2rem, 50vw, 40rem);
 }
 
-.hb-copyright{
+.hb-copyright {
     color: rgba(255, 255, 255, 0.5);
 }
 
-.hb-footer-links{
+.hb-footer-links {
     display: flex;
     flex-direction: row;
     gap: 10rem;
@@ -48,45 +48,63 @@ margin: 0;
     justify-content: center;
 }
 
-.hb-footer-links hr{
-    width: 10rem;
+@media (max-width: 1200px) {
+    .hb-footer-links {
+        display: flex;
+        flex-direction: row;
+        gap: 2rem;
+        padding: 0rem;
+        flex-wrap: wrap;
+        justify-content: center;
+    }
+
+    .hb-footer-sqarepart {
+        background-image: linear-gradient(#153E42, #4D9F71);
+        font-family: "Josefin Sans", sans-serif;
+        color: white;
+    }
+
+}
+
+.hb-footer-links hr {
+    width: clamp(8rem, 10vw, 10rem);
     color: white;
 }
 
-.hb-footer-links h3{
+.hb-footer-links h3 {
     color: rgba(255, 255, 255, 0.5);
 }
 
-.hb-footer-links button{
+.hb-footer-links button {
     border: none;
     background-color: transparent;
     color: white;
     font-family: "Josefin Sans", sans-serif;
-    cursor: pointer;  
-    font-size: 1.2rem;
-    padding: 0;  
+    cursor: pointer;
+    font-size: clamp(0.9rem, 2vw, 1.2rem);
+    padding: 0;
     margin-block: 1rem;
 }
 
-.hb-footer-links button:hover{
+.hb-footer-links button:hover {
     text-decoration: underline;
 }
 
 
-.hb-links-core{
+.hb-links-core {
     display: flex;
     flex-direction: column;
     align-items: start;
 }
 
-.hb-links-info{
+.hb-links-info {
     display: flex;
     flex-direction: column;
     align-items: start;
 }
 
-.hb-footer-logodeco{
-    width: clamp(20rem,20vw,25rem);
+.hb-footer-logodeco {
+    width: clamp(20rem, 20vw, 25rem);
     position: absolute;
     pointer-events: none;
     z-index: 0;
