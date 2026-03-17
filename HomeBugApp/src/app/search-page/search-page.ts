@@ -1,5 +1,4 @@
 import { Component, HostListener, OnInit } from '@angular/core';
-import { NgIcon } from '@ng-icons/core';
 import { UnknownBugImage } from '../ui-components/unknown-bug-image/unknown-bug-image';
 import { RouterModule } from '@angular/router';
 import { AppliedFilter } from '../ui-components/applied-filter/applied-filter';
@@ -7,7 +6,7 @@ import { AppliedFilter } from '../ui-components/applied-filter/applied-filter';
 
 @Component({
   selector: 'app-search-page',
-  imports: [NgIcon, UnknownBugImage, RouterModule, AppliedFilter],
+  imports: [UnknownBugImage, RouterModule, AppliedFilter],
   templateUrl: './search-page.html',
   styleUrl: './search-page.scss'
 })

@@ -73,15 +73,20 @@
     border-radius: 0 50px 50px 0;
     display: flex;
     flex-direction: column;
-    justify-items: center;
+    justify-content: space-evenly;
 
     width: 40rem;
 }
 
-.hb-flex-row{
+.hb-flex-row {
     display: flex;
     flex-direction: row;
     justify-content: space-around;
+    align-items: center;
+}
+
+.hb-margintop {
+    margin-top: 1.5rem;
 }
 
 .hb-register-text1 {
@@ -127,19 +132,19 @@
     align-self: flex-end;
     color: white;
     cursor: pointer;
-    
+
 }
 
-.hb-login-color{
+.hb-login-color {
     color: $hb-light-green;
     font-weight: 800;
     cursor: pointer;
 }
 
-.hb-already-have{
+.hb-already-have {
     align-self: center;
     margin-block: 2rem;
-    
+
 }
 
 .hb-register-button:hover {
@@ -160,7 +165,7 @@
 }
 
 .hb-register-googleacc {
-   
+
     align-self: center
 }
 
@@ -205,8 +210,8 @@ hr {
 }
 
 .gender-button {
-    width: 12rem;
-    height: 12rem;
+    width: 8rem;
+    height: 8rem;
     transition: background-color 0.1s linear;
     background-color: $hb-light-green;
 
@@ -224,19 +229,58 @@ hr {
 
 .gender-button img {
     position: absolute;
-    height: 10rem;
-    width: 7rem;
+    height: 8rem;
+    width: 5rem;
 
-    top: calc(50% - 5rem);
-    left: calc(50% - 3.5rem);
+    top: calc(50% - 4rem);
+    left: calc(50% - 2.5rem);
 }
 
 
-.gender-button:hover{
+.gender-button:hover {
     background-color: $hb-dark-green;
-    
+
 }
 
-.gender-button:hover{
+.gender-button:hover {
     background-color: $hb-dark-green;
+}
+
+
+@media (max-width:1200px) {
+
+
+    .hb-register-page {
+        padding-inline: 0;
+        align-items: normal;
+    }
+
+    .hb-logo {
+        align-self: center;
+    }
+
+    .hb-register-deco {
+        visibility: hidden;
+        width: 0;
+        height: 0;
+    }
+
+    .hb-register-form {
+        border-radius: 3rem;
+        flex: 1;
+
+    }
+
+    .hb-flex-row {
+        display: flex;
+        flex-direction: row;
+        justify-content: space-evenly;
+        align-items: center;
+    }
+
+    .hb-register-button {
+        margin: 0;
+        align-self: center;
+    }
+
 }
