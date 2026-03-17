@@ -5,30 +5,28 @@
     background-color: $hb-background;
     margin-bottom: -15rem;
     padding-bottom: 15rem;
+    padding-top: 2rem;
     position: relative;
     display: flex;
     align-items: center;
     justify-content: center;
     font-family: $hb-main-font;
+
+    overflow: hidden;
 }
 
-.hb-header-wave {
-    position: absolute;
-    width: 100%;
-    top: 0;
-    pointer-events: none;
-}
+
 
 .hb-profile-tabs-cont {
     position: relative;
     height: 30rem;
-    width: 30rem;
+    width: clamp(10rem, 30vw, 30rem);
 }
 
 .hb-profile-tabs {
     background-color: rgb(250, 250, 250);
     height: 30rem;
-    width: 30rem;
+    width: clamp(10rem, 30vw, 30rem);
     border-radius: 25px;
     box-shadow: $hb-box-shadow;
     z-index: 3;
@@ -115,7 +113,7 @@
 .hb-profile-info-tab {
     margin-right: -3rem;
     height: 35rem;
-    width: 60rem;
+    width: clamp(20rem, 60vw, 60rem);
     translate: -3rem 0;
     box-shadow: $hb-box-shadow;
     border-radius: 25px;
@@ -185,4 +183,141 @@
     justify-content: space-around;
     height: 100%;
     width: 100%;
+}
+
+
+@media (max-width: 1200px) {
+
+    .hb-profile-page {
+        background-color: $hb-background;
+        margin-bottom: -15rem;
+        padding-bottom: 15rem;
+        position: relative;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        font-family: $hb-main-font;
+    }
+
+
+    .hb-profile-tabs-cont {
+        position: relative;
+        height: 10rem;
+        width: clamp(20rem, 50vw, 50rem);
+
+    }
+
+    .hb-profile-tabs {
+        background-color: rgb(250, 250, 250);
+        height: 10rem;
+        width: clamp(20rem, 50vw, 50rem);
+        border-radius: 25px;
+        box-shadow: $hb-box-shadow;
+        z-index: 3;
+        position: absolute;
+    }
+
+    .hb-avatar-circle#first {
+        position: absolute;
+        top: -10%;
+        left: 53%;
+        translate: -50% 0%;
+        background-color: rgb(250, 250, 250);
+        width: 5rem;
+        height: 5rem;
+        border-radius: 50%;
+        box-shadow: $hb-box-shadow;
+        z-index: 1;
+    }
+
+    .hb-avatar-circle#second {
+        position: absolute;
+        top: -10%;
+        left: 53%;
+        translate: -50% 0%;
+        background-color: rgb(250, 250, 250);
+        width: 5rem;
+        height: 5rem;
+        border-radius: 50%;
+        z-index: 4;
+    }
+
+
+    .hb-profile-tabs-cont img {
+        position: absolute;
+        top: -10%;
+        width: 4rem;
+        left: 53%;
+        translate: -50% 0%;
+        z-index: 5;
+
+    }
+
+
+
+    .hb-profile-tabs button {
+        background-color: transparent;
+        border: none;
+        font-family: $hb-main-font;
+        font-size: clamp(1rem, 2vw, 1.5rem);
+        color: $hb-dark-green;
+        cursor: pointer;
+        font-weight: 700;
+        height: 5vh;
+        width: 50%;
+        align-self: center;
+        border-radius: 25px;
+        transition: box-shadow 0.2s ease-in-out;
+        padding-top: 7px;
+    }
+
+    .hb-profile-tabs button:hover {
+        background-color: white;
+        box-shadow: 0 0px 5px 5px rgba(0, 0, 0, 0.15);
+    }
+
+    .hb-tabs-buttons {
+        display: flex;
+        flex-direction: row;
+        justify-content: center;
+        gap: 1rem;
+        padding-inline: 1rem;
+        margin-top: 2rem;
+    }
+
+    .hb-profile-tabs button.btn-selected {}
+
+    .hb-profile-info-tab {
+        height: 35rem;
+        width: 90%;
+        translate: 0;
+        box-shadow: $hb-box-shadow;
+        border-radius:0;
+        background-color: rgb(250, 250, 250);
+        z-index: 10;
+        position: relative;
+        padding-block: 3rem;
+        margin: 0rem;
+        margin-top: 2rem;
+
+    }
+
+    .hb-info-whiterec {
+        visibility:hidden ;
+    }
+
+    .hb-profile-text {}
+
+    .hb-profile-hint-text {}
+
+    .hb-info-title {}
+
+
+    .hb-info-section {}
+
+    .hb-bug-section {}
+
+    .hb-images-part {}
+
 }
