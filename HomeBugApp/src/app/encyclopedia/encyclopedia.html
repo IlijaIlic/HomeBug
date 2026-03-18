@@ -9,7 +9,7 @@
     <div class="hb-cont">
         <div class="hb-filters">
             FILTERS
-            <button style="width: 25rem;" type="button">FILTER1</button>
+            <button type="button">FILTER1</button>
             <button type="button">FILTER2</button>
             <button type="button">FILTER3</button>
         </div>
@@ -22,12 +22,12 @@
 
             </div>
             <div class="hb-bugs-cont">
-                <app-unknown-bug-image [country_show]="false" routerLink="known"/>
-                <app-unknown-bug-image [country_show]="false" />
-                <app-unknown-bug-image [country_show]="false" />
-                <app-unknown-bug-image [country_show]="false" />
-                <app-unknown-bug-image [country_show]="false" />
-                <app-unknown-bug-image [country_show]="false" />
+                <app-unknown-bug-image [country_show]="false" routerLink="known" [size]="size_of_comp"/>
+                <app-unknown-bug-image [country_show]="false" [size]="size_of_comp"/>
+                <app-unknown-bug-image [country_show]="false" [size]="size_of_comp" />
+                <app-unknown-bug-image [country_show]="false" [size]="size_of_comp" />
+                <app-unknown-bug-image [country_show]="false" [size]="size_of_comp" />
+                <app-unknown-bug-image [country_show]="false" [size]="size_of_comp" />
             </div>
             <div class="hb-numeration">
                 <button type="button"><</button>
