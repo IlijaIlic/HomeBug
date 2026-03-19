@@ -1,5 +1,5 @@
 <div class="unknown-bug-page">
-   
+
 
     <div class="unknown-user-placed">
 
@@ -7,7 +7,8 @@
         <div class="unknown-bug-text">
             <div class="unknown-username">
                 <div> User <span>bugfinder123</span> said:</div>
-                <img class="unknown-comment-flag" [src]="'https://flagcdn.com/' + countryCode + '.svg'" alt="countryCode" />
+                <img class="unknown-comment-flag" [src]="'https://flagcdn.com/' + countryCode + '.svg'"
+                    alt="countryCode" />
 
             </div>
             <div class="unknown-comment">
@@ -33,7 +34,12 @@
         <h1>Comments</h1>
 
         <div class="unknown-community-comments">
-            <app-input-comment></app-input-comment>
+
+            <div class="comment-cont">
+                <textarea class="input-comment" type="text" placeholder="Enter your comment here..." rows="1" cols="50"
+                    maxlength="300"></textarea>
+                <button class="submit-comment">Comment</button>
+            </div>
             <app-comment></app-comment>
             <app-comment></app-comment>
             <app-comment></app-comment>

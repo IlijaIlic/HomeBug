@@ -30,6 +30,8 @@
 
     margin-bottom: 6rem;
 
+    gap: 3rem;
+
 }
 
 .known-name {
@@ -37,14 +39,16 @@
     text-align: left;
 }
 
+
+
 .name-common {
-    font-size: 5rem;
+    font-size: clamp(2rem, 10vw, 5rem);
     margin-bottom: 1.5rem;
     font-weight: 700;
 }
 
 .name-latin {
-    font-size: 2rem;
+    font-size: clamp(1rem, 5vw, 2rem);
     color: $hb-light-green;
 
 }
@@ -81,6 +85,7 @@
     flex-direction: row;
     flex-wrap: wrap;
     justify-content: space-evenly;
+    gap: 2rem;
 }
 
 .location-habitat {
@@ -99,13 +104,13 @@
 }
 
 .habitat-title {
-    font-size: 2rem;
+    font-size: clamp(1.5rem, 5vw, 2rem);
     text-align: center;
 
 }
 
 .habitat-info {
-    font-size: 1.5rem;
+    font-size: clamp(1rem, 5vw, 1.5rem);
 }
 
 .info-taxonomy {
@@ -125,7 +130,7 @@
 }
 
 .taxonomy-title {
-    font-size: 2rem;
+    font-size: clamp(1.5rem, 5vw, 2rem);
     text-align: center;
 }
 
@@ -135,12 +140,13 @@
     gap: 5rem;
     justify-content: space-between;
 
-    font-size: 1.5rem;
+    font-size: clamp(1rem, 5vw, 1.5rem);
 }
 
 .item-link {
     text-decoration: underline;
     cursor: pointer;
+    text-align: right;
 }
 
 .info-visual {
@@ -165,12 +171,12 @@
 }
 
 .visual-title {
-    font-size: 2rem;
+    font-size: clamp(1.5rem, 5vw, 2rem);
     text-align: center;
 }
 
 .visual-item {
-    font-size: 1.5rem;
+    font-size: clamp(1rem, 5vw, 1.5rem);
     display: flex;
     flex-direction: row;
     justify-content: space-between;
@@ -180,6 +186,7 @@
 .info-cont {
     display: flex;
     flex-direction: row;
+    flex-wrap: wrap;
     gap: 3rem;
     justify-content: center;
 }
@@ -200,7 +207,7 @@
 }
 
 .important-title {
-    font-size: 2rem;
+    font-size: clamp(1.5rem, 5vw, 2rem);
     text-align: center;
 }
 
@@ -217,7 +224,7 @@
     justify-content: space-between;
 
     gap: 3rem;
-    font-size: 1.5rem;
+    font-size: clamp(1rem, 5vw, 1.5rem);
     align-items: center;
 }
 
@@ -240,7 +247,7 @@
 }
 
 .overview-data {
-    font-size: 1.5rem;
+    font-size: clamp(1rem, 5vw, 1.5rem);
     line-height: 1.9rem;
 
 }
@@ -256,6 +263,8 @@
     gap: 1rem;
     align-items: baseline;
 
+    margin-inline: 1rem;
+    margin-block: 2rem;
     font-size: 1.5rem;
 }
 
@@ -273,15 +282,54 @@
     background-color: $hb-gray;
     color: white;
     padding: 0.8rem;
-    padding-inline: 1rem;
+    padding-inline: clamp(0.5rem, 3vw, 1rem);
     border-radius: 1rem;
     box-shadow: $hb-box-shadow;
     border: none;
-    font-size: 1.5rem;
+    font-size: clamp(0.6rem, 4vw, 1.5rem);
 
 }
 
 .tag-item:hover {
     background-color: $hb-gray-hover;
     cursor: pointer;
+}
+
+@media (max-width: 1400px) {
+    .known-name {
+        text-align: center;
+    }
+
+    .known-name-img{
+        margin-top: 3rem;
+    }
+
+
+    #location-map{
+        width: 100%;
+    }
+    .known-img{
+        width: 100%;
+        border-radius: 0;
+    }
+
+    .known-cont {
+        padding-inline: 0rem;
+        gap: 1rem;
+    }
+
+    .info-cont{
+        gap: 2rem;
+    }
+
+    .info-overview,
+    .info-visual,
+    .info-taxonomy,
+    .info-important,
+    .location-habitat {
+        width: 100%;
+        border-radius: 0;
+    }
+
+
 }
