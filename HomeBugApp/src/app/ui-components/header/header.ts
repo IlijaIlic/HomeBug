@@ -1,4 +1,4 @@
-import { Component, Input } from '@angular/core';
+import { Component, HostListener, Input } from '@angular/core';
 import { RouterModule } from '@angular/router';
 
 @Component({
@@ -10,4 +10,22 @@ import { RouterModule } from '@angular/router';
 export class Header {
 
   @Input() wave_show = false;
+
+  menuOpen = false;
+
+  toggleMenu() {
+    this.menuOpen = !this.menuOpen;
+    document.body.style.overflow = this.menuOpen ? 'hidden' : ''
+  }
+
+  closeMenu() {
+    this.menuOpen = false;
+    document.body.style.overflow = ''
+
+  }
+
+  @HostListener('document:keydown.escape')
+  handleEsc() {
+    this.closeMenu();
+  }
 }

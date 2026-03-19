@@ -8,11 +8,36 @@
       <button routerLink="profile">More</button>
       <button routerLink="encyclopedia">Encyclopedia</button>
     </div>
-    <div>
+    <div class="hb-auth">
       <button class="hb-header-login" routerLink="login">Login</button>
       <button class="hb-header-register" routerLink="register">Register</button>
     </div>
+    <button class="burger-menu" (click)="toggleMenu()" [class.open]="menuOpen">
+      <span></span>
+      <span></span>
+      <span></span>
+    </button>
   </div>
+
+
+  @if (menuOpen == true) {
+
+  <!-- overlay -->
+  <div class="hb-overlay" (click)="closeMenu()"></div>
+
+  <!-- mobile menu -->
+  <nav class="hb-mobile-menu" [class.open]="menuOpen">
+    <button routerLink="search" (click)="closeMenu()">Search</button>
+    <button routerLink="profile" (click)="closeMenu()">More</button>
+    <button routerLink="encyclopedia" (click)="closeMenu()">Encyclopedia</button>
+
+    <hr>
+
+    <button routerLink="login" (click)="closeMenu()">Login</button>
+    <button routerLink="register" (click)="closeMenu()">Register</button>
+  </nav>
+
+  }
   @if (wave_show == true) {
   <svg class="hb-header-wave" viewBox="0 50 900 50" xmlns="http://www.w3.org/2000/svg"
     xmlns:xlink="http://www.w3.org/1999/xlink" version="1.1">
