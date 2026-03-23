@@ -1,0 +1,13 @@
+version: '3'
+
+services:
+  postgres:
+    image: postgres
+    restart: always
+    container_name: bug-db
+    environment:
+      POSTGRES_USER: buguser
+      POSTGRES_PASSWORD: bugpass
+      POSTGRES_DB: bugdb
+    ports:
+      - "5432:5432"
