@@ -1,26 +1,80 @@
-import { Injectable } from '@nestjs/common';
+import { Injectable, NotFoundException } from '@nestjs/common';
 import { CreateCommentDto } from './dto/create-comment.dto';
 import { UpdateCommentDto } from './dto/update-comment.dto';
+import { InjectRepository } from '@nestjs/typeorm';
+import { Comment } from './entities/comment.entity';
+import { Repository } from 'typeorm';
+import { UnknownBug } from 'src/unknown-bug/entities/unknown-bug.entity';
+import { User } from 'src/user/entities/user.entity';
 
 @Injectable()
 export class CommentService {
-  create(createCommentDto: CreateCommentDto) {
-    return 'This action adds a new comment';
+
+  constructor(
+    @InjectRepository(Comment)
+    private readonly comRepo: Repository<Comment>,
+    @InjectRepository(UnknownBug)
+    private readonly ubugRepo: Repository<UnknownBug>,
+  ) { }
+
+  async create(createCommentDto: CreateCommentDto, userID: number) {
+    const ubug = await this.ubugRepo.find({ where: { id: createCommentDto.ubugId } })
+
+    if (!ubug) throw new NotFoundException("Unknown bug not found!")
+
+    const com = this.comRepo.create({
+      text: createCommentDto.text,
+      ubug: { id: createCommentDto.ubugId },
+      rating: 0,
+      user: {id: userID}
+    });
+    return this.comRepo.save(com);
   }
 
-  findAll() {
-    return `This action returns all comment`;
+  async findAll() {
+    return this.comRepo.find({
+      relations: ['user', 'ubug']
+    })
   }
 
-  findOne(id: number) {
-    return `This action returns a #${id} comment`;
+  async findOne(id: number) {
+    return this.comRepo.find({
+      where: { id },
+      relations: ['user', 'ubug']
+    })
   }
 
-  update(id: number, updateCommentDto: UpdateCommentDto) {
+  async update(id: number, updateCommentDto: UpdateCommentDto) {
     return `This action updates a #${id} comment`;
   }
 
-  remove(id: number) {
-    return `This action removes a #${id} comment`;
+  async remove(id: number) {
+    const com = await this.findOne(id);
+
+    if (com) {
+      return this.comRepo.remove(com)
+    } else {
+      return `Cannot find comment with this id: #${id}`
+    }
+  }
+
+  async like(id: number) {
+    const com = await this.comRepo.findOneBy({ id: id });
+    if (com) {
+      com.rating++;
+      await this.comRepo.save(com);
+    } else {
+      return `Cannot find comment with this id: #${id}`
+    }
+  }
+
+  async dislike(id: number) {
+    const com = await this.comRepo.findOneBy({ id: id });
+    if (com) {
+      com.rating--;
+      await this.comRepo.save(com);
+    } else {
+      return `Cannot find comment with this id: #${id}`
+    }
   }
 }

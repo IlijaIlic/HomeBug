@@ -1,26 +1,46 @@
 import { Injectable } from '@nestjs/common';
 import { CreateTaxonomyDto } from './dto/create-taxonomy.dto';
 import { UpdateTaxonomyDto } from './dto/update-taxonomy.dto';
+import { InjectRepository } from '@nestjs/typeorm';
+import { Taxonomy } from './entities/taxonomy.entity';
+import { Repository } from 'typeorm';
 
 @Injectable()
 export class TaxonomyService {
-  create(createTaxonomyDto: CreateTaxonomyDto) {
-    return 'This action adds a new taxonomy';
+
+  constructor(@InjectRepository(Taxonomy)
+  private readonly taxonomyRepo: Repository<Taxonomy>
+  ) { }
+
+  async create(createTaxonomyDto: CreateTaxonomyDto) {
+    const tax = this.taxonomyRepo.create({
+      ...createTaxonomyDto
+    })
+
+    return this.taxonomyRepo.save(tax);
   }
 
-  findAll() {
-    return `This action returns all taxonomy`;
+  async findAll() {
+    return this.taxonomyRepo.find();
   }
 
-  findOne(id: number) {
-    return `This action returns a #${id} taxonomy`;
+  async findOne(id: number) {
+    return this.taxonomyRepo.find({
+      where: { id }
+    })
   }
 
-  update(id: number, updateTaxonomyDto: UpdateTaxonomyDto) {
+  async update(id: number, updateTaxonomyDto: UpdateTaxonomyDto) {
     return `This action updates a #${id} taxonomy`;
   }
 
-  remove(id: number) {
-    return `This action removes a #${id} taxonomy`;
+  async remove(id: number) {
+    const tax = await this.findOne(id);
+
+    if (tax) {
+      return this.taxonomyRepo.remove(tax);
+    } else {
+      return `Cannot find taxonomy with this id:  #${id}`
+    }
   }
 }

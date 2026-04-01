@@ -8,14 +8,21 @@ export class Comment {
     @PrimaryGeneratedColumn()
     id: number;
 
-    @ManyToOne(() => User)
+    @ManyToOne(() => User, {
+        onDelete: 'CASCADE'
+    })
     user: User;
 
-    @ManyToOne(() => UnknownBug, bug => bug.comments)
+    @ManyToOne(() => UnknownBug, bug => bug.comments, {
+        onDelete: 'CASCADE'
+    })
     ubug: UnknownBug;
 
     @Column()
     text: string;
+
+    @Column({ default: 0 })
+    rating: number;
 
 
 }

@@ -1,3 +1,4 @@
+import { Comment } from "src/comment/entities/comment.entity";
 import { KnownBug } from "src/known-bug/entities/known-bug.entity";
 import { UnknownBug } from "src/unknown-bug/entities/unknown-bug.entity";
 import { Column, Entity, JoinTable, ManyToMany, OneToMany, PrimaryGeneratedColumn } from "typeorm";
@@ -44,6 +45,9 @@ export class User {
 
     @OneToMany(() => UnknownBug, ubug => ubug.user)
     unknown_scans: UnknownBug[];
+
+    @OneToMany(() => Comment, (comment) => comment.user)
+    comments: Comment[];
 
     @ManyToMany(() => KnownBug)
     @JoinTable()

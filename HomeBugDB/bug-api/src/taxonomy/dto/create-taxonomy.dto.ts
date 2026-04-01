@@ -1,1 +1,24 @@
-export class CreateTaxonomyDto {}
+import { IsNotEmpty, IsString } from "class-validator";
+
+export class CreateTaxonomyDto {
+
+    @IsString()
+    @IsNotEmpty()
+    class: string;
+
+    @IsString()
+    @IsNotEmpty()
+    order: string;
+
+    @IsString()
+    @IsNotEmpty()
+    family: string;
+
+    @IsString()
+    @IsNotEmpty()
+    genus: string;
+
+    @IsString()
+    @IsNotEmpty()
+    species: string;
+}

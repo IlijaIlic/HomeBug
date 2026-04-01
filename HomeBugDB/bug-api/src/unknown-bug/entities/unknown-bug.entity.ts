@@ -8,7 +8,9 @@ export class UnknownBug {
     @PrimaryGeneratedColumn()
     id: number;
 
-    @ManyToOne(() => User)
+    @ManyToOne(() => User, {
+        onDelete: 'CASCADE'
+    })
     user: User;
 
     @Column()
