@@ -11,6 +11,7 @@ import { KnownBug } from './known-bug/known-bug';
 import { Contact } from './contact/contact';
 import { AfterUpload } from './after-upload/after-upload';
 import { AfterUploadNotFound } from './after-upload-not-found/after-upload-not-found';
+import { Admin } from './admin/admin';
 
 export const routes: Routes = [
     {
@@ -55,10 +56,13 @@ export const routes: Routes = [
         component: Contact
     },
     {
-        path: 'search/unknown',
+        path: 'search/unknown/:id',
         component: UnknownBug
     },
-
+    {
+        path:'admin',
+        component: Admin
+    },
     {
         path: '**',
         component: NotFound

@@ -3,7 +3,7 @@
 
     <div class="unknown-user-placed">
 
-        <img class="unknown-bug-image" src="../../assets/bee.jpg" alt="image" />
+        <img class="unknown-bug-image" [src]="bug?.picture_url" alt="image" />
         <div class="unknown-bug-text">
             <div class="unknown-username">
                 <div> User <span>bugfinder123</span> said:</div>
@@ -12,17 +12,7 @@
 
             </div>
             <div class="unknown-comment">
-                Lorem ipsum dolor sit amet consectetur adipisicing elit. Tempore, sunt.
-                Odio inventore dolore consequatur sed, laboriosam, porro alias qui eos eius iste exercitationem
-                corporis tempora velit eum? Recusandae, in eligendi! Lorem ipsum dolor sit amet consectetur adipisicing
-                elit. Tempore, sunt.
-                Odio inventore dolore consequatur sed, laboriosam, porro alias qui eos eius iste exercitationem
-                Lorem ipsum dolor sit amet consectetur adipisicing elit. Tempore, sunt.
-                Odio inventore dolore consequatur sed, laboriosam, porro alias qui eos eius iste exercitationem
-                corporis tempora velit eum? Recusandae, in eligendi! Lorem ipsum dolor sit amet consectetur adipisicing
-                elit. Tempore, sunt.
-                Odio inventore dolore consequatur sed, laboriosam, porro alias qui eos eius iste exercitationem
-                , in eligendi!
+                {{bug?.description}}
             </div>
             <div class="unknown-text-profile">
                 <img src="../../assets/profileavatarfemale.png" alt="profile picture" />
@@ -40,16 +30,9 @@
                     maxlength="300"></textarea>
                 <button class="submit-comment">Comment</button>
             </div>
-            <app-comment></app-comment>
-            <app-comment></app-comment>
-            <app-comment></app-comment>
-            <app-comment></app-comment>
-            <app-comment></app-comment>
-            <app-comment></app-comment>
-            <app-comment></app-comment>
-            <app-comment></app-comment>
-            <app-comment></app-comment>
-            <app-comment></app-comment>
+            @for (comment of bug?.comments; track $index) {
+                <app-comment></app-comment>
+            }
         </div>
 
     </div>

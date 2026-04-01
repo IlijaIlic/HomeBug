@@ -1,0 +1,70 @@
+<div>
+
+    <div class="change-entity-cont">
+        <button class="entity-btn" [class.active]="entityShown === 'user' " (click)="handleUsersClick()">Users</button>
+        <button class="entity-btn" [class.active]="entityShown === 'known' "
+            (click)="handleKnownClick()">KnownBugs</button>
+        <button class="entity-btn" [class.active]="entityShown === 'unknown' "
+            (click)="handleUnknownClick()">UnknownBugs</button>
+        <button class="entity-btn" [class.active]="entityShown === 'comments' "
+            (click)="handleCommentsClick()">Comments</button>
+    </div>
+    @switch (entityShown) {
+    @case ('user') {
+    <div class="table-cont">
+        <table>
+            @for (user of users; track $index) {
+            <tr class="test" (click)="handleUserInfo(user)">
+                <th>{{user.id}}</th>
+                <th>{{user.name}}</th>
+                <th>{{user.surname}}</th>
+                <th>{{user.email}}</th>
+                <th>{{user.gender}}</th>
+                <th>{{user.reputation}}</th>
+                <th>{{user.comments_helping_others}}</th>
+                <th>{{user.known_scans}}</th>
+                <th>{{user.other_users_rated}}</th>
+                <th>{{user.saved_bugs}}</th>
+                <th>{{user.unknwon_bugs_scanned}}</th>
+                <th>{{user.unknwon_scans}}</th>
+                <th><button type="button">Delete User</button></th>
+            </tr>
+            }
+        </table>
+    </div>
+    }
+    @case ('known') {
+
+    <div class="table-cont">
+        <table>
+            @for (kbug of kbugs; track $index) {
+            <tr class="test" (click)="handleKbugInfo(kbug)">
+                <th>{{kbug.id}}</th>
+                <th>{{kbug.common_name}}</th>
+                <th>{{kbug.latin_name}}</th>
+                <th><button type="button">Delete Bug</button></th>
+            </tr>
+            }
+        </table>
+    </div>
+
+    }
+    @case ('unknown') {
+     <div class="table-cont">
+        <table>
+            @for (ubug of ubugs; track $index) {
+            <tr class="test" (click)="handleUbugInfo(ubug)">
+                <th>{{ubug.id}}</th>
+                <th>{{ubug.user?.email}}</th>
+                <th>{{ubug.description}}</th>
+                <th><button type="button">Delete Bug</button></th>
+            </tr>
+            }
+        </table>
+    </div>
+    }
+    @case ('comments') {
+    <div>Comments</div>
+    }
+    }
+</div>

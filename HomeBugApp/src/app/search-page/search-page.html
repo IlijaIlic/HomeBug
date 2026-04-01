@@ -28,16 +28,11 @@
 
 
         </svg>
-        <div class="hb-search-imgdrop">
-            <img src="../../assets/draganddrop.png" alt="Image drag & drop" />
-        </div>
+        <button class="hb-search-imgdrop" routerLink="uploaded">
+            <img src="../../assets/draganddrop.png" alt="Image drag & drop"  />
+        </button>
 
     </div>
-
-
-
-
-
 
 
 
@@ -58,10 +53,11 @@
 
             </div>
             <div class="hb-search-unknown">
-                <app-unknown-bug-image [size]="size_of_comp" routerLink="unknown" />
                 <app-unknown-bug-image [size]="size_of_comp" routerLink="uploaded" />
-                <app-unknown-bug-image [size]="size_of_comp" />
-                <app-unknown-bug-image [size]="size_of_comp" />
+                @for (bug of bugs; track $index) {
+                <app-unknown-bug-image [bug]="bug" [size]="size_of_comp" [routerLink]="'unknown/' + bug.id" />
+                }
+
             </div>
         </div>
     </div>

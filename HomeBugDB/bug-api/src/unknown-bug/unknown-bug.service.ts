@@ -31,7 +31,7 @@ export class UnknownBugService {
   }
 
   async findOne(id: number) {
-    return this.unknownBugRepo.find({
+    return this.unknownBugRepo.findOne({
       where: { id },
       relations: ['user', 'comments']
     })

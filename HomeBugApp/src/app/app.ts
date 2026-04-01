@@ -26,7 +26,7 @@ export class App {
           this.showHeader = false
         } else {
           this.showHeader = true
-          if (this, router.url === '/profile' || router.url === "/encyclopedia" || router.url === "/encyclopedia/known" || router.url === "/search/unknown" || router.url === "/search/uploaded" || router.url === "/contact" || router.url === "/search/notfound") {
+          if (this, router.url === '/profile' || router.url === "/encyclopedia" || router.url === "/encyclopedia/known" || router.url.startsWith("/search/unknown/" ) || router.url === "/search/uploaded" || router.url === "/contact" || router.url === "/search/notfound") {
             this.showWave = true;
           } else {
             this.showWave = false;

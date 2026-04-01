@@ -11,26 +11,26 @@
                 <textarea class="input-comment" type="text" placeholder="Add any kind of description here..." rows="1"
                     cols="50" maxlength="300"></textarea>
             </div>
-            <app-input-field label="Color" placeholder="Black, brown, red, ..." width="20rem"/>
-            <app-input-field label="Size" placeholder="Smaller than an ant" width="20rem" />
-            <app-input-field label="Country" placeholder="Serbia, Austria, Japan, ..." width="20rem" />
+            <app-input-field label="Color" placeholder="Black, brown, red, ..." width="20rem" [(value)]="uBugData.color"/>
+            <app-input-field label="Size" placeholder="Smaller than an ant" width="20rem" [(value)]="uBugData.size" />
+            <app-input-field label="Country" placeholder="Serbia, Austria, Japan, ..." width="20rem"  />
             <div class="anf-radio-cont">
                 <div class="anf-radio">
                     <label>Has wings</label>
-                    <input class="radio-btn" type="radio" name="bool-haswings" />
+                    <input class="radio-btn" type="radio" name="bool-haswings" [(ngModel)]="uBugData.wings" [value]="true" />
                 </div>
                 <div class="anf-radio">
                     <label>Doesn't have wings</label>
-                    <input class="radio-btn" type="radio" name="bool-haswings" />
+                    <input class="radio-btn" type="radio" name="bool-haswings" [(ngModel)]="uBugData.wings" [value]="false" />
                 </div>
             </div>
             <div class="anf-number-cont">
                 <label>Number of legs:</label>
-                <input class="anf-number" type="number" />
+                <input class="anf-number" type="number" [(ngModel)]="uBugData.legs" />
             </div>
-            <div class="anf-submit">
+            <button class="anf-submit" (click)="postUnknownBug()">
                 SUBMIT
-            </div>
+            </button>
         </div>
     </div>
 </div>
