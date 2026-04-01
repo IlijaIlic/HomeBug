@@ -5,12 +5,16 @@
     </button>
     <div class="hb-header-links-container">
       <button routerLink="search">Search</button>
-      <button routerLink="profile">More</button>
       <button routerLink="encyclopedia">Encyclopedia</button>
     </div>
     <div class="hb-auth">
+      @if (loggedIn) {
+      <button class="hb-header-login" routerLink="profile">Profile</button>
+      <button class="hb-header-login" routerLink="/" (click)="handleLogout()">Logout</button>
+      } @else {
       <button class="hb-header-login" routerLink="login">Login</button>
       <button class="hb-header-register" routerLink="register">Register</button>
+      }
     </div>
     <button class="burger-menu" (click)="toggleMenu()" [class.open]="menuOpen">
       <span></span>
@@ -28,13 +32,17 @@
   <!-- mobile menu -->
   <nav class="hb-mobile-menu" [class.open]="menuOpen">
     <button routerLink="search" (click)="closeMenu()">Search</button>
-    <button routerLink="profile" (click)="closeMenu()">More</button>
     <button routerLink="encyclopedia" (click)="closeMenu()">Encyclopedia</button>
 
     <hr>
 
+    @if (loggedIn) {
+    <button routerLink="profile" (click)="closeMenu()">Profile</button>
+    <button routerLink="/" (click)="closeMenu(); handleLogout()">Logout</button>
+    } @else {
     <button routerLink="login" (click)="closeMenu()">Login</button>
     <button routerLink="register" (click)="closeMenu()">Register</button>
+    }
   </nav>
 
   }

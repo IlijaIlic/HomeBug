@@ -1,5 +1,5 @@
 import { CommonModule } from '@angular/common';
-import { Component, Input } from '@angular/core';
+import { Component, EventEmitter, Input, Output } from '@angular/core';
 import { FormControl } from '@angular/forms';
 
 @Component({
@@ -14,4 +14,13 @@ export class InputField {
   @Input() formControl!: FormControl;
   @Input() type: String = "text";
   @Input() width: String = "11rem";
+  @Input() value = "";
+
+  @Output() valueChange = new EventEmitter<string>();
+
+  onInput(event: Event){
+    const newValue = (event.target as HTMLInputElement).value;
+    this.value = newValue;
+    this.valueChange.emit(newValue)
+  }
 }

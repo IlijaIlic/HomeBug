@@ -38,13 +38,13 @@
 
 
             <div class="hb-flex-row">
-                <app-input-field placeholder="John" label="First Name" />
-                <app-input-field placeholder="Doe" label="Last Name" />
+                <app-input-field placeholder="John" label="First Name" [(value)]="userData.name" />
+                <app-input-field placeholder="Doe" label="Last Name" [(value)]="userData.surname" />
             </div>
 
             <div class="hb-flex-row">
-                <app-input-field placeholder="john.doe@gmail.com" label="Email" />
-                <app-input-field placeholder="" label="Password" type="password" />
+                <app-input-field placeholder="john.doe@gmail.com" label="Email" [(value)]="userData.email" />
+                <app-input-field placeholder="" label="Password" type="password" [(value)]="userData.password" />
             </div>
 
             <div class="hb-flex-row hb-margintop">
@@ -58,7 +58,7 @@
                 </button>
             </div> 
             
-            <button type="submit" class="hb-register-button">Register</button>
+            <button type="submit" class="hb-register-button" (click)="handleRegister()">Register</button>
 
             <p class="hb-already-have">You already have an account? <span class="hb-login-color">Login</span> right
                 here!</p>

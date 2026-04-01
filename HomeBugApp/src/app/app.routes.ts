@@ -10,6 +10,7 @@ import { Encyclopedia } from './encyclopedia/encyclopedia';
 import { KnownBug } from './known-bug/known-bug';
 import { Contact } from './contact/contact';
 import { AfterUpload } from './after-upload/after-upload';
+import { AfterUploadNotFound } from './after-upload-not-found/after-upload-not-found';
 
 export const routes: Routes = [
     {
@@ -46,6 +47,10 @@ export const routes: Routes = [
         component: AfterUpload
     },
     {
+        path: "search/notfound",
+        component: AfterUploadNotFound
+    },
+    {
         path: 'contact',
         component: Contact
     },
@@ -58,4 +63,5 @@ export const routes: Routes = [
         path: '**',
         component: NotFound
     },
+
 ];

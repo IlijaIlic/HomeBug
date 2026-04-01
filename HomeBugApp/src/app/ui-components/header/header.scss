@@ -39,12 +39,13 @@
 .hb-header-button-container {
     display: flex;
     flex-direction: row;
-    justify-content: space-evenly;
     align-items: center;
+    justify-content: space-between;
     padding-inline: 5rem;
     padding-block: 2vh;
 
     background-color: #4D9F71;
+    position: relative;
 
 }
 
@@ -95,12 +96,15 @@
 }
 
 .hb-header-links-container {
+    flex:  1;
     display: flex;
     flex-direction: row;
-
+    justify-content: center;
     gap: 30px;
-
+    position: absolute;
+    transform: translate(-50%);
     left: 50%;
+    
 }
 
 .hb-header-links-container button {

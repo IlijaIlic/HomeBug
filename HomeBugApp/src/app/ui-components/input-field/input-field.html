@@ -1,4 +1,4 @@
 <div class="input-cont" [ngStyle]="{ width: width }">
     <p>{{label}}</p>
-    <input  [type]="type" [placeholder]="placeholder" spellcheck="false"/>
+    <input [type]="type" [placeholder]="placeholder" spellcheck="false" [value]="value" (input)="onInput($event)" />
 </div>

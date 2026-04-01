@@ -1,0 +1,163 @@
+@use "/styles/variables" as *;
+
+.hb-anf-page {
+    background-color: $hb-background;
+    font-family: $hb-main-font;
+    margin-bottom: -15rem;
+    padding-bottom: 15rem;
+}
+
+.anf-cont {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-around;
+    align-items: center;
+    flex-wrap: wrap;
+}
+
+.anf-form {
+    padding: 2rem;
+    border: 3px solid $hb-highlight-green;
+    border-radius: 2rem;
+    box-shadow: $hb-box-shadow;
+    display: flex;
+    flex-direction: column;
+
+    background-color: white;
+
+    margin-bottom: 2rem;
+
+}
+
+.anf-submit {
+    background-image: linear-gradient($hb-light-green, $hb-highlight-green);
+    color: white;
+    box-shadow: $hb-box-shadow;
+
+    font-weight: 800;
+
+    width: fit-content;
+    padding: 1rem;
+    border-radius: 1rem;
+
+    align-self: end;
+    margin: 1rem;
+}
+
+.anf-submit:hover {
+    background-image: linear-gradient($hb-dark-green, $hb-highlight-green);
+    cursor: pointer;
+
+}
+
+.input-comment {
+    font-family: $hb-main-font;
+
+    font-size: 1.2rem;
+
+    outline: none;
+    border: none;
+    border-bottom: 1px solid black;
+
+    max-height: 10rem;
+    min-height: 10rem;
+    max-width: 30rem;
+    min-width: 30rem;
+
+    margin: 1rem;
+
+
+}
+
+.anf-desc-title {
+    margin-inline: 1rem;
+    font-size: 1.5rem;
+}
+
+.anf-radio-cont {
+    margin: 1rem;
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    gap: 2rem;
+}
+
+
+
+.radio-btn {
+    accent-color: $hb-highlight-green;
+}
+
+.anf-number-cont {
+    align-self: center;
+}
+
+.anf-number {
+    margin: 1rem;
+    font-family: $hb-main-font;
+    width: 3rem;
+}
+
+.anf-img-cont {
+    position: relative;
+    display: inline-block;
+}
+
+.anf-img {
+    display: block;
+    max-width: 100%;
+    border-radius: 1rem;
+}
+
+.anf-img-btn {
+    position: absolute;
+    top: 90%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    background-color: rgba(0, 0, 0, 0.6);
+    color: white;
+    padding: 0.8rem 1.2rem;
+    border: none;
+    border-radius: 0.5rem;
+    cursor: pointer;
+    font-weight: bold;
+
+    font-family: $hb-main-font
+}
+
+.anf-img-btn:hover {
+    background-color: rgba(0, 0, 0, 0.8);
+}
+
+@media (max-width: 1300px) {
+
+    .anf-form {
+        border: none;
+        margin-bottom: 2rem;
+        width: 100%;
+        border-radius: 0rem;
+        margin: 2rem 0rem;
+        align-items: center;
+    }
+
+
+    .input-comment {
+        font-family: $hb-main-font;
+
+        font-size: 1.2rem;
+
+        outline: none;
+        border: none;
+        border-bottom: 1px solid black;
+
+        max-height: 10rem;
+        min-height: 10rem;
+
+        max-width: 70vw;
+        min-width: 70vw;
+
+        margin: 1rem;
+        width: 100%;
+
+    }
+}

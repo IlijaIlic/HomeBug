@@ -1,0 +1,47 @@
+<div class="hb-anf-page">
+    <div class="anf-cont">
+        <div class="anf-img-cont">
+            <img class="anf-img" src="../../assets/bee.jpg" alt="Uploaded picture" />
+            <button class="anf-img-btn">Change your picture</button> 
+        </div>
+            
+        <div class="anf-form">
+            <div>
+                <div class="anf-desc-title">Description</div>
+                <textarea class="input-comment" type="text" placeholder="Add any kind of description here..." rows="1"
+                    cols="50" maxlength="300"></textarea>
+            </div>
+            <app-input-field label="Color" placeholder="Black, brown, red, ..." width="20rem"/>
+            <app-input-field label="Size" placeholder="Smaller than an ant" width="20rem" />
+            <app-input-field label="Country" placeholder="Serbia, Austria, Japan, ..." width="20rem" />
+            <div class="anf-radio-cont">
+                <div class="anf-radio">
+                    <label>Has wings</label>
+                    <input class="radio-btn" type="radio" name="bool-haswings" />
+                </div>
+                <div class="anf-radio">
+                    <label>Doesn't have wings</label>
+                    <input class="radio-btn" type="radio" name="bool-haswings" />
+                </div>
+            </div>
+            <div class="anf-number-cont">
+                <label>Number of legs:</label>
+                <input class="anf-number" type="number" />
+            </div>
+            <div class="anf-submit">
+                SUBMIT
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+<!--
+    picture_url: string;
+    description: string; !
+    color: string; !
+    size: string; !
+    wings: boolean; 
+    legs: number;
+-->

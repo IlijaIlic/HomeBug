@@ -2,21 +2,22 @@ import { ApplicationConfig, importProvidersFrom, provideBrowserGlobalErrorListen
 import { provideRouter, withComponentInputBinding } from '@angular/router';
 
 import { routes } from './app.routes';
-import { provideHttpClient } from '@angular/common/http';
-import { provideAnimationsAsync } from '@angular/platform-browser/animations/async';
-import { provideAnimations } from '@angular/platform-browser/animations';
-import { NgIcon, provideIcons } from '@ng-icons/core'
+import { provideHttpClient, withInterceptors } from '@angular/common/http';
+import { provideIcons } from '@ng-icons/core'
 import { featherSearch, featherMessageCircle, featherGlobe, featherArrowDown, featherArrowUp } from '@ng-icons/feather-icons'
+import { authInterceptor } from './interceptors/auth.interceptor';
 
 export const appConfig: ApplicationConfig = {
   providers: [
     provideBrowserGlobalErrorListeners(),
     provideZoneChangeDetection({ eventCoalescing: true }),
     provideRouter(routes, withComponentInputBinding()),
-    provideHttpClient(),
+    provideHttpClient(
+      withInterceptors([authInterceptor])
+    ),
     provideIcons({
       featherSearch, featherMessageCircle, featherGlobe, featherArrowDown, featherArrowUp
     }),
-    provideAnimations()
+    
   ]
 };

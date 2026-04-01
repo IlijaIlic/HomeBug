@@ -36,12 +36,12 @@
 
             <div class="hb-flex-row">
 
-                <app-input-field placeholder="john.doe@gmail.com" label="Email" />
-                <app-input-field placeholder="" label="Password" type="password" />
+                <app-input-field placeholder="john.doe@gmail.com" label="Email"  [(value)]="loginData.email" />
+                <app-input-field placeholder="" label="Password" type="password"  [(value)]="loginData.password" />
             </div>
             <div class="login-cont">
 
-                <button type="submit" class="hb-register-button">Login</button>
+                <button type="submit" class="hb-register-button" (click)="handleLogin()">Login</button>
                 <p class="hb-already-have">You don't have an account? <span class="hb-login-color">Register</span> right
                     here!</p>
             </div>
