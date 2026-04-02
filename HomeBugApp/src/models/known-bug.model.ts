@@ -1,3 +1,4 @@
+import { RegionModel } from "./region.model";
 import { Taxonomy } from "./taxonomy.model";
 
 export interface KnownBugModel{
@@ -10,7 +11,7 @@ export interface KnownBugModel{
     taxonomy: Taxonomy;
     overview: string;
     
-    regions: number[];
+    regions: RegionModel[];
     habitats: string[];
     
     behaviour: string;

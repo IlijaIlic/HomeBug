@@ -9,7 +9,7 @@ export class Region {
     @Column()
     name: string;
 
-    @Column("simple-array")
-    coord: number[];
+    @Column("json")
+    coord: number[][];
 
 }

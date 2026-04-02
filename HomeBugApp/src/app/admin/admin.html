@@ -1,4 +1,4 @@
-<div>
+<div class="admin-page">
 
     <div class="change-entity-cont">
         <button class="entity-btn" [class.active]="entityShown === 'user' " (click)="handleUsersClick()">Users</button>
@@ -8,6 +8,16 @@
             (click)="handleUnknownClick()">UnknownBugs</button>
         <button class="entity-btn" [class.active]="entityShown === 'comments' "
             (click)="handleCommentsClick()">Comments</button>
+        <button class="entity-btn" [class.active]="entityShown === 'regions' "
+            (click)="handleRegionsClick()">Regions</button>
+    </div>
+    <div class="switch-cont">
+        <label>Update</label>
+        <label class="switch">
+            <input type="checkbox" [value]="isCreating" (change)="switchChange()">
+            <span class="slider round"></span>
+        </label>
+        <label>Create</label>
     </div>
     @switch (entityShown) {
     @case ('user') {
@@ -32,8 +42,19 @@
             }
         </table>
     </div>
+    <div class="admin-form-update">
+        <input type="text" placeholder="Name" [ngModel]="this.selUser?.name">
+        <input type="text" placeholder="Surname" [ngModel]="this.selUser?.surname">
+        <div>
+            <select name="gender">
+                <option value="male">Male</option>
+                <option value="female">Female</option>
+            </select>
+        </div>
+    </div>
     }
     @case ('known') {
+
 
     <div class="table-cont">
         <table>
@@ -48,9 +69,105 @@
         </table>
     </div>
 
+    <div class="admin-form-update">
+        <div class="form-field">
+            <label>Common Name
+                <input type="text" placeholder="Common Name" [ngModel]="this.selBug?.common_name">
+            </label>
+        </div>
+        <div class="form-field">
+            <label> Latin Name
+                <input type="text" placeholder="Latin Name" [ngModel]="this.selBug?.latin_name">
+            </label>
+        </div>
+        <div class="form-field">
+            <label> Overview
+                <input type="text" placeholder="Overview" [ngModel]="this.selBug?.overview">
+            </label>
+        </div>
+        <div class="form-field">
+            <label>Behaviour
+                <input type="text" placeholder="Behaviour" [ngModel]="this.selBug?.behaviour">
+            </label>
+        </div>
+        <div class="form-field">
+            <label>Body Type
+                <input type="text" placeholder="Body Type" [ngModel]="this.selBug?.body_type">
+            </label>
+        </div>
+        <div class="form-field">
+            <label>Color
+                <input type="text" placeholder="Color" [ngModel]="this.selBug?.color">
+            </label>
+        </div>
+        <div class="form-field">
+            <label>Diet
+                <input type="text" placeholder="Diet" [ngModel]="this.selBug?.diet">
+            </label>
+        </div>
+        <div class="form-field">
+            <label>Number of Legs
+                <input type="text" placeholder="Number of Legs" [ngModel]="this.selBug?.no_legs">
+            </label>
+        </div>
+        <div class="form-field">
+            <label>Size
+                <input type="text" placeholder="Size" [ngModel]="this.selBug?.size">
+            </label>
+        </div>
+
+        <div class="form-field">
+            <label>Danger To Humans
+                <input type="checkbox" placeholder="Danger To Humans" [ngModel]="this.selBug?.danger_to_humans">
+            </label>
+        </div>
+        <div class="form-field">
+            <label>Stings
+                <input type="checkbox" placeholder="Stings" [ngModel]="this.selBug?.stings">
+            </label>
+        </div>
+        <div class="form-field">
+            <label>Venomous
+                <input type="checkbox" placeholder="Venomous" [ngModel]="this.selBug?.venomous">
+            </label>
+        </div>
+        <div class="form-field">
+            <label>Has Wings
+                <input type="checkbox" placeholder="Wings" [ngModel]="this.selBug?.wings">
+            </label>
+        </div>
+        <div class="form-field">
+            <label>Bites
+                <input type="checkbox" placeholder="Bites" [ngModel]="this.selBug?.bites">
+            </label>
+        </div>
+    </div>
+
+    <div class="tables-cont">
+
+        <div class="table-cont-selection">
+            <table>
+                @for (region of selBug?.regions; track $index) {
+                <tr>
+                    <th>{{region.name}}</th>
+                </tr>
+                }
+            </table>
+        </div>
+
+        <div class="table-cont-selection">
+            <table>
+                @for (region of regions; track $index) {
+                <tr class="test" (click)="addRegionToKbug(region)">
+                    <th>{{region.name}}</th>
+                </tr>
+                }
+            </table>
+        </div>
+    </div>
     }
     @case ('unknown') {
-     <div class="table-cont">
+    <div class="table-cont">
         <table>
             @for (ubug of ubugs; track $index) {
             <tr class="test" (click)="handleUbugInfo(ubug)">
@@ -64,7 +181,96 @@
     </div>
     }
     @case ('comments') {
-    <div>Comments</div>
+    <div class="table-cont">
+        <table>
+            @for (comm of comments; track $index) {
+            <tr class="test" (click)="handleCommInfo(comm)">
+                <th>{{comm.id}}</th>
+                <th>{{comm.text}}</th>
+                <th>{{comm.ubug?.id}}</th>
+                <th>{{comm.user?.email}}</th>
+                <th><button type="button">Delete Comment</button></th>
+            </tr>
+            }
+        </table>
+    </div>
+    }
+    @case ('regions') {
+    <div class="table-cont">
+        <table>
+            @for (region of regions; track $index) {
+            <tr class="test" (click)="handleRegionInfo(region)">
+                <th>{{region.id}}</th>
+                <th>{{region.name}}</th>
+                <th>{{region.coord}}</th>
+                <th><button type="button" (click)="handleDeleteRegion(region)">Delete Region</button></th>
+            </tr>
+            }
+        </table>
+    </div>
+    <div>Selected ID: {{this.selRegion?.id}}</div>
+    <div class="admin-form-update">
+
+        <div class="form-field">
+            <label>Region Name
+                <input type="text" placeholder="Region Name" [(ngModel)]="this.selRegion.name">
+            </label>
+        </div>
+
+        <div>
+            <div class="form-field">
+                <label>Coord 1.1
+                    <input type="text" placeholder="Coord 1.1" [(ngModel)]="this.selRegion.coord[0][0] ">
+                </label>
+            </div>
+            <div class="form-field">
+                <label>Coord 1.2
+                    <input type="text" placeholder="Coord 1.2" [(ngModel)]="this.selRegion.coord[0][1]">
+                </label>
+            </div>
+        </div>
+
+        <div>
+            <div class="form-field">
+                <label>Coord 2.1
+                    <input type="text" placeholder="Coord 2.2" [(ngModel)]="this.selRegion.coord[1][0]">
+                </label>
+            </div>
+            <div class="form-field">
+                <label>Coord 2.2
+                    <input type="text" placeholder="Coord 2.2" [(ngModel)]="this.selRegion.coord[1][1]">
+                </label>
+            </div>
+        </div>
+
+        <div>
+            <div class="form-field">
+                <label>Coord 3.1
+                    <input type="text" placeholder="Coord 3.2" [(ngModel)]="this.selRegion.coord[2][0]">
+                </label>
+            </div>
+            <div class="form-field">
+                <label>Coord 3.2
+                    <input type="text" placeholder="Coord 3.2" [(ngModel)]="this.selRegion.coord[2][1]">
+                </label>
+            </div>
+        </div>
+
+        <div>
+            <div class="form-field">
+                <label>Coord 4.1
+                    <input type="text" placeholder="Coord 4.1" [(ngModel)]="this.selRegion.coord[3][0]">
+                </label>
+            </div>
+            <div class="form-field">
+                <label>Coord 4.2
+                    <input type="text" placeholder="Coord 4.2" [(ngModel)]="this.selRegion.coord[3][1]">
+                </label>
+            </div>
+        </div>
+
+    </div>
+    <button class="submit-btn" (click)="handleSubmitRegions()">{{isCreating ? "Create": "Update"}}</button>
     }
     }
 </div>
