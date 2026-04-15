@@ -226,6 +226,11 @@ hr {
     cursor: pointer;
 }
 
+.gender-button.active{
+    background-color: $hb-dark-green;
+
+}
+
 
 .gender-button img {
     position: absolute;

@@ -4,7 +4,7 @@ import { UpdateKnownBugDto } from './dto/update-known-bug.dto';
 import { InjectRepository } from '@nestjs/typeorm';
 import { KnownBug } from './entities/known-bug.entity';
 import { Repository } from 'typeorm';
-import { Taxonomy } from 'src/taxonomy/entities/taxonomy.entity';
+import { Taxonomy } from '@taxonomy/entities/taxonomy.entity';
 
 @Injectable()
 export class KnownBugService {
@@ -53,7 +53,7 @@ export class KnownBugService {
   }
 
   async findOne(id: number) {
-    return this.knownBugRepo.find({
+    return this.knownBugRepo.findOne({
       relations: ['regions', 'taxonomy'],
       where: { id }
     });

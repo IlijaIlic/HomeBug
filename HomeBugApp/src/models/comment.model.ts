@@ -1,3 +1,4 @@
+import { RateModel } from "./rate.model";
 import { UnknownBugModel } from "./unknown-bug.model";
 import { UserModel } from "./user.model";
 
@@ -7,4 +8,5 @@ export interface CommentModel{
     text: string;
     ubug: UnknownBugModel;
     rating: number;
+    ratings: RateModel[]
 }

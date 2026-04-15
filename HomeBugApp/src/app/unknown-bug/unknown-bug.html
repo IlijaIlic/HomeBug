@@ -3,10 +3,18 @@
 
     <div class="unknown-user-placed">
 
-        <img class="unknown-bug-image" [src]="bug?.picture_url" alt="image" />
+        <img class="unknown-bug-image" [src]="apirul + bug?.picture_url" alt="image" />
         <div class="unknown-bug-text">
             <div class="unknown-username">
-                <div> User <span>bugfinder123</span> said:</div>
+                <div class="flex"> User
+                    <div class="username-span">{{this.bug?.user?.name}}
+                        <div class="user-popup">
+                            <div>{{this.bug?.user?.name}}</div>
+                            <div>{{this.bug?.user?.surname}}</div>
+                            <span>Reputation:{{this.bug?.user?.reputation}}</span>
+                        </div>
+                    </div> said:
+                </div>
                 <img class="unknown-comment-flag" [src]="'https://flagcdn.com/' + countryCode + '.svg'"
                     alt="countryCode" />
 
@@ -15,7 +23,12 @@
                 {{bug?.description}}
             </div>
             <div class="unknown-text-profile">
-                <img src="../../assets/profileavatarfemale.png" alt="profile picture" />
+                @if(this.bug?.user!.gender == "male"){
+                <img src="assets/profileavatarmale.png" alt="Male profile avatar" />
+                }
+                @if(this.bug?.user!.gender == "female"){
+                <img src="assets/profileavatarfemale.png" alt="Male profile avatar" />
+                }
             </div>
         </div>
     </div>
@@ -27,11 +40,11 @@
 
             <div class="comment-cont">
                 <textarea class="input-comment" type="text" placeholder="Enter your comment here..." rows="1" cols="50"
-                    maxlength="300"></textarea>
-                <button class="submit-comment">Comment</button>
+                    maxlength="300" [(ngModel)]="commentText"></textarea>
+                <button class="submit-comment" (click)="handleSubmitComment()">Comment</button>
             </div>
-            @for (comment of bug?.comments; track $index) {
-                <app-comment></app-comment>
+            @for (com of bug?.comments; track $index) {
+            <app-comment [comment]=com></app-comment>
             }
         </div>
 

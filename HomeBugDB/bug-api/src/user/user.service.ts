@@ -4,11 +4,12 @@ import { UpdateUserDto } from './dto/update-user.dto';
 import { InjectRepository } from '@nestjs/typeorm';
 import { User } from './entities/user.entity';
 import { Repository } from 'typeorm';
-import { KnownBug } from 'src/known-bug/entities/known-bug.entity';
 import * as bcrypt from 'bcryptjs';
+import { KnownBug } from '@known-bug/entities/known-bug.entity';
 
 @Injectable()
 export class UserService {
+
   constructor(
     @InjectRepository(User)
     private readonly userRepo: Repository<User>,
@@ -47,7 +48,7 @@ export class UserService {
   async findOne(id: number) {
     return this.userRepo.findOne({
       where: { id },
-      relations: ['known_scans', 'unknown_scans', 'saved_bugs']
+      relations: ['known_scans', 'unknown_scans', 'saved_bugs', 'unknown_scans.comments']
     });
   }
 
@@ -62,29 +63,23 @@ export class UserService {
     } else return `No user found with this id:  #${id}`;
   }
 
-  async addfound(id: number, userID: number) {
-    const kbug = await this.knownRepo.findOneBy({ id: id })
-    const user = await this.userRepo.findOneBy({ id: userID })
-
-    if (kbug && user) {
-      user.known_scans.push(kbug);
-
-      return this.userRepo.save(user);
-    } else return `Custom error!`;
-  }
-
   async savebug(id: number, userID: number) {
-    const kbug = await this.knownRepo.findOneBy({ id: id })
-    const user = await this.userRepo.findOneBy({ id: userID })
+    const kbug = await this.knownRepo.findOne({ where: { id: id } })
+    const user = await this.userRepo.findOne({ where: { id: userID }, relations: ['saved_bugs'] })
 
     if (kbug && user) {
       if (!user.saved_bugs.some(b => b.id === id)) {
         user.saved_bugs.push(kbug);
         return this.userRepo.save(user);
+      } else {
+        user.saved_bugs.splice(user.saved_bugs.indexOf(kbug), 1)
+        return this.userRepo.save(user)
       }
     } else return `Custom error!`;
 
   }
+
+ 
 
   async findByEmail(email: string): Promise<User | null> {
     return this.userRepo.findOne({

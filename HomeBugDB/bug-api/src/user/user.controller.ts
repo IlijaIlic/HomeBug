@@ -2,7 +2,7 @@ import { Controller, Get, Post, Body, Patch, Param, Delete, UseGuards, Req } fro
 import { UserService } from './user.service';
 import { CreateUserDto } from './dto/create-user.dto';
 import { UpdateUserDto } from './dto/update-user.dto';
-import { JwtAuthGuard } from 'src/auth/jwt-auth.guard';
+import { JwtAuthGuard } from '@auth/jwt-auth.guard';
 
 @Controller('user')
 @UseGuards(JwtAuthGuard)
@@ -34,15 +34,11 @@ export class UserController {
     return this.userService.remove(+id);
   }
 
-  @Patch("/addfound/:id")
-  addfound(@Param('id') id: string, @Req() req: any) {
-    const userID = req.user.id
-    return this.userService.addfound(+id, userID);
-  }
-
   @Patch("/savebug/:id")
   savebug(@Param('id') id: string, @Req() req: any) {
     const userID = req.user.id
     return this.userService.savebug(+id, userID);
   }
+
+ 
 }

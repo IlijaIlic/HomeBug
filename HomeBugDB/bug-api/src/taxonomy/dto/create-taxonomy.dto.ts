@@ -4,7 +4,7 @@ export class CreateTaxonomyDto {
 
     @IsString()
     @IsNotEmpty()
-    class: string;
+    taxonomyClass: string;
 
     @IsString()
     @IsNotEmpty()

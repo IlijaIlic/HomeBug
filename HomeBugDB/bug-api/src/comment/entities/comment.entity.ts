@@ -1,6 +1,7 @@
-import { UnknownBug } from "src/unknown-bug/entities/unknown-bug.entity";
-import { User } from "src/user/entities/user.entity";
-import { Column, Entity, ManyToOne, PrimaryGeneratedColumn } from "typeorm";
+import { UnknownBug } from "@unknown-bug/entities/unknown-bug.entity";
+import { User } from "@user/entities/user.entity";
+import { Column, Entity, ManyToOne, OneToMany, PrimaryGeneratedColumn } from "typeorm";
+import { Rating } from "../../rating/entities/rating.entity";
 
 @Entity()
 export class Comment {
@@ -23,6 +24,9 @@ export class Comment {
 
     @Column({ default: 0 })
     rating: number;
+
+    @OneToMany(() => Rating, rating => rating.comment)
+    ratings: Rating[];
 
 
 }

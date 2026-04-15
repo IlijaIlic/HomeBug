@@ -25,7 +25,15 @@ export class KnownBugService {
         return this.http.delete(`${environment.apiUrl}/region/` + id)
     }
 
+    deleteKBug(id: number): Observable<any>{
+        return this.http.delete(`${environment.apiUrl}/known-bug/` + id)
+    }
+
     postRegion(region: Omit<RegionModel, 'id'>): Observable<RegionModel> {
         return this.http.post<RegionModel>(`${environment.apiUrl}/region`, region)
+    }
+
+    postKBug(kbug: any): Observable<KnownBugModel> {
+        return this.http.post<KnownBugModel>(`${environment.apiUrl}/known-bug`, kbug)
     }
 }

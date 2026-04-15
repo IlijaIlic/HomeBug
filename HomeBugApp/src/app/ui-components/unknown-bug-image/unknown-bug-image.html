@@ -1,8 +1,13 @@
-<div  class="hb-unknown" [style.width.rem]="size" [style.height.rem]="size">
-    <img [src]="bug.picture_url">
+<div class="hb-unknown" [style.width.rem]="size" [style.height.rem]="size">
+    @if(country_show){
+    <img [src]="apirul+ bug!.picture_url">
     <div class="hb-unknown-gradient"></div>
-    <div class="hb-unknown-comments">35<ng-icon name="featherMessageCircle"></ng-icon></div>
-    @if (country_show === true) {
-        <div class="hb-unknown-country"><ng-icon name="featherGlobe"></ng-icon>SRB</div>
+    <div class="hb-unknown-comments">{{bug!.comments.length}}<ng-icon name="featherMessageCircle"></ng-icon></div>
+    <div class="hb-unknown-country"><ng-icon name="featherGlobe"></ng-icon>SRB</div>
     }
+    @if(!country_show){
+    <img [src]="apirul + kbug!.picture_urls[0]">
+    <div class="hb-unknown-gradient"></div>
+    }
+
 </div>

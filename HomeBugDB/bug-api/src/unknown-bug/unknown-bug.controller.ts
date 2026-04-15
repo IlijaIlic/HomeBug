@@ -1,8 +1,10 @@
-import { Controller, Get, Post, Body, Patch, Param, Delete, UseGuards, Req } from '@nestjs/common';
+import { Controller, Get, Post, Body, Patch, Param, Delete, UseGuards, Req, UseInterceptors, UploadedFile } from '@nestjs/common';
 import { UnknownBugService } from './unknown-bug.service';
 import { CreateUnknownBugDto } from './dto/create-unknown-bug.dto';
 import { UpdateUnknownBugDto } from './dto/update-unknown-bug.dto';
-import { JwtAuthGuard } from 'src/auth/jwt-auth.guard';
+import { JwtAuthGuard } from '@auth/jwt-auth.guard';
+import { FileInterceptor } from '@nestjs/platform-express';
+import type { Multer } from 'multer'
 
 @Controller('unknown-bug')
 @UseGuards(JwtAuthGuard)
@@ -10,9 +12,21 @@ export class UnknownBugController {
   constructor(private readonly unknownBugService: UnknownBugService) { }
 
   @Post()
-  create(@Body() createUnknownBugDto: CreateUnknownBugDto, @Req() req:any) {
+  @UseInterceptors(FileInterceptor('file'))
+  create(@Body() createUnknownBugDto: any, @Req() req: any, @UploadedFile() file: Express.Multer.File) {
     const userID = req.user.id
-    return this.unknownBugService.create(createUnknownBugDto, userID);
+
+    const filePath = `uploads/${file.filename}`
+    const dto: CreateUnknownBugDto = {
+      picture_url: filePath,
+      description: createUnknownBugDto.description,
+      color: createUnknownBugDto.color,
+      size: createUnknownBugDto.size,
+      wings: createUnknownBugDto.wings === 'true',   
+      legs: Number(createUnknownBugDto.legs),       
+    };
+
+    return this.unknownBugService.create(dto, userID, file);
   }
 
   @Get()

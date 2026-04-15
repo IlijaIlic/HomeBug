@@ -1,5 +1,5 @@
-import { Region } from "src/region/entities/region.entity";
-import { Taxonomy } from "src/taxonomy/entities/taxonomy.entity";
+import { Region } from "@region/entities/region.entity";
+import { Taxonomy } from "@taxonomy/entities/taxonomy.entity";
 import { Column, Entity, JoinColumn, JoinTable, ManyToMany, OneToMany, OneToOne, PrimaryGeneratedColumn } from "typeorm";
 
 @Entity()

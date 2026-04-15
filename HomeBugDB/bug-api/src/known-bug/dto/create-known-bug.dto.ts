@@ -1,6 +1,6 @@
 import { Type } from "class-transformer";
-import { IsArray, IsBoolean, IsNotEmpty, IsNumber, IsString, ValidateNested } from "class-validator";
-import { CreateTaxonomyDto } from "src/taxonomy/dto/create-taxonomy.dto";
+import { isArray, IsArray, IsBoolean, IsNotEmpty, IsNumber, IsString, ValidateNested } from "class-validator";
+import { CreateTaxonomyDto } from "@taxonomy/dto/create-taxonomy.dto";
 
 export class CreateKnownBugDto {
 
@@ -12,10 +12,10 @@ export class CreateKnownBugDto {
     @IsNotEmpty()
     latin_name: string;
 
-    @IsString()
+    @IsArray()
     picture_urls: string[];
 
-    @IsString()
+    @IsArray()
     habitats: string[];
 
     @IsNumber()

@@ -12,7 +12,12 @@
                 <button (click)="selectTab('saved')" [class.btn-selected]="active_tab ==='saved'">Saved Bugs</button>
             </div>
         </div>
-        <img src="assets/profileavatarmale.png" alt="Male profile avatar" />
+        @if(user.gender == "male"){
+            <img src="assets/profileavatarmale.png" alt="Male profile avatar" />
+        }
+        @if(user.gender == "female"){
+            <img src="assets/profileavatarfemale.png" alt="Male profile avatar" />
+        }
     </div>
 
 
@@ -23,30 +28,30 @@
         <div class="hb-info-section">
             <div>
                 <p class="hb-profile-hint-text">Name</p>
-                <p class="hb-profile-text">John</p>
+                <p class="hb-profile-text">{{this.user.name}}</p>
             </div>
             <div>
                 <p class="hb-profile-hint-text">Surname</p>
-                <p class="hb-profile-text">Doe</p>
+                <p class="hb-profile-text">{{this.user.surname}}</p>
             </div>
             <div>
                 <p class="hb-profile-hint-text">Email</p>
-                <p class="hb-profile-text">john.doe&#64;gmail.com</p>
+                <p class="hb-profile-text">{{this.user.email}}</p>
             </div>
             <div>
                 <p class="hb-profile-hint-text">Gender</p>
-                <p class="hb-profile-text">Male</p>
+                <p class="hb-profile-text">{{this.user.gender.toUpperCase()}}</p>
             </div>
         </div>
         <h1 class="hb-info-title">HomeBug Info</h1>
         <div class="hb-info-section">
             <div>
                 <p class="hb-profile-hint-text">Unknown bugs scanned</p>
-                <p class="hb-profile-text">20</p>
+                <p class="hb-profile-text">{{this.user.unknown_bugs_scanned}}</p>
             </div>
             <div>
                 <p class="hb-profile-hint-text">Comments helping others</p>
-                <p class="hb-profile-text">205</p>
+                <p class="hb-profile-text">{{this.user.comments_helping_others}}</p>
             </div>
             <div>
                 <p class="hb-profile-hint-text">Reputation </p>
@@ -54,7 +59,7 @@
             </div>
             <div>
                 <p class="hb-profile-hint-text">Users rated</p>
-                <p class="hb-profile-text">2.2k</p>
+                <p class="hb-profile-text">{{this.user.other_users_rated}}</p>
             </div>
         </div>
         }
@@ -64,21 +69,18 @@
 
                 <h1 class="hb-info-title">Scanned successfully</h1>
                 <div class="hb-bug-section">
+                    @for (scanned of this.user.known_scans ; track $index) {
                     <app-unknown-bug-image [size]="11" [country_show]="false" />
-                    <app-unknown-bug-image [size]="11" [country_show]="false" />
-                    <app-unknown-bug-image [size]="11" [country_show]="false" />
-                    <app-unknown-bug-image [size]="11" [country_show]="false" />
-                    <app-unknown-bug-image [size]="11" [country_show]="false" />
-                    <app-unknown-bug-image [size]="11" [country_show]="false" />
-                    <app-unknown-bug-image [size]="11" [country_show]="false" />
+                    }
                 </div>
             </div>
             <div>
 
                 <h1 class="hb-info-title">Unknown bugs</h1>
                 <div class="hb-bug-section">
-                    <app-unknown-bug-image [size]="11" [country_show]="true" />
-
+                    @for (scanned of this.user.unknown_scans ; track $index) {
+                    <app-unknown-bug-image [size]="11" [country_show]="true" [bug]=scanned [routerLink]="'../search/unknown/' + scanned.id" />
+                    }
                 </div>
             </div>
         </div>
@@ -88,13 +90,9 @@
             <div>
                 <h1 class="hb-info-title">Saved bugs</h1>
                 <div class="hb-bug-section">
-                    <app-unknown-bug-image [size]="11" [country_show]="false" />
-                    <app-unknown-bug-image [size]="11" [country_show]="false" />
-                    <app-unknown-bug-image [size]="11" [country_show]="false" />
-                    <app-unknown-bug-image [size]="11" [country_show]="false" />
-                    <app-unknown-bug-image [size]="11" [country_show]="false" />
-                    <app-unknown-bug-image [size]="11" [country_show]="false" />
-                    <app-unknown-bug-image [size]="11" [country_show]="false" />
+                    @for (saved of this.user.saved_bugs ; track $index) {
+                        <app-unknown-bug-image [size]="11" [country_show]="false" [kbug]=saved [routerLink]="'/encyclopedia/known/' + saved.id  "/>
+                    }
                 </div>
             </div>
         </div>

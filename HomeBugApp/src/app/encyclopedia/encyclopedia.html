@@ -22,12 +22,10 @@
 
             </div>
             <div class="hb-bugs-cont">
-                <app-unknown-bug-image [country_show]="false" routerLink="known" [size]="size_of_comp"/>
-                <app-unknown-bug-image [country_show]="false" [size]="size_of_comp"/>
-                <app-unknown-bug-image [country_show]="false" [size]="size_of_comp" />
-                <app-unknown-bug-image [country_show]="false" [size]="size_of_comp" />
-                <app-unknown-bug-image [country_show]="false" [size]="size_of_comp" />
-                <app-unknown-bug-image [country_show]="false" [size]="size_of_comp" />
+
+                @for (kbug of this.kbugs; track $index) {
+                <app-unknown-bug-image [country_show]="false" [routerLink]="`known/` + kbug.id" [size]="size_of_comp" [kbug]=kbug [unknown]=true/>
+                }
             </div>
             <div class="hb-numeration">
                 <button type="button"><</button>
@@ -37,7 +35,6 @@
                 ...
                 <button type="button">></button>
                 <button type="button">>></button>
-
             </div>
         </div>
     </div>

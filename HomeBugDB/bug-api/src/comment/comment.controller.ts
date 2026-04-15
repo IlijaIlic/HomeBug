@@ -2,7 +2,7 @@ import { Controller, Get, Post, Body, Patch, Param, Delete, UseGuards, Req } fro
 import { CommentService } from './comment.service';
 import { CreateCommentDto } from './dto/create-comment.dto';
 import { UpdateCommentDto } from './dto/update-comment.dto';
-import { JwtAuthGuard } from 'src/auth/jwt-auth.guard';
+import { JwtAuthGuard } from '@auth/jwt-auth.guard';
 
 @Controller('comment')
 @UseGuards(JwtAuthGuard)
@@ -31,17 +31,21 @@ export class CommentController {
   }
 
   @Patch('/like/:id')
-  like(@Param('id') id: string) {
-    return this.commentService.like(+id);
+  like(@Param('id') id: string, @Req() req:any) {
+
+    const userId = req.user.id
+    return this.commentService.like(+id, userId);
   }
 
   @Patch('/dislike/:id')
-  dislike(@Param('id') id: string) {
-    return this.commentService.dislike(+id);
+  dislike(@Param('id') id: string, @Req() req:any) {
+    const userId = req.user.id
+    return this.commentService.dislike(+id, userId);
   }
 
   @Delete(':id')
-  remove(@Param('id') id: string) {
-    return this.commentService.remove(+id);
+  remove(@Param('id') id: string, @Req() req:any) {
+    const userId = req.user.id
+    return this.commentService.remove(+id, userId);
   }
 }

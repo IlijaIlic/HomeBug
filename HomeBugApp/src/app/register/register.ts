@@ -16,7 +16,7 @@ export class Register {
     surname: "",
     email: "",
     password: "",
-    gender: "male"
+    gender: ""
   }
 
   constructor(public authService: AuthService, private router: Router) { }

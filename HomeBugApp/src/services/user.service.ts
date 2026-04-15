@@ -13,6 +13,14 @@ export class UserService {
     }
 
     getById(id: number): Observable<UserModel>{
-        return this.http.get<UserModel>(`${environment.apiUrl}/user` + id)
+        return this.http.get<UserModel>(`${environment.apiUrl}/user/` + id)
+    }
+
+    deleteById(id: number) : Observable<any>{
+        return this.http.delete(`${environment.apiUrl}/user/` + id)
+    }
+
+    addSaved(id: number): Observable<UserModel>{
+        return this.http.patch<UserModel>(`${environment.apiUrl}/user/savebug/`+ id, null)
     }
 }

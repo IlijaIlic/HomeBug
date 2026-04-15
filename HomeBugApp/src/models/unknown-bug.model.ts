@@ -10,5 +10,5 @@ export interface UnknownBugModel {
     wings: boolean;
     legs: number;
     comments: CommentModel[];
-    user: UserModel;
+    user: UserModel | null;
 }

@@ -35,16 +35,17 @@
                 <th>{{user.known_scans}}</th>
                 <th>{{user.other_users_rated}}</th>
                 <th>{{user.saved_bugs}}</th>
-                <th>{{user.unknwon_bugs_scanned}}</th>
-                <th>{{user.unknwon_scans}}</th>
-                <th><button type="button">Delete User</button></th>
+                <th>{{user.unknown_bugs_scanned}}</th>
+                <th>{{user.unknown_scans}}</th>
+                <th><button type="button" (click)="handleDeleteUser(user)">Delete User</button></th>
             </tr>
             }
         </table>
     </div>
+    <div>Selected ID: {{this.selUser.id}}</div>
     <div class="admin-form-update">
-        <input type="text" placeholder="Name" [ngModel]="this.selUser?.name">
-        <input type="text" placeholder="Surname" [ngModel]="this.selUser?.surname">
+        <input type="text" placeholder="Name" [(ngModel)]="this.selUser!.name">
+        <input type="text" placeholder="Surname" [(ngModel)]="this.selUser!.surname">
         <div>
             <select name="gender">
                 <option value="male">Male</option>
@@ -63,82 +64,112 @@
                 <th>{{kbug.id}}</th>
                 <th>{{kbug.common_name}}</th>
                 <th>{{kbug.latin_name}}</th>
-                <th><button type="button">Delete Bug</button></th>
+                <th><button type="button" (click)="handleDeleteKBug(kbug)">Delete Bug</button></th>
             </tr>
             }
         </table>
     </div>
-
+    <div>Selected ID: {{this.selBug.id}}</div>
     <div class="admin-form-update">
         <div class="form-field">
             <label>Common Name
-                <input type="text" placeholder="Common Name" [ngModel]="this.selBug?.common_name">
+                <input type="text" placeholder="Common Name" [(ngModel)]="this.selBug.common_name">
             </label>
         </div>
         <div class="form-field">
             <label> Latin Name
-                <input type="text" placeholder="Latin Name" [ngModel]="this.selBug?.latin_name">
+                <input type="text" placeholder="Latin Name" [(ngModel)]="this.selBug.latin_name">
+            </label>
+        </div>
+        <div class="form-field">
+            <label> Taxonomy Class
+                <input type="text" placeholder="Taxonomy Class" [(ngModel)]="this.selBug.taxonomy.taxonomyClass">
+            </label>
+        </div>
+        <div class="form-field">
+            <label> Taxonomy Order
+                <input type="text" placeholder="Taxonomy Order" [(ngModel)]="this.selBug.taxonomy.order">
+            </label>
+        </div>
+        <div class="form-field">
+            <label> Taxonomy Family
+                <input type="text" placeholder="Taxonomy Family" [(ngModel)]="this.selBug.taxonomy.family">
+            </label>
+        </div>
+        <div class="form-field">
+            <label> Taxonomy Genus
+                <input type="text" placeholder="Taxonomy Genus" [(ngModel)]="this.selBug.taxonomy.genus">
+            </label>
+        </div>
+        <div class="form-field">
+            <label> Taxonomy Species
+                <input type="text" placeholder="Taxonomy Species" [(ngModel)]="this.selBug.taxonomy.species">
             </label>
         </div>
         <div class="form-field">
             <label> Overview
-                <input type="text" placeholder="Overview" [ngModel]="this.selBug?.overview">
+                <textarea placeholder="Overview" [(ngModel)]="this.selBug.overview"> </textarea>
+            </label>
+        </div>
+        <div class="form-field">
+            <label> Habitats (separate by ;)
+                <input type="text" placeholder="Habitats" [(ngModel)]="this.selBug.habitats[0]" />
             </label>
         </div>
         <div class="form-field">
             <label>Behaviour
-                <input type="text" placeholder="Behaviour" [ngModel]="this.selBug?.behaviour">
+                <input type="text" placeholder="Behaviour" [(ngModel)]="this.selBug.behaviour">
             </label>
         </div>
         <div class="form-field">
             <label>Body Type
-                <input type="text" placeholder="Body Type" [ngModel]="this.selBug?.body_type">
+                <input type="text" placeholder="Body Type" [(ngModel)]="this.selBug.body_type">
             </label>
         </div>
         <div class="form-field">
             <label>Color
-                <input type="text" placeholder="Color" [ngModel]="this.selBug?.color">
+                <input type="text" placeholder="Color" [(ngModel)]="this.selBug.color">
             </label>
         </div>
         <div class="form-field">
             <label>Diet
-                <input type="text" placeholder="Diet" [ngModel]="this.selBug?.diet">
+                <input type="text" placeholder="Diet" [(ngModel)]="this.selBug.diet">
             </label>
         </div>
         <div class="form-field">
             <label>Number of Legs
-                <input type="text" placeholder="Number of Legs" [ngModel]="this.selBug?.no_legs">
+                <input type="number" placeholder="Number of Legs" [(ngModel)]="this.selBug.no_legs">
             </label>
         </div>
         <div class="form-field">
             <label>Size
-                <input type="text" placeholder="Size" [ngModel]="this.selBug?.size">
+                <input type="text" placeholder="Size" [(ngModel)]="this.selBug.size">
             </label>
         </div>
 
         <div class="form-field">
             <label>Danger To Humans
-                <input type="checkbox" placeholder="Danger To Humans" [ngModel]="this.selBug?.danger_to_humans">
+                <input type="checkbox" placeholder="Danger To Humans" [(ngModel)]="this.selBug.danger_to_humans">
             </label>
         </div>
         <div class="form-field">
             <label>Stings
-                <input type="checkbox" placeholder="Stings" [ngModel]="this.selBug?.stings">
+                <input type="checkbox" placeholder="Stings" [(ngModel)]="this.selBug.stings">
             </label>
         </div>
         <div class="form-field">
             <label>Venomous
-                <input type="checkbox" placeholder="Venomous" [ngModel]="this.selBug?.venomous">
+                <input type="checkbox" placeholder="Venomous" [(ngModel)]="this.selBug.venomous">
             </label>
         </div>
         <div class="form-field">
             <label>Has Wings
-                <input type="checkbox" placeholder="Wings" [ngModel]="this.selBug?.wings">
+                <input type="checkbox" placeholder="Wings" [(ngModel)]="this.selBug.wings">
             </label>
         </div>
         <div class="form-field">
             <label>Bites
-                <input type="checkbox" placeholder="Bites" [ngModel]="this.selBug?.bites">
+                <input type="checkbox" placeholder="Bites" [(ngModel)]="this.selBug.bites">
             </label>
         </div>
     </div>
@@ -147,8 +178,11 @@
 
         <div class="table-cont-selection">
             <table>
-                @for (region of selBug?.regions; track $index) {
-                <tr>
+                <tr class="column-name">
+                    <th>Added Regions</th>
+                </tr>
+                @for (region of selBug.regions; track $index) {
+                <tr class="test" (click)="removeRegionFromKbug(region)">
                     <th>{{region.name}}</th>
                 </tr>
                 }
@@ -157,6 +191,9 @@
 
         <div class="table-cont-selection">
             <table>
+                <tr class="column-name">
+                    <th>Available Regions</th>
+                </tr>
                 @for (region of regions; track $index) {
                 <tr class="test" (click)="addRegionToKbug(region)">
                     <th>{{region.name}}</th>
@@ -165,6 +202,35 @@
             </table>
         </div>
     </div>
+
+    <h3 class="upload-title">Upload new images</h3>
+    <div class="kbug-img-cont">
+        <img class="kbug-imgs" [src]="previewUrl || '../../assets/bee.jpg'" alt="test img" />
+        <button class="next-img" (click)="nextImage()"><ng-icon name="featherArrowRight"></ng-icon></button>
+        <button class="prev-img" (click)="prevImage()"><ng-icon name="featherArrowLeft"></ng-icon></button>
+        <button class="delete-img" (click)="deleteImage()">Delete <ng-icon name="featherTrash2"></ng-icon> </button>
+        <input type="file" multiple accept="image/*" style="display: none;" (change)="onFileSelected($event)"
+            #fileInput />
+    </div>
+    <button class="upload-img-btn" (click)="fileInput.click()">Upload new <ng-icon
+            name="featherUpload"></ng-icon></button>
+
+    <h3  class="upload-title">Uploaded images</h3>
+
+    <div class="kbug-uploaded-cont">
+        @for (url of this.selBug.picture_urls; track $index) {
+        <div class="uploaded-img-cont">
+            <img class="uploaded-img" [src]="apiUrl + url" />
+            <button class="delete-img" (click)="deleteUploadedImage()">Delete <ng-icon
+                    name="featherTrash2"></ng-icon>
+            </button>
+        </div>
+        }
+
+
+    </div>
+    <button class="submit-btn" (click)="handleSubmitKBug()">{{isCreating ? "Create": "Update"}}</button>
+
     }
     @case ('unknown') {
     <div class="table-cont">
@@ -172,9 +238,9 @@
             @for (ubug of ubugs; track $index) {
             <tr class="test" (click)="handleUbugInfo(ubug)">
                 <th>{{ubug.id}}</th>
-                <th>{{ubug.user?.email}}</th>
+                <th>{{ubug.user!.email}}</th>
                 <th>{{ubug.description}}</th>
-                <th><button type="button">Delete Bug</button></th>
+                <th><button type="button" (click)="handleDeleteUbug(ubug)">Delete Bug</button></th>
             </tr>
             }
         </table>
@@ -187,9 +253,9 @@
             <tr class="test" (click)="handleCommInfo(comm)">
                 <th>{{comm.id}}</th>
                 <th>{{comm.text}}</th>
-                <th>{{comm.ubug?.id}}</th>
-                <th>{{comm.user?.email}}</th>
-                <th><button type="button">Delete Comment</button></th>
+                <th>{{comm.ubug.id}}</th>
+                <th>{{comm.user.email}}</th>
+                <th><button type="button" (click)="handleDeleteComment(comm)">Delete Comment</button></th>
             </tr>
             }
         </table>
@@ -208,7 +274,7 @@
             }
         </table>
     </div>
-    <div>Selected ID: {{this.selRegion?.id}}</div>
+    <div>Selected ID: {{this.selRegion.id}}</div>
     <div class="admin-form-update">
 
         <div class="form-field">

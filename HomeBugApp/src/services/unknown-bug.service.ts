@@ -15,4 +15,12 @@ export class UnknownBugService {
     getById(id: number): Observable<UnknownBugModel> {
         return this.http.get<UnknownBugModel>(`${environment.apiUrl}/unknown-bug/` + id)
     }
+
+     deleteById(id: number) : Observable<any>{
+        return this.http.delete(`${environment.apiUrl}/unknown-bug/` + id)
+    }
+
+    post(uBug: any) : Observable<UnknownBugModel>{
+        return this.http.post<UnknownBugModel>(`${environment.apiUrl}/unknown-bug`, uBug)
+    }
 }

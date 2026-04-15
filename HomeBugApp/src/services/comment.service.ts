@@ -14,6 +14,22 @@ export class CommentService {
     }
 
     getById(id: number): Observable<CommentModel> {
-        return this.http.get<CommentModel>(`${environment.apiUrl}/comment` + id)
+        return this.http.get<CommentModel>(`${environment.apiUrl}/comment/` + id)
+    }
+
+    deleteById(id: number): Observable<any> {
+        return this.http.delete(`${environment.apiUrl}/comment/` + id)
+    }
+
+    postComment(body: any): Observable<any> {
+        return this.http.post(`${environment.apiUrl}/comment`, body)
+    }
+
+    likeComment(id: number): Observable<any>{
+        return this.http.patch(`${environment.apiUrl}/comment/like/` + id, null, {responseType: 'text'})
+    }
+
+    dislikeComment(id: number): Observable<any>{
+        return this.http.patch(`${environment.apiUrl}/comment/dislike/` + id, null, {responseType: 'text'})
     }
 }

@@ -25,38 +25,118 @@
     flex-direction: row;
 
     align-items: center;
-    justify-content: space-around;
     flex-wrap: wrap;
 
-    margin-bottom: 6rem;
 
     gap: 3rem;
+    background-color: white;
+    padding: 1rem 5rem;
+    box-shadow: $hb-box-shadow;
+    border-radius: 2rem;
 
 }
 
 .known-name {
     color: $hb-dark-green;
     text-align: left;
+    flex: 1;
+}
+
+hr {
+    width: 100%;
+    border: none;
+    height: 1px;
+    color: #3333333e;
+    background-color: #3333333e;
+    margin: 0;
+}
+
+
+.known-name-img hr {
+    width: 100%;
+    border: none;
+    height: 1px;
+    color: #3333333e;
+    background-color: #3333333e;
+    margin-block: 1rem 2rem;
+
 }
 
 
 
 .name-common {
-    font-size: clamp(2rem, 10vw, 5rem);
-    margin-bottom: 1.5rem;
+    font-size: clamp(1.5rem, 5vw, 3rem);
     font-weight: 700;
 }
 
 .name-latin {
-    font-size: clamp(1rem, 5vw, 2rem);
+    font-size: clamp(1rem, 2.5vw, 1.5rem);
     color: $hb-light-green;
+    margin-top: 1rem;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    gap: 3rem;
+    width: 30%;
+}
+
+.save-btn {
+    border: none;
+    color: $hb-dark-green;
+    background-color: transparent;
+    font-size: 2rem;
+}
+
+
+
+
+
+.kbug-img-cont {
+    width: 20rem;
+    height: 20rem;
+    position: relative;
+    align-self: center;
+    margin-block: 5rem;
+    display: inline-block;
+}
+
+.kbug-imgs {
+    display: block;
+    margin: auto;
+    height: 100%;
+    width: 100%;
+    object-fit: cover;
+    border-radius: 2rem;
 
 }
 
-.known-img {
-    width: 50rem;
-    border-radius: 3rem;
 
+.next-img,
+.prev-img {
+    border: none;
+    color: white;
+    background-color: rgba(24, 24, 24, 0.781);
+    border-radius: 0.2rem;
+    padding: 0.5rem;
+    position: absolute;
+    transform: translateY(-50%);
+    cursor: pointer;
+}
+
+.next-img:hover,
+.prev-img:hover {
+    background-color: rgb(0, 0, 0);
+
+}
+
+.next-img {
+    top: 50%;
+    right: 3%;
+}
+
+.prev-img {
+    top: 50%;
+    left: 3%;
 }
 
 .map-title {
@@ -89,7 +169,7 @@
 }
 
 .location-habitat {
-    background-color: $hb-yellow;
+    background-color: white;
     padding: 2rem;
     border-radius: 2rem;
     box-shadow: $hb-box-shadow;
@@ -101,6 +181,11 @@
     flex-direction: column;
     gap: 1rem;
 
+}
+
+.save-btn:hover ng-icon{
+    color: $hb-light-green;
+    cursor: pointer;
 }
 
 .habitat-title {
@@ -118,7 +203,7 @@
     padding: 2rem;
     border-radius: 2rem;
     box-shadow: $hb-box-shadow;
-    width: fit-content;
+    width: 30%;
     height: fit-content;
 
     color: $hb-dark-green;
@@ -150,11 +235,11 @@
 }
 
 .info-visual {
-    background-color: $hb-yellow;
+    background-color: white;
     padding: 2rem;
     border-radius: 2rem;
     box-shadow: $hb-box-shadow;
-    width: fit-content;
+    width: 30%;
     height: fit-content;
 
     color: $hb-dark-green;
@@ -193,12 +278,12 @@
 
 .info-important {
     padding: 2rem;
-    background-image: linear-gradient($hb-light-green -40%, $hb-dark-green 100%);
-    color: white;
+    background-color: white;
+    color: $hb-dark-green;
     border-radius: 2rem;
     box-shadow: $hb-box-shadow;
 
-    width: fit-content;
+    width: 30%;
     height: fit-content;
     display: flex;
     flex-direction: column;
@@ -300,15 +385,20 @@
         text-align: center;
     }
 
-    .known-name-img{
+    .known-name-img {
         margin-top: 3rem;
+        flex-direction: column;
+        align-items: center;
+        padding: 5rem 1rem;
+        border-radius: 0;
     }
 
 
-    #location-map{
+    #location-map {
         width: 100%;
     }
-    .known-img{
+
+    .known-img {
         width: 100%;
         border-radius: 0;
     }
@@ -318,7 +408,7 @@
         gap: 1rem;
     }
 
-    .info-cont{
+    .info-cont {
         gap: 2rem;
     }
 
@@ -329,6 +419,51 @@
     .location-habitat {
         width: 100%;
         border-radius: 0;
+    }
+
+    .kbug-img-cont {
+        width: 80%;
+        height: 80%;
+        position: relative;
+        align-self: center;
+        margin: 0;
+        display: inline-block;
+    }
+
+    .kbug-imgs {
+        display: block;
+        margin: auto;
+        height: 100%;
+        width: 100%;
+        object-fit: cover;
+    }
+
+    .next-img,
+    .prev-img {
+        border: none;
+        color: white;
+        background-color: rgba(24, 24, 24, 0.781);
+        border-radius: 0.2rem;
+        padding: 0.5rem;
+        position: absolute;
+        transform: translateY(-50%);
+        cursor: pointer;
+    }
+
+    .next-img:hover,
+    .prev-img:hover {
+        background-color: rgb(0, 0, 0);
+
+    }
+
+    .next-img {
+        top: 50%;
+        right: 3%;
+    }
+
+    .prev-img {
+        top: 50%;
+        left: 3%;
     }
 
 

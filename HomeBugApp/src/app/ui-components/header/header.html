@@ -5,6 +5,7 @@
     </button>
     <div class="hb-header-links-container">
       <button routerLink="search">Search</button>
+      <button routerLink="encyclopedia">BugMap</button>
       <button routerLink="encyclopedia">Encyclopedia</button>
     </div>
     <div class="hb-auth">
@@ -38,6 +39,7 @@
 
     @if (loggedIn) {
     <button routerLink="profile" (click)="closeMenu()">Profile</button>
+    <button routerLink="profile" (click)="closeMenu()">BugMap</button>
     <button routerLink="/" (click)="closeMenu(); handleLogout()">Logout</button>
     } @else {
     <button routerLink="login" (click)="closeMenu()">Login</button>

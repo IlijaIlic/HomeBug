@@ -10,9 +10,16 @@ import { TypeOrmModule } from '@nestjs/typeorm';
 import { UserModule } from './user/user.module';
 import { AuthModule } from './auth/auth.module';
 import { ConfigModule } from '@nestjs/config';
+import { ServeStaticModule } from '@modules/@nestjs/serve-static';
+import { join } from 'path';
+import { RatingModule } from './rating/rating.module';
 
 @Module({
   imports: [
+    ServeStaticModule.forRoot({
+      rootPath: join(__dirname, '..', 'uploads'),
+      serveRoot: '/uploads'
+    }),
     ConfigModule.forRoot({ isGlobal: true }),
     TypeOrmModule.forRoot({
       type: 'postgres',
@@ -23,7 +30,7 @@ import { ConfigModule } from '@nestjs/config';
       database: 'bugdb',
       entities: [__dirname + '/**/*.entity{.ts,.js}'],
       synchronize: true,
-    }), UserModule, KnownBugModule, UnknownBugModule, RegionModule, TaxonomyModule, CommentModule, AuthModule],
+    }), UserModule, KnownBugModule, UnknownBugModule, RegionModule, TaxonomyModule, CommentModule, AuthModule, RatingModule],
   controllers: [AppController],
   providers: [AppService],
 })

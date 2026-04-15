@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { InputField } from "../ui-components/input-field/input-field";
 import { Router, RouterModule } from '@angular/router';
 import { AuthService } from '../auth/auth.service';
@@ -10,7 +10,7 @@ import { FormsModule } from '@angular/forms';
   templateUrl: './login.html',
   styleUrl: '../login/login.scss'
 })
-export class Login {
+export class Login implements OnInit{
 
   loginData = {
     email: "",
@@ -19,12 +19,20 @@ export class Login {
 
   constructor(public authService: AuthService, private router: Router) { }
 
-  handleLogin(){
+  ngOnInit(): void {
+    if(this.authService.isLoggedIn()){
+      this.router.navigate(['/'])
+    }
+  }
+
+  handleLogin() {
     this.authService.login(this.loginData.email, this.loginData.password).subscribe({
-      next: (res) => console.log('Login uspešan', res),
+      next: (res) => {
+        console.log('Login uspešan', res)
+        window.location.reload()
+      },
       error: (err) => console.error('Login greška', err)
     })
-    this.router.navigate(["/"])
 
   }
 }

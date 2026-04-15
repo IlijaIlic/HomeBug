@@ -2,6 +2,7 @@ import { Component, input, Input } from '@angular/core';
 import { NgIcon } from '@ng-icons/core';
 import { UnknownBugModel } from '../../../models/unknown-bug.model';
 import { CommonModule } from '@angular/common';
+import { KnownBugModel } from '../../../models/known-bug.model';
 
 @Component({
   selector: 'app-unknown-bug-image',
@@ -13,6 +14,9 @@ export class UnknownBugImage {
 
   @Input() size = 15;
   @Input() country_show = true;
-  @Input() bug!: UnknownBugModel;
+  @Input() unknown = true;
+  @Input() bug?: UnknownBugModel;
+  @Input() kbug?: KnownBugModel;
 
+  public apirul = "http://localhost:3000/"
 }

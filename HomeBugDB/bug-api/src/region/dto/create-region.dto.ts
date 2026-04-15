@@ -7,5 +7,5 @@ export class CreateRegionDto {
     name: string;
 
     @IsArray()
-    coord: number[];
+    coord: number[][];
 }

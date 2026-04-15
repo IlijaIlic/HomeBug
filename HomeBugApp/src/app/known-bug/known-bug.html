@@ -1,138 +1,120 @@
 <div class="hb-knownbug-page">
-    
+
     <div class="known-cont">
         <div class="known-name-img">
+
+            <div class="kbug-img-cont">
+                <img class="kbug-imgs" [src]="apiUrl + this.bug.picture_urls[index]" alt="test img" />
+                <button class="next-img" (click)="nextImage()"><ng-icon name="featherArrowRight"></ng-icon></button>
+                <button class="prev-img" (click)="prevImage()"><ng-icon name="featherArrowLeft"></ng-icon></button>
+            </div>
             <div class="known-name">
                 <div class="name-common">
-                    Ladybug
+                    Ladybug <span><button class="save-btn" (click)="handleSave()">
+                            @if(!saved){
+                            <ng-icon name="featherBookmark"></ng-icon>
+                            }
+                            @if(saved){
+                                <ng-icon name="featherXCircle"></ng-icon>
+                            }
+                        </button></span>
+                </div>
+                <hr>
+                <div class="name-latin">
+                    Species: <span style="font-style: italic;">{{this.bug.common_name}}</span>
                 </div>
                 <div class="name-latin">
-                    Coccinella septempunctata
+                    Genus: <span style="font-style: italic;">{{this.bug.common_name}} </span>
+                </div>
+                <div class="name-latin">
+                    Familiy: <span style="font-style: italic;">{{this.bug.common_name}}</span>
+                </div>
+                <div class="name-latin">
+                    Order: <span style="font-style: italic;">{{this.bug.common_name}}</span>
+                </div>
+                <div class="name-latin">
+                    Class: <span style="font-style: italic;">{{this.bug.common_name}}</span>
                 </div>
             </div>
-            <img class="known-img" src="../../assets/ladybug.jpg" alt="bugimg" />
         </div>
         <div class="known-location">
             <div class="map-title">This insect can be found in the following regions</div>
             <div id="location-map"></div>
         </div>
         <div class="known-info">
+
+            <div class="info-important">
+                <div class="important-title">Quick facts</div>
+                <hr>
+                <div class="important-cont">
+                    <div class="important-item">
+                        <div class="item-name">Diet:</div>
+                        <div class="item-data">{{this.bug.diet}}</div>
+                    </div>
+                    <div class="important-item">
+                        <div class="item-name">Danger to humans:</div>
+                        <div class="item-data">{{this.bug.danger_to_humans === true ? "✅ Yes" : "❌ No"}}</div>
+                    </div>
+                    <div class="important-item">
+                        <div class="item-name">Behaviour:</div>
+                        <div class="item-data">{{this.bug.behaviour}}</div>
+                    </div>
+                    <div class="important-item">
+                        <div class="item-name">Venom:</div>
+                        <div class="item-data">{{this.bug.venomous === true ? "✅ Yes" : "❌ No"}}</div>
+                    </div>
+                    <div class="important-item">
+                        <div class="item-name">Bites:</div>
+                        <div class="item-data">{{this.bug.bites === true ? "✅ Yes" : "❌ No"}}</div>
+                    </div>
+                    <div class="important-item">
+                        <div class="item-name">Stings:</div>
+                        <div class="item-data">{{this.bug.stings === true ? "✅ Yes" : "❌ No"}}</div>
+                    </div>
+
+                </div>
+
+            </div>
             <div class="location-habitat">
                 <div class="habitat-title">Prefered habitats</div>
+                <hr>
+                @for (hab of bug.habitats; track $index) {
                 <div class="habitat-info">{{habitats["agro"]}}</div>
-                <div class="habitat-info">{{habitats["wet"]}}</div>
-                <div class="habitat-info">{{habitats["forest"]}}</div>
-            </div>
-            <div class="info-taxonomy">
-                <div class="taxonomy-title">Taxonomy</div>
-                <div class="taxonomy-item">
-                    <div>
-                        Species:
-                    </div>
-                    <div class="item-link">
-                        Coccinella septempunctata
-                    </div>
-                </div>
-                <div class="taxonomy-item">
-                    <div>
-                        Genus:
-                    </div>
-                    <div class="item-link">
-                        Coccinella
-                    </div>
-                </div>
-                <div class="taxonomy-item">
-                    <div>
-                        Family:
-                    </div>
-                    <div class="item-link">
-                        Coccinellidae
-                    </div>
-                </div>
-                <div class="taxonomy-item">
-                    <div>
-                        Order:
-                    </div>
-                    <div class="item-link">
-                        Coleoptera
-                    </div>
-                </div>
-                <div class="taxonomy-item">
-                    <div>
-                        Class:
-                    </div>
-                    <div class="item-link">
-                        Insecta
-                    </div>
-                </div>
+                }
             </div>
             <div class="info-visual">
                 <div class="visual-title">Visual Characteristics</div>
+                <hr>
                 <div class="visual-cont">
                     <div class="visual-item">
                         <div>Number of legs:</div>
-                        <div class="item-link">8</div>
+                        <div class="item-link">{{this.bug.no_legs}}</div>
                     </div>
                     <div class="visual-item">
                         <div>Body Type:</div>
-                        <div class="item-link">Oval</div>
+                        <div class="item-link">{{this.bug.body_type}}</div>
                     </div>
                     <div class="visual-item">
                         <div>Color:</div>
-                        <div class="item-link">Black, red and purple</div>
+                        <div class="item-link">{{this.bug.color}}</div>
                     </div>
                     <div class="visual-item">
                         <div>Size:</div>
-                        <div class="item-link">Small</div>
+                        <div class="item-link">{{this.bug.size}}</div>
                     </div>
                     <div class="visual-item">
                         <div>Wings:</div>
-                        <div class="item-link">No</div>
+                        <div class="item-link">{{this.bug.wings === true ? "✅ Yes" : "❌ No"}}</div>
                     </div>
                 </div>
             </div>
         </div>
         <div class="info-cont">
-            <div class="info-important">
-                <div class="important-title">Quick facts</div>
-                <div class="important-cont">
-                    <div class="important-item">
-                        <div class="item-name">Diet:</div>
-                        <div class="item-data">Plants</div>
-                    </div>
-                    <div class="important-item">
-                        <div class="item-name">Danger to humans:</div>
-                        <div class="item-data">✔ Safe</div>
-                    </div>
-                    <div class="important-item">
-                        <div class="item-name">Behaviour:</div>
-                        <div class="item-data">Passive</div>
-                    </div>
-                    <div class="important-item">
-                        <div class="item-name">Venom:</div>
-                        <div class="item-data">❌ No</div>
-                    </div>
-                    <div class="important-item">
-                        <div class="item-name">Bites:</div>
-                        <div class="item-data">❌ No</div>
-                    </div>
-                    <div class="important-item">
-                        <div class="item-name">Stings:</div>
-                        <div class="item-data">❌ No</div>
-                    </div>
 
-                </div>
-
-            </div>
             <div class="info-overview">
                 <div class="overview-item">
                     <div class="important-title">Overview:</div>
-                    <div class="overview-data">Lorem ipsum dolor sit amet consectetur adipisicing elit. Impedit esse eius
-                        blanditiis repellendus ipsam accusamus iusto porro dolores, sed quo provident odio explicabo
-                        voluptatum. Recusandae asperiores quo doloremque accusamus deserunt minima? Debitis dicta
-                        obcaecati
-                        sunt a repudiandae rerum delectus expedita cumque? Iste aperiam, ad laudantium obcaecati quis
-                        numquam facilis tenetur?</div>
+                    <div class="overview-data">{{this.bug.overview}}</div>
                 </div>
             </div>
         </div>

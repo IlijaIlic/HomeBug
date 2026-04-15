@@ -36,7 +36,7 @@ export const routes: Routes = [
         component: Encyclopedia
     },
     {
-        path: 'encyclopedia/known',
+        path: 'encyclopedia/known/:id',
         component: KnownBug
     },
     {

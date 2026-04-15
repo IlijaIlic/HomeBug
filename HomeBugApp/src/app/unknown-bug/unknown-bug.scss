@@ -38,6 +38,8 @@ svg {
 }
 
 
+
+
 .unknown-bug-text {
     min-width: 60rem;
     flex: 1;
@@ -91,14 +93,47 @@ svg {
 
 }
 
+.flex {
+    display: flex;
+    flex-direction: row;
+    gap: 1rem;
+}
+
+.user-popup {
+    display: none;
+    position: absolute;
+    cursor: none;
+    width: fit-content;
+    height: fit-content;
+    background-color: white;
+    border: 2px solid $hb-light-green;
+    box-shadow: $hb-box-shadow;
+    left: 50%;
+    transform: translate(-50%, -120%);
+     flex-direction: row;
+    align-items: center;
+    gap: 1rem;
+    padding: 1rem;
+    z-index: 100;
+    font-size: 1rem;
+    
+}
+
+
+.username-span:hover .user-popup {
+    display: flex;
+   
+    top: 0%;
+}
+
 .unknown-comment-flag {
     width: clamp(2rem, 6vw, 5rem);
 }
 
-.unknown-username span {
+.username-span {
     color: $hb-light-green;
     text-decoration: underline;
-
+    position: relative;
     cursor: pointer;
 }
 
@@ -200,7 +235,7 @@ svg {
     }
 
     .unknown-bug-text {
-        min-width: 0 ;
+        min-width: 0;
         max-width: 100%;
         border-radius: 0;
         padding-inline: 2rem;

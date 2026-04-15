@@ -7,7 +7,7 @@ export class Taxonomy {
     id: number;
 
     @Column()
-    class: string;
+    taxonomyClass: string;
     
     @Column()
     order: string;

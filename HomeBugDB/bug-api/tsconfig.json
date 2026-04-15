@@ -13,13 +13,23 @@
     "target": "ES2023",
     "sourceMap": true,
     "outDir": "./dist",
-    "baseUrl": "./",
+    "paths": {
+      "@auth/*": ["./src/auth/*"],
+      "@comment/*": ["./src/comment/*"],
+      "@known-bug/*": ["./src/known-bug/*"],
+      "@region/*": ["./src/region/*"],
+      "@taxonomy/*": ["./src/taxonomy/*"],
+      "@user/*": ["./src/user/*"],
+      "@unknown-bug/*": ["./src/unknown-bug/*"],
+      "@modules/*": ["./node_modules/*"],
+    },
     "incremental": true,
     "skipLibCheck": true,
     "strictNullChecks": true,
     "forceConsistentCasingInFileNames": true,
     "noImplicitAny": false,
     "strictBindCallApply": false,
-    "noFallthroughCasesInSwitch": false
-  }
+    "noFallthroughCasesInSwitch": false,
+    "strictPropertyInitialization": false
+  },
 }

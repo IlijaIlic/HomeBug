@@ -103,12 +103,15 @@
 .anf-img-cont {
     position: relative;
     display: inline-block;
+    width: 25rem;
+    
 }
 
 .anf-img {
     display: block;
     max-width: 100%;
     border-radius: 1rem;
+    margin: auto;
 }
 
 .anf-img-btn {

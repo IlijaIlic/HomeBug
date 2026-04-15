@@ -49,11 +49,11 @@
 
             <div class="hb-flex-row hb-margintop">
 
-                <button type="button" class="gender-button">
+                <button type="button" class="gender-button" (click)="this.userData.gender='female'" [class.active]="this.userData.gender === 'female'">
                     <img src="../../assets/profileavatarfemale.png" alt="female avatar" />
                 </button>
 
-                <button type="button" class="gender-button">
+                <button type="button" class="gender-button" (click)="this.userData.gender='male'" [class.active]="this.userData.gender === 'male'">
                     <img src="../../assets/profileavatarmale.png" alt="male avatar" />
                 </button>
             </div> 

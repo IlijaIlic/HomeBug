@@ -1,19 +1,19 @@
 <div class="comment">
     <div class="rate-section">
-        <button><ng-icon class="icon-up" name="featherArrowUp" size="1.5rem"></ng-icon></button>
-        <div class="rate-points">97</div>
-        <button><ng-icon class="icon-down" name="featherArrowDown" size="1.5rem"></ng-icon></button>
+        <button (click)="handleLike()" [disabled]="this.disabled"><ng-icon class="icon-up" [class.active]="this.liked" name="featherArrowUp" size="1.5rem"></ng-icon></button>
+        <div class="rate-points">{{this.comment.rating}}</div>
+        <button (click)="handleDislike()"  [disabled]="this.disabled"><ng-icon class="icon-down" [class.active]="this.disliked" name="featherArrowDown" size="1.5rem"></ng-icon></button>
     </div>
     <div>
 
         <div class="username">
 
-            <div>Pera</div>
-            <div class="user-rating">Web of Confusion</div>
+            <div>{{this.comment.user.name}}</div>
+            <div class="user-rating">{{this.reputations[userReputation]}}</div>
         </div>
         <hr>
         <div class="comment-text">
-            I think it's <span class="bug-link">[Bee]</span> but I'm not so sure
+            {{this.comment.text}}
         </div>
     </div>
 </div>

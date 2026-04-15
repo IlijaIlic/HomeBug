@@ -1,6 +1,6 @@
-import { Comment } from "src/comment/entities/comment.entity";
-import { KnownBug } from "src/known-bug/entities/known-bug.entity";
-import { UnknownBug } from "src/unknown-bug/entities/unknown-bug.entity";
+import { Comment } from "@comment/entities/comment.entity";
+import { KnownBug } from "@known-bug/entities/known-bug.entity";
+import { UnknownBug } from "@unknown-bug/entities/unknown-bug.entity";
 import { Column, Entity, JoinTable, ManyToMany, OneToMany, PrimaryGeneratedColumn } from "typeorm";
 
 @Entity()

@@ -3,10 +3,14 @@ import { CommentService } from './comment.service';
 import { CommentController } from './comment.controller';
 import { TypeOrmModule } from '@nestjs/typeorm';
 import { Comment } from './entities/comment.entity';
-import { UnknownBug } from 'src/unknown-bug/entities/unknown-bug.entity';
+import { UnknownBug } from '@unknown-bug/entities/unknown-bug.entity';
+import { Rating } from '../rating/entities/rating.entity';
+import { User } from '@user/entities/user.entity';
 
 @Module({
-  imports: [TypeOrmModule.forFeature([Comment]), TypeOrmModule.forFeature([UnknownBug])],
+  imports: [
+    TypeOrmModule.forFeature([Comment, UnknownBug, Rating, User])
+  ],
   controllers: [CommentController],
   providers: [CommentService],
 })
