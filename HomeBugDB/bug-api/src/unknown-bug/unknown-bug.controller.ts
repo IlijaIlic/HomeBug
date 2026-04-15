@@ -23,6 +23,7 @@ export class UnknownBugController {
       color: createUnknownBugDto.color,
       size: createUnknownBugDto.size,
       wings: createUnknownBugDto.wings === 'true',   
+      countryCode: createUnknownBugDto.countryCode,
       legs: Number(createUnknownBugDto.legs),       
     };
 

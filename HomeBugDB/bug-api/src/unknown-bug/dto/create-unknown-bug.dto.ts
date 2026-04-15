@@ -24,4 +24,8 @@ export class CreateUnknownBugDto {
     @IsNumber()
     @IsNotEmpty()
     legs: number;
+
+    @IsString()
+    @IsNotEmpty()
+    countryCode: string;
 }

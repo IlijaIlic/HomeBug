@@ -33,6 +33,7 @@ export class UnknownBugService {
       size: createUnknownBugDto.size,
       wings: createUnknownBugDto.wings,
       legs: createUnknownBugDto.legs,
+      countryCode: createUnknownBugDto.countryCode,
       user: user
     });
 

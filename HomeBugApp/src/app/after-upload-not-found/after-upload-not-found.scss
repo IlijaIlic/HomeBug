@@ -15,6 +15,47 @@
     flex-wrap: wrap;
 }
 
+.country-input-cont {
+    font-family: "Josefin Sans", sans-serif;
+    position: relative;
+    width: 20rem;
+    height: 3.5rem;
+    padding: 0;
+    margin: clamp(0rem, 1vw, 1rem);
+
+
+}
+
+.country-p {
+    width: fit-content;
+    margin: 0;
+    font-size: clamp(0.3rem, 4vw, 1.5rem);
+    position: absolute;
+    top: 0;
+}
+
+
+.country-input {
+    font-family: "Josefin Sans", sans-serif;
+    width: 90%;
+    height: 1.5rem;
+    font-size: 1rem;
+    border: none;
+    border-bottom-width: 1px;
+    border-bottom-style: solid;
+    border-bottom-color: black;
+    margin-top: 2px;
+    position: absolute;
+    bottom: 0;
+}
+
+.country-input:focus {
+    outline: none;
+    border-bottom-width: 3px;
+    border-bottom-color: $hb-light-green;
+    color: $hb-light-green;
+}
+
 .anf-form {
     padding: 2rem;
     border: 3px solid $hb-highlight-green;
@@ -104,7 +145,7 @@
     position: relative;
     display: inline-block;
     width: 25rem;
-    
+
 }
 
 .anf-img {

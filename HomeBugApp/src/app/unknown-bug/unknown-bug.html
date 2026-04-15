@@ -13,9 +13,9 @@
                             <div>{{this.bug?.user?.surname}}</div>
                             <span>Reputation:{{this.bug?.user?.reputation}}</span>
                         </div>
-                    </div> said:
+                    </div> said
                 </div>
-                <img class="unknown-comment-flag" [src]="'https://flagcdn.com/' + countryCode + '.svg'"
+                <img class="unknown-comment-flag" [src]="'https://flagcdn.com/' + this.bug?.countryCode + '.svg'"
                     alt="countryCode" />
 
             </div>

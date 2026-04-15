@@ -11,4 +11,5 @@ export interface UnknownBugModel {
     legs: number;
     comments: CommentModel[];
     user: UserModel | null;
+    countryCode: string;
 }

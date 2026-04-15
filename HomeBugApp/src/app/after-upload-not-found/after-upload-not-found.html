@@ -15,7 +15,17 @@
             <app-input-field label="Color" placeholder="Black, brown, red,..." width="20rem"
                 [(value)]="uBugData.color" />
             <app-input-field label="Size" placeholder="Smaller than an ant" width="20rem" [(value)]="uBugData.size" />
-            <app-input-field label="Country" placeholder="Serbia, Austria, Japan,..." width="20rem" />
+            <div class="country-input-cont">
+                <p class="country-p">Country</p>
+                <input class="country-input" list="cntrs" (change)="validateCountry($event)" placeholder="Serbia" />
+            </div>
+
+            <datalist id="cntrs">
+                @for (country of this.countries; track $index) {
+                <option [value]="country.name"></option>
+                }
+            </datalist>
+
             <div class="anf-radio-cont">
                 <div class="anf-radio">
                     <label>Has wings</label>

@@ -34,6 +34,8 @@ export class UnknownBug {
     @OneToMany(() => Comment, comment => comment.ubug)
     comments: Comment[];
 
+    @Column()
+    countryCode: string;
 
 
 }
