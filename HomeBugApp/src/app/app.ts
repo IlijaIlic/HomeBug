@@ -22,11 +22,11 @@ export class App {
       .pipe(filter(event => event instanceof NavigationEnd))
       .subscribe(() => {
 
-        if (this, router.url === '/register' || router.url === "/login") {
+        if (this, router.url === '/register' || router.url === "/login" || router.url === '/bugmap') {
           this.showHeader = false
         } else {
           this.showHeader = true
-          if (this, router.url === '/profile' || router.url === "/encyclopedia" ||  router.url.startsWith("/encyclopedia/known/" )|| router.url.startsWith("/search/unknown/" ) || router.url === "/search/uploaded" || router.url === "/contact" || router.url === "/search/notfound") {
+          if (this, router.url === '/profile'  || router.url === "/encyclopedia" ||  router.url.startsWith("/encyclopedia/known/" )|| router.url.startsWith("/search/unknown/" ) || router.url === "/search/uploaded" || router.url === "/contact" || router.url === "/search/notfound") {
             this.showWave = true;
           } else {
             this.showWave = false;

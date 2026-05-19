@@ -11,6 +11,7 @@ import { CommentService } from '../../services/comment.service';
 import { CommonModule } from '@angular/common';
 import { RegionModel } from '../../models/region.model';
 import { NgIcon } from '@ng-icons/core';
+import { HabitatsService } from '../../services/habitats.service';
 
 @Component({
   selector: 'app-admin',
@@ -27,6 +28,7 @@ export class Admin {
     private userService: UserService,
     private kbugService: KnownBugService,
     private commService: CommentService,
+    public habitatService: HabitatsService
   ) { }
 
   previewUrl: string | ArrayBuffer | null = null;
@@ -156,7 +158,7 @@ export class Admin {
 
     this.kbugService.getAll().subscribe({
       next: (response) => {
-        this.kbugs = response;
+        this.kbugs = response[0];
         console.log(response)
       },
       error: (response) => console.log(response)

@@ -33,6 +33,7 @@ export class CommentService {
       rating: 0,
       user: { id: userID }
     });
+
     return this.comRepo.save(com);
   }
 
@@ -53,7 +54,7 @@ export class CommentService {
     return `This action updates a ${id} comment`;
   }
 
-  async remove(id: number, userId: number) {
+  async remove(id: number) {
     const com = await this.findOne(id);
 
     if (com) {

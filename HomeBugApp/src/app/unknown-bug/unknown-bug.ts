@@ -2,10 +2,11 @@ import { Component, OnInit } from '@angular/core';
 import { Comment } from '../ui-components/comment/comment';
 import { UnknownBugModel } from '../../models/unknown-bug.model';
 import { UnknownBugService } from '../../services/unknown-bug.service';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { CommentService } from '../../services/comment.service';
+import { AuthService } from '../auth/auth.service';
 
 type ReputationKey = -2 | -1 | 0 | 1 | 2;
 
@@ -20,6 +21,7 @@ export class UnknownBug implements OnInit {
   bug?: UnknownBugModel;
   countryCode = 'rs';
   commentText = ""
+  userOwns: boolean = false
   public apirul = "http://localhost:3000/"
 
   reputations: Record<ReputationKey, string> = {
@@ -31,11 +33,12 @@ export class UnknownBug implements OnInit {
   }
   userReputation: ReputationKey = -1;
 
-
   constructor(
     private ubugService: UnknownBugService,
     private route: ActivatedRoute,
     private commentService: CommentService,
+    private authService: AuthService,
+    private router: Router
   ) { }
 
   ngOnInit(): void {
@@ -44,26 +47,32 @@ export class UnknownBug implements OnInit {
       this.ubugService.getById(id).subscribe({
         next: (response) => {
           this.bug = response;
+          this.bug.comments = this.bug!.comments.sort((a, b) => b.rating - a.rating)
+          if (this.bug.user?.id == this.authService.currentUserSubject.value.sub) {
+            console.log("MOJ UBUG")
+            this.userOwns = true
+          }
           switch (true) {
             case (this.bug?.user!.reputation < -200):
               this.userReputation = -2;
               break;
-            case (this.bug?.user!.reputation>= -200 && this.bug?.user!.reputation< -100):
+            case (this.bug?.user!.reputation >= -200 && this.bug?.user!.reputation <= -50):
               this.userReputation = -1;
               break;
-            case (this.bug?.user!.reputation> -50 && this.bug?.user!.reputation<= 50):
+            case (this.bug?.user!.reputation > -50 && this.bug?.user!.reputation <= 50):
               this.userReputation = 0;
               break;
-            case (this.bug?.user!.reputation> 50 && this.bug?.user!.reputation<= 200):
+            case (this.bug?.user!.reputation > 50 && this.bug?.user!.reputation <= 200):
               this.userReputation = 1;
               break;
-            case (this.bug?.user!.reputation> 200):
+            case (this.bug?.user!.reputation > 200):
               this.userReputation = 2;
               break;
           }
         },
         error: (response) => console.log(response)
       })
+
     }
   }
 
@@ -73,7 +82,6 @@ export class UnknownBug implements OnInit {
       ubugId: this.bug?.id
     }
 
-
     this.commentService.postComment(com).subscribe({
       next: (response) => {
         this.bug?.comments.push(response)
@@ -81,9 +89,25 @@ export class UnknownBug implements OnInit {
       },
       error: (response) => console.log(response)
     })
-
-
-
   }
 
+  removeComment(id: number) {
+    if (!this.bug) return;
+    const index = this.bug.comments.findIndex(c => c.id === id);
+    if (index !== -1) {
+      this.bug.comments.splice(index, 1);
+    }
+  }
+
+  handleCorrect(userId: number) {
+    if (this.bug) {
+      this.ubugService.foundCorrect(this.bug!.id, userId).subscribe({
+        next: (response) => {
+          console.log(response)
+          this.router.navigate(['/search'])
+        },
+        error: (response) => console.log(response)
+      })
+    }
+  }
 }

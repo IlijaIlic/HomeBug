@@ -37,5 +37,9 @@ export class UnknownBug {
     @Column()
     countryCode: string;
 
+    @Column()
+    dateCreated: Date;
 
+    @Column()
+    found: boolean
 }

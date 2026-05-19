@@ -1,4 +1,4 @@
-import { IsBoolean, IsNotEmpty, IsNumber, IsString } from "class-validator";
+import { IsBoolean, IsDate, IsNotEmpty, IsNumber, IsString } from "class-validator";
 
 export class CreateUnknownBugDto {
 
@@ -28,4 +28,8 @@ export class CreateUnknownBugDto {
     @IsString()
     @IsNotEmpty()
     countryCode: string;
+
+    @IsDate()
+    @IsNotEmpty()
+    dateCreated: Date
 }

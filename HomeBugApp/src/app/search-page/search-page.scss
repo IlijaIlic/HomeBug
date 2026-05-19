@@ -21,9 +21,14 @@
 
     display: flex;
     flex-direction: row;
-    justify-content: space-around;
+    justify-content: space-between;
     gap: 2rem;
 
+}
+
+.unknown-comment-flag {
+    width: clamp(2rem, 6vw, 3rem);
+    margin-left: 1rem;
 }
 
 .img-cont {
@@ -68,7 +73,6 @@
 
 
 .hb-search-unknown {
-    margin-bottom: 15rem;
 
     display: flex;
     flex-direction: row;
@@ -99,17 +103,65 @@
     font-size: 2rem;
     font-weight: 600;
 
-    color: white;
-    background-color: $hb-light-green;
-    border-radius: 2rem;
+    min-width: 20rem;
+    max-width: 20rem;
 
-    width: fit-content;
+    color: $hb-light-green;
+    background-color: white;
+    border-radius: 2rem;
+    box-shadow: $hb-box-shadow;
+    border: 2px solid $hb-light-green;
+    outline: 2px solid white;
+
+}
+
+
+.filters-title {
+    font-size: 3rem;
+    color: $hb-dark-green;
+}
+
+.filter-regions-cont {
+    height: 8rem;
+    overflow-y: scroll;
+    margin-bottom: 1rem;
+}
+
+.filter-option {
+    width: 5rem;
+    border-bottom: 1px solid $hb-dark-green;
+    width: 90%;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    padding-block: 0.5rem;
+}
+
+.option-label {
+    font-size: 1rem;
+    margin-left: 1rem;
+}
+
+.filter-number-input {
+    font-family: $hb-main-font;
+    font-size: 1.5rem;
+    margin-bottom: 1rem;
+    width: 4rem;
+
+}
+
+.cb-cont {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    gap: 1rem;
 }
 
 .hb-applied-filters {
     width: 100%;
 
     font-size: 1.5rem;
+
 
     display: flex;
     flex-direction: row;
@@ -123,8 +175,89 @@
 .applied-results {
     display: flex;
     flex-direction: column;
+    width: 100%;
 }
 
+
+.filter-submit{
+    cursor: pointer;
+    border-radius: 1rem;
+    box-shadow: $hb-box-shadow;
+    font-size: 1.5rem;
+    font-family: $hb-main-font;
+    color: white;
+    background-color: $hb-light-green;
+    border: none;
+    width: 10rem;
+    height: 3rem;
+    align-self: flex-end;
+    margin-top: 2rem;
+}
+
+.filter-submit:hover{
+    background-color: $hb-highlight-green;
+}
+
+.loader {
+  width: 48px;
+  height: 48px;
+  border-radius: 50%;
+  display: inline-block;
+  position: relative;
+  border: 3px solid;
+  border-color: $hb-dark-green $hb-dark-green transparent;
+  box-sizing: border-box;
+  animation: rotation 1s linear infinite;
+  align-self: center;
+  margin-block: 2rem;
+}
+.loader::after {
+  content: '';  
+  box-sizing: border-box;
+  position: absolute;
+  left: 0;
+  right: 0;
+  top: 0;
+  bottom: 0;
+  margin: auto;
+  border: 3px solid;
+  border-color: transparent $hb-light-green $hb-light-green;
+  width: 24px;
+  height: 24px;
+  border-radius: 50%;
+  animation: rotationBack 0.5s linear infinite;
+  transform-origin: center center;
+}
+
+.nomore{
+    align-self: center;
+    margin-block: 2rem;
+}
+
+.country-fullname{
+    font-size: 1rem;
+    font-weight: 400;
+    margin-left: 1.5rem;
+}
+
+@keyframes rotation {
+  0% {
+    transform: rotate(0deg);
+  }
+  100% {
+    transform: rotate(360deg);
+  }
+} 
+    
+@keyframes rotationBack {
+  0% {
+    transform: rotate(0deg);
+  }
+  100% {
+    transform: rotate(-360deg);
+  }
+}
+    
 
 @media (max-width: 1200px) {
     .hb-search-cont {

@@ -7,6 +7,7 @@ import { Router } from '@angular/router';
 import { CommonModule } from '@angular/common';
 import { UnknownBugModel } from '../../models/unknown-bug.model';
 import { UnknownBugService } from '../../services/unknown-bug.service';
+import countriesData from '../../data/coords.json'
 
 
 @Component({
@@ -59,6 +60,7 @@ export class AfterUploadNotFound implements OnInit {
     formData.append('wings', String(this.uBugData.wings))
     formData.append('legs', String(this.uBugData.legs))
     formData.append('countryCode', String(this.uBugData.countryCode))
+    formData.append('dateCreated', new Date().toISOString())
 
 
     this.uBugService.post(formData).subscribe({
@@ -80,14 +82,11 @@ export class AfterUploadNotFound implements OnInit {
   }
 
   ngOnInit(): void {
-    this.http.get<any[]>('https://restcountries.com/v3.1/all?fields=cca2,name')
-      .subscribe(data => {
-        this.countries = data.map(c => ({
-          code: c.cca2,
-          name: c.name.common
-        }));
-      });
 
+    this.countries = Object.entries(countriesData).map(([code, data]) => ({
+      code,
+      name: data.name
+    }));
   }
 
   validateCountry(event: any) {
@@ -95,10 +94,10 @@ export class AfterUploadNotFound implements OnInit {
     const match = this.countries.find(c => c.name === value)
     if (!match) {
       this.badCountry = true;
-      this.uBugData.countryCode = "";   
+      this.uBugData.countryCode = "";
     } else {
       this.badCountry = false;
-      this.uBugData.countryCode = match.code.toLocaleLowerCase();  
+      this.uBugData.countryCode = match.code.toLocaleLowerCase();
     }
   }
 

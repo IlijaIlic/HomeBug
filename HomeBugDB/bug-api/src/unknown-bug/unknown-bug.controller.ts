@@ -1,10 +1,10 @@
-import { Controller, Get, Post, Body, Patch, Param, Delete, UseGuards, Req, UseInterceptors, UploadedFile } from '@nestjs/common';
+import { Controller, Get, Post, Body, Patch, Param, Delete, UseGuards, Req, UseInterceptors, UploadedFile, Query } from '@nestjs/common';
 import { UnknownBugService } from './unknown-bug.service';
 import { CreateUnknownBugDto } from './dto/create-unknown-bug.dto';
 import { UpdateUnknownBugDto } from './dto/update-unknown-bug.dto';
 import { JwtAuthGuard } from '@auth/jwt-auth.guard';
 import { FileInterceptor } from '@nestjs/platform-express';
-import type { Multer } from 'multer'
+import { UnkFilterDto } from './dto/filter-unknown-bug.dto';
 
 @Controller('unknown-bug')
 @UseGuards(JwtAuthGuard)
@@ -22,17 +22,18 @@ export class UnknownBugController {
       description: createUnknownBugDto.description,
       color: createUnknownBugDto.color,
       size: createUnknownBugDto.size,
-      wings: createUnknownBugDto.wings === 'true',   
+      wings: createUnknownBugDto.wings === 'true',
       countryCode: createUnknownBugDto.countryCode,
-      legs: Number(createUnknownBugDto.legs),       
+      legs: Number(createUnknownBugDto.legs),
+      dateCreated: new Date(createUnknownBugDto.dateCreated)
     };
 
     return this.unknownBugService.create(dto, userID, file);
   }
 
   @Get()
-  findAll() {
-    return this.unknownBugService.findAll();
+  findAll(@Query() filters: UnkFilterDto) {
+    return this.unknownBugService.findAll(filters);
   }
 
   @Get(':id')
@@ -48,5 +49,10 @@ export class UnknownBugController {
   @Delete(':id')
   remove(@Param('id') id: string) {
     return this.unknownBugService.remove(+id);
+  }
+
+  @Delete('correct/:id1/:id2')
+  correct(@Param('id1') ubugId: string, @Param('id2') userId: string) {
+    return this.unknownBugService.correct(+ubugId, +userId);
   }
 }

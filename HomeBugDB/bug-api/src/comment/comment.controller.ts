@@ -44,8 +44,7 @@ export class CommentController {
   }
 
   @Delete(':id')
-  remove(@Param('id') id: string, @Req() req:any) {
-    const userId = req.user.id
-    return this.commentService.remove(+id, userId);
+  remove(@Param('id') id: string) {
+    return this.commentService.remove(+id);
   }
 }

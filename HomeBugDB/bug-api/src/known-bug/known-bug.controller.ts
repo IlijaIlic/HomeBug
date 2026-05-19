@@ -1,8 +1,9 @@
-import { Controller, Get, Post, Body, Patch, Param, Delete, UseInterceptors, UploadedFiles } from '@nestjs/common';
+import { Controller, Get, Post, Body, Patch, Param, Delete, UseInterceptors, UploadedFiles, Query } from '@nestjs/common';
 import { KnownBugService } from './known-bug.service';
 import { CreateKnownBugDto } from './dto/create-known-bug.dto';
 import { UpdateKnownBugDto } from './dto/update-known-bug.dto';
 import { FilesInterceptor } from '@modules/@nestjs/platform-express';
+import { KnownFilterDto } from './dto/filter-known-bug.dto';
 
 @Controller('known-bug')
 export class KnownBugController {
@@ -46,8 +47,8 @@ export class KnownBugController {
   }
 
   @Get()
-  findAll() {
-    return this.knownBugService.findAll();
+  findAll(@Query() filters: KnownFilterDto) {
+    return this.knownBugService.findAll(filters);
   }
 
   @Get(':id')

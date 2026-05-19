@@ -315,10 +315,11 @@ hr {
 
 .info-overview {
     padding: 2rem;
-    background-image: linear-gradient($hb-light-green -40%, $hb-dark-green 100%);
-    color: white;
+    background-color: white;
+    color: $hb-dark-green;
     border-radius: 2rem;
     box-shadow: $hb-box-shadow;
+    border: 2px solid $hb-light-green ;
 
     width: 50%;
     height: fit-content;

@@ -5,6 +5,7 @@ import { InjectRepository } from '@nestjs/typeorm';
 import { KnownBug } from './entities/known-bug.entity';
 import { Repository } from 'typeorm';
 import { Taxonomy } from '@taxonomy/entities/taxonomy.entity';
+import { KnownFilterDto } from './dto/filter-known-bug.dto';
 
 @Injectable()
 export class KnownBugService {
@@ -46,10 +47,93 @@ export class KnownBugService {
     return this.knownBugRepo.save(kbug);
   }
 
-  async findAll() {
-    return this.knownBugRepo.find({
-      relations: ['regions', 'taxonomy'],
-    })
+  async findAll(filters: KnownFilterDto = {}) {
+
+    const page = filters.page ?? 1;
+    const limit = filters.limit ?? 20;
+    const skip = (page - 1) * limit;
+
+    const [insects, colors, bodyTypes, habitats, sizes, diets, behaviours, total] = await Promise.all([
+      (() => {
+        const qb = this.knownBugRepo
+          .createQueryBuilder('known-bug')
+          .leftJoinAndSelect('known-bug.regions', 'regions')
+          .leftJoinAndSelect('known-bug.taxonomy', 'taxonomy')
+          .skip(skip)
+          .take(limit);
+
+        if (filters.common_name) {
+          qb.andWhere('known-bug.common_name ILIKE :common_name', { common_name: `%${filters.common_name}%` });
+        }
+        if (filters.colors?.length) {
+          qb.andWhere('known-bug.color IN (:...colors)', { colors: filters.colors });
+        }
+        if (filters.bodyTypes?.length) {
+          qb.andWhere('known-bug.body_type IN (:...bodyTypes)', { bodyTypes: filters.bodyTypes });
+        }
+        if (filters.habitats?.length) {
+          qb.andWhere('"known-bug".habitats && ARRAY[:...habitats]', { habitats: filters.habitats });
+        }
+        if (filters.sizes?.length) {
+          qb.andWhere('known-bug.size IN (:...sizes)', { sizes: filters.sizes });
+        }
+        if (filters.diets?.length) {
+          qb.andWhere('known-bug.diet IN (:...diets)', { diets: filters.diets });
+        }
+        if (filters.behaviours?.length) {
+          qb.andWhere('known-bug.behaviour IN (:...behaviours)', { behaviours: filters.behaviours });
+        }
+        if (filters.dangerous !== undefined) {
+          qb.andWhere('known-bug.danger_to_humans = :dangerous', { dangerous: filters.dangerous });
+        }
+        if (filters.wings !== undefined) {
+          qb.andWhere('known-bug.wings = :wings', { wings: filters.wings });
+        }
+        if (filters.venomous !== undefined) {
+          qb.andWhere('known-bug.venomous = :venomous', { venomous: filters.venomous });
+        }
+        if (filters.bites !== undefined) {
+          qb.andWhere('known-bug.bites = :bites', { bites: filters.bites });
+        }
+        if (filters.stings !== undefined) {
+          qb.andWhere('known-bug.stings = :stings', { stings: filters.stings });
+        }
+        if (filters.legs !== undefined) {
+          qb.andWhere('known-bug.no_legs = :legs', { legs: filters.legs });
+        }
+
+        return qb.getMany();
+      })(),
+      this.knownBugRepo
+        .createQueryBuilder('known-bug')
+        .select("DISTINCT known-bug.color", "color")
+        .getRawMany(),
+      this.knownBugRepo
+        .createQueryBuilder('known-bug')
+        .select("DISTINCT known-bug.body_type", "body_type")
+        .getRawMany(),
+      this.knownBugRepo
+        .createQueryBuilder('known-bug')
+        .select("DISTINCT known-bug.habitats", "habitats")
+        .getRawMany(),
+      this.knownBugRepo
+        .createQueryBuilder('known-bug')
+        .select("DISTINCT known-bug.size", "size")
+        .getRawMany(),
+      this.knownBugRepo
+        .createQueryBuilder('known-bug')
+        .select("DISTINCT known-bug.diet", "diet")
+        .getRawMany(),
+      this.knownBugRepo
+        .createQueryBuilder('known-bug')
+        .select("DISTINCT known-bug.behaviour", "behaviour")
+        .getRawMany(),
+      (() => {
+        const qb = this.knownBugRepo.createQueryBuilder('known-bug');
+        return qb.getCount()
+      })()
+    ])
+    return [insects, colors, bodyTypes, habitats, sizes, diets, behaviours, total];
   }
 
   async findOne(id: number) {

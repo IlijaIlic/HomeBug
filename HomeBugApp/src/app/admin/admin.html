@@ -114,6 +114,9 @@
         <div class="form-field">
             <label> Habitats (separate by ;)
                 <input type="text" placeholder="Habitats" [(ngModel)]="this.selBug.habitats[0]" />
+                @for (item of habitatService.getAll() | keyvalue; track item.key) {
+                <div>{{ item.key }}</div>
+                }
             </label>
         </div>
         <div class="form-field">
@@ -215,14 +218,13 @@
     <button class="upload-img-btn" (click)="fileInput.click()">Upload new <ng-icon
             name="featherUpload"></ng-icon></button>
 
-    <h3  class="upload-title">Uploaded images</h3>
+    <h3 class="upload-title">Uploaded images</h3>
 
     <div class="kbug-uploaded-cont">
         @for (url of this.selBug.picture_urls; track $index) {
         <div class="uploaded-img-cont">
             <img class="uploaded-img" [src]="apiUrl + url" />
-            <button class="delete-img" (click)="deleteUploadedImage()">Delete <ng-icon
-                    name="featherTrash2"></ng-icon>
+            <button class="delete-img" (click)="deleteUploadedImage()">Delete <ng-icon name="featherTrash2"></ng-icon>
             </button>
         </div>
         }

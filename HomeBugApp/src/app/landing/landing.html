@@ -1,4 +1,7 @@
 <div class="hb-page-landing">
+    @if (isModalOpen) {
+    <app-modal (positiveClick)="positiveModal()" (negativeClick)="negativeModal()" (xClick)="xModal()"></app-modal>
+    }
     <div class="hb-landing-findout">
         <div class="hb-findout-background">
             <h1>Don't panic. <span style="color: #153e42;">Identify it!</span></h1>
@@ -42,13 +45,6 @@
     </div>
 
 
-    <div class="hb-landing-nomore">
-        <h2 class="hb-nomore">- No more -</h2>
-        <h1 class="hb-cycle">{{currWord}}</h1>
-        <div class="hb-white-rect"></div>
-    </div>
-
-
     <div class="hb-landing-explain">
         <div class="hb-explain-search">
             <div class="hb-explain-text1">
@@ -60,22 +56,7 @@
                 <img class="magnifying-image-1" alt="magnifying glass" src="assets/magnMagn.png" />
                 <img class="magnifying-image-2" alt="bug" src="assets/bugMagn.png" (mouseenter)="onHoverMagn(true)"
                     (mouseleave)="onHoverMagn(false)" />
-                <!-- <img src="assets/infoHarmless.png" alt="infoHarmless" class="hb-magn-popup" [@popupAnimation]="isHoveredMagn ? 'active' :'inactive'"/> -->
-                <div class="hb-magn-popup"
-                    [@popupAnimation]="{value: isHoveredMagn ? 'active' : 'inactive', params:{delay: '1.s'}}"
-                    style="top: 2%; left: 2%;">
-                    mealworm beetle
-                </div>
-                <div class="hb-magn-popup"
-                    [@popupAnimation]="{value: isHoveredMagn ? 'active' : 'inactive', params:{delay: '1.25s'}}"
-                    style="top: 30%; right: -20%;">
-                    harmless
-                </div>
-                <div class="hb-magn-popup"
-                    [@popupAnimation]="{value: isHoveredMagn ? 'active' : 'inactive', params: {delay: '1.5s'}}"
-                    style="top: 40%; left: 2%;">
-                    can't fly
-                </div>
+
             </div>
         </div>
         <hr>

@@ -49,18 +49,12 @@
                 <p class="hb-profile-hint-text">Unknown bugs scanned</p>
                 <p class="hb-profile-text">{{this.user.unknown_bugs_scanned}}</p>
             </div>
-            <div>
-                <p class="hb-profile-hint-text">Comments helping others</p>
-                <p class="hb-profile-text">{{this.user.comments_helping_others}}</p>
-            </div>
+           
             <div>
                 <p class="hb-profile-hint-text">Reputation </p>
                 <p class="hb-profile-text">{{reputations[userReputation]}}</p>
             </div>
-            <div>
-                <p class="hb-profile-hint-text">Users rated</p>
-                <p class="hb-profile-text">{{this.user.other_users_rated}}</p>
-            </div>
+            
         </div>
         }
         @else if (active_tab === 'scans') {
@@ -79,7 +73,7 @@
                 <h1 class="hb-info-title">Unknown bugs</h1>
                 <div class="hb-bug-section">
                     @for (scanned of this.user.unknown_scans ; track $index) {
-                    <app-unknown-bug-image [size]="11" [country_show]="true" [bug]=scanned [routerLink]="'../search/unknown/' + scanned.id" />
+                    <app-unknown-bug-image [size]="11" [countryCode]="scanned.countryCode" [country_show]="true" [bug]=scanned [routerLink]="'../search/unknown/' + scanned.id" />
                     }
                 </div>
             </div>

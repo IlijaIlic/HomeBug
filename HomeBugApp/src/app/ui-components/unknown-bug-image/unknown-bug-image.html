@@ -3,7 +3,7 @@
     <img [src]="apirul+ bug!.picture_url">
     <div class="hb-unknown-gradient"></div>
     <div class="hb-unknown-comments">{{bug!.comments.length}}<ng-icon name="featherMessageCircle"></ng-icon></div>
-    <div class="hb-unknown-country"><ng-icon name="featherGlobe"></ng-icon>SRB</div>
+    <div class="hb-unknown-country"><ng-icon name="featherGlobe"></ng-icon>{{this.countryCode3}}</div>
     }
     @if(!country_show){
     <img [src]="apirul + kbug!.picture_urls[0]">

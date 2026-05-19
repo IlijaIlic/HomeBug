@@ -1,0 +1,100 @@
+@use 'styles/variables' as *;
+
+.modal-gray-zone {
+    width: 100vw;
+    height: 100vh;
+    background-color: rgba(0, 0, 0, 0.507);
+    position: fixed;
+    top: 0;
+    left: 0;
+    z-index: 2000;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    font-family: $hb-main-font;
+}
+
+.modal-cont {
+    display: flex;
+    flex-direction: column;
+    flex-wrap: nowrap;
+    border-radius: 1rem;
+    overflow: hidden;
+    box-shadow: $hb-box-shadow;
+}
+
+.modal-topbar {
+    background-color: $hb-light-green;
+    padding: 0.7rem 2rem 0.5rem 2rem;
+    color: white;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
+
+
+    button {
+        border: none;
+        outline: none;
+        color: white;
+        background-color: transparent;
+        font-family: $hb-main-font;
+        cursor: pointer;
+        border-radius: 25%;
+        padding-block: 0.2rem;
+        padding-inline: 0.5rem;
+    }
+
+    button:hover{
+        background-color: $hb-highlight-green;
+    }
+}
+
+.modal-message {
+    background-color: white;
+    padding: 3rem 3rem 2rem 3rem;
+}
+
+.modal-btn-cont {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-around;
+    margin-top: 2rem;
+}
+
+.negative-btn {
+    border: 2px solid $hb-light-green;
+    outline: none;
+    background-color: white;
+    color: $hb-light-green;
+    font-size: 1rem;
+    padding-block: 0.5rem 0.3rem;
+    padding-inline: 2rem;
+    border-radius: 1rem;
+    font-weight: 700;
+    font-family: $hb-main-font;
+    cursor: pointer;
+}
+
+.positive-btn {
+    border: none;
+    outline: none;
+    background-color: $hb-light-green;
+    color: white;
+    font-size: 1rem;
+    padding-block: 0.5rem 0.3rem;
+    padding-inline: 2rem;
+    border-radius: 1rem;
+    font-weight: 700;
+    font-family: $hb-main-font;
+    cursor: pointer;
+}
+
+.negative-btn:hover {
+    background-color: rgb(218, 218, 218)
+}
+
+.positive-btn:hover {
+    background-color: $hb-highlight-green;
+}

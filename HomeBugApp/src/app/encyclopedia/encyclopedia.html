@@ -1,6 +1,6 @@
 <div class="hb-encyclopedia-page">
 
-  
+
 
     <div class="hb-encyclopedia-title">
         ARTHROPOD ENCYCLOPEDIA
@@ -8,34 +8,201 @@
     </div>
     <div class="hb-cont">
         <div class="hb-filters">
-            FILTERS
-            <button type="button">FILTER1</button>
-            <button type="button">FILTER2</button>
-            <button type="button">FILTER3</button>
+            <div class="filters-title">FILTERS</div>
+            <app-input-field [(value)]="filters.common_name" label="Search by name" width="20rem"
+                placeholder="Ladybug..." />
+            <label>Regions TBD</label>
+            <div class="filter-regions-cont">
+                <div class="filter-option">
+                    <input type="checkbox" class="option-cb" />
+                    <label class="option-label">Proba</label>
+                </div>
+                <div class="filter-option">
+                    <input type="checkbox" class="option-cb" />
+                    <label class="option-label">Proba</label>
+                </div>
+                <div class="filter-option">
+                    <input type="checkbox" class="option-cb" />
+                    <label class="option-label">Proba</label>
+                </div>
+                <div class="filter-option">
+                    <input type="checkbox" class="option-cb" />
+                    <label class="option-label">Proba</label>
+                </div>
+                <div class="filter-option">
+                    <input type="checkbox" class="option-cb" />
+                    <label class="option-label">Proba</label>
+                </div>
+                <div class="filter-option">
+                    <input type="checkbox" class="option-cb" />
+                    <label class="option-label">Proba</label>
+                </div>
+            </div>
+            <label>Habitats</label>
+            <div class="filter-regions-cont">
+                @for (habitat of this.habService.getAll() | keyvalue; track $index) {
+
+                <div class="filter-option">
+                    <input type="checkbox" class="option-cb" [checked]="this.filters.habitats.includes(habitat.value)"
+                        (change)="toggleArrayFilter('habitats', habitat.value)" />
+                    <label class="option-label">{{habitat.value}}</label>
+                </div>
+                }
+            </div>
+            <label>Body type</label>
+            <div class="filter-regions-cont">
+                @for (body of this.filter_bodytypes; track $index) {
+
+                <div class="filter-option">
+                    <input type="checkbox" class="option-cb" [checked]="this.filters.bodyTypes.includes(body.body_type)"
+                        (change)="toggleArrayFilter('bodyTypes', body.body_type)" />
+                    <label class="option-label">{{body.body_type}}</label>
+                </div>
+                }
+
+            </div>
+            <label>Color</label>
+            <div class="filter-regions-cont">
+                @for (clr of this.filter_colors; track $index) {
+                <div class="filter-option">
+                    <input type="checkbox" class="option-cb" [checked]="this.filters.colors.includes(clr.color)"
+                        (change)="toggleArrayFilter('colors', clr.color)" />
+                    <label class="option-label">{{clr.color}}</label>
+                </div>
+                }
+            </div>
+            <label>Size</label>
+            <div class="filter-regions-cont">
+                @for (size of this.filter_size; track $index) {
+
+                <div class="filter-option">
+                    <input type="checkbox" class="option-cb" [checked]="this.filters.sizes.includes(size.size)"
+                        (change)="toggleArrayFilter('sizes', size.size)" />
+                    <label class="option-label">{{size.size}}</label>
+                </div>
+                }
+            </div>
+
+            <label>Diet</label>
+            <div class="filter-regions-cont">
+                @for (diet of this.filter_diet; track $index) {
+
+                <div class="filter-option">
+                    <input type="checkbox" class="option-cb" [checked]="this.filters.diets.includes(diet.diet)"
+                        (change)="toggleArrayFilter('diets', diet.diet)" />
+                    <label class="option-label">{{diet.diet}}</label>
+                </div>
+                }
+            </div>
+
+            <label>Behaviour</label>
+            <div class="filter-regions-cont">
+                @for (behav of this.filter_behaviour; track $index) {
+
+                <div class="filter-option">
+                    <input type="checkbox" class="option-cb"
+                        [checked]="this.filters.behaviours.includes(behav.behaviour)"
+                        (change)="toggleArrayFilter('behaviours', behav.behaviour)" />
+                    <label class="option-label">{{behav.behaviour}}</label>
+                </div>
+                }
+            </div>
+            <label>Number of Legs</label>
+            <input class="filter-number-input" [(ngModel)]="filters.legs" type="number" placeholder="0" min="0" />
+
+            <div class="cb-cont">
+                <input type="checkbox" [checked]="filters.dangerous === true"
+                    (change)="toggleBoolFilter('dangerous', true)" />
+                <label>Dangerous</label>
+            </div>
+            <div class="cb-cont">
+                <input type="checkbox" [checked]="filters.wings === true" (change)="toggleBoolFilter('wings', true)" />
+                <label>Wings</label>
+            </div>
+            <div class="cb-cont">
+                <input type="checkbox" [checked]="filters.venomous === true"
+                    (change)="toggleBoolFilter('venomous', true)" />
+                <label>Venomous</label>
+            </div>
+            <div class="cb-cont">
+                <input type="checkbox" [checked]="filters.bites === true" (change)="toggleBoolFilter('bites', true)" />
+                <label>Bites</label>
+            </div>
+            <div class="cb-cont">
+                <input type="checkbox" [checked]="filters.stings === true"
+                    (change)="toggleBoolFilter('stings', true)" />
+                <label>Stings</label>
+            </div>
+            <button type="submit" (click)="applyFilters()" class="filter-submit">Apply</button>
         </div>
         <div class="hb-filt-bugs">
             <div class="hb-applied-filters">
                 APPLIED FILTERS:
-                <app-applied-filter filter_name="filter1"/>
-                <app-applied-filter filter_name="filter2"/>
-                <app-applied-filter filter_name="filter3"/>
+                @if (this.filters.common_name.length > 0) {
+                <app-applied-filter [filter_name]=this.filters.common_name (removed)="this.filters.common_name = ''" />
+                }
+                <!-- REGIONI -->
+                @for (filtHab of this.filters.habitats; track $index) {
+                <app-applied-filter [filter_name]=filtHab (removed)="toggleArrayFilter('habitats', filtHab)" />
+                }
+                @for (filtBody of this.filters.bodyTypes; track $index) {
+                <app-applied-filter [filter_name]=filtBody (removed)="toggleArrayFilter('bodyTypes', filtBody)" />
+                }
+                @for (filtClr of this.filters.colors; track $index) {
+                <app-applied-filter [filter_name]=filtClr [filter_key]="'colors'"
+                    (removed)="toggleArrayFilter('colors', filtClr)" />
+                }
+                @for (filtSize of this.filters.sizes; track $index) {
+                <app-applied-filter [filter_name]=filtSize [filter_key]="'sizes'"
+                    (removed)="toggleArrayFilter('sizes', filtSize)" />
+                }
+                @for (filtDiet of this.filters.diets; track $index) {
+                <app-applied-filter [filter_name]=filtDiet [filter_key]="'diets'"
+                    (removed)="toggleArrayFilter('diets', filtDiet)" />
+                }
+                @for (filtBehav of this.filters.behaviours; track $index) {
+                <app-applied-filter [filter_name]=filtBehav [filter_key]="'behaviours'"
+                    (removed)="toggleArrayFilter('behaviours', filtBehav)" />
+                }
+                @if (this.filters.legs! != null) {
+                <app-applied-filter [filter_name]='`Number of Legs: `+this.filters.legs!.toString()'
+                    (removed)="this.filters.legs = null" />
+                }
+                @if(this.filters.dangerous! == true){
+                <app-applied-filter [filter_name]="this.filters.dangerous === true ? `Dangerous` : `Error`"
+                    (removed)="toggleBoolFilter('dangerous', true)" />
+                }
+                @if(this.filters.wings! == true){
+                <app-applied-filter [filter_name]="this.filters.wings === true ? `Has wings` : `Error`"
+                    (removed)="toggleBoolFilter('wings', true)" />
+                }
+                @if(this.filters.venomous! == true){
+                <app-applied-filter [filter_name]="this.filters.venomous === true ? `Venomous` : `Error`"
+                    (removed)="toggleBoolFilter('venomous', true)" />
+                }
+                @if(this.filters.bites! == true){
+                <app-applied-filter [filter_name]="this.filters.bites === true ? `Bites` : `Error`"
+                    (removed)="toggleBoolFilter('bites', true)" />
+                }
+                @if(this.filters.stings! == true){
+                <app-applied-filter [filter_name]="this.filters.stings === true ? `Stings` : `Error`"
+                    (removed)="toggleBoolFilter('stings', true)" />
+                }
 
             </div>
             <div class="hb-bugs-cont">
 
                 @for (kbug of this.kbugs; track $index) {
-                <app-unknown-bug-image [country_show]="false" [routerLink]="`known/` + kbug.id" [size]="size_of_comp" [kbug]=kbug [unknown]=true/>
+                <app-unknown-bug-image [country_show]="false" [routerLink]="`known/` + kbug.id" [size]="size_of_comp"
+                    [kbug]=kbug [unknown]=true />
                 }
             </div>
-            <div class="hb-numeration">
-                <button type="button"><</button>
-                <button type="button"><<</button>
-                <button type="button">1</button>
-                <button type="button">2</button>
-                ...
-                <button type="button">></button>
-                <button type="button">>></button>
-            </div>
+            @if (this.isLoading) {
+            <span class="loader"></span>
+            }
+            @if(!this.hasMore && !this.isLoading){
+            <div class="nomore">No more insects to load...</div>
+            }
         </div>
     </div>
 </div>

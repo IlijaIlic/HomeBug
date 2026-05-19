@@ -7,6 +7,7 @@ import { ActivatedRoute } from '@angular/router';
 import { NgIcon } from '@ng-icons/core';
 import { UserService } from '../../services/user.service';
 import { AuthService } from '../auth/auth.service';
+import { HabitatsService } from '../../services/habitats.service';
 
 type HabitatKey = "grass" | "forest" | "garden" | "wet" | "desert" | "mountain" | "rainforest" | "agro";
 
@@ -23,6 +24,7 @@ export class KnownBug implements AfterViewInit, OnInit {
     private userService: UserService,
     private route: ActivatedRoute,
     private authService: AuthService,
+    public habitatService: HabitatsService
   ) { }
 
   map!: L.Map;
@@ -135,14 +137,5 @@ export class KnownBug implements AfterViewInit, OnInit {
 
 
 
-  habitats: Record<HabitatKey, string> = {
-    "grass": "🌾 Grasslands",
-    "forest": "🌳 Forests",
-    "garden": "🌺 Gardens",
-    "wet": "🌊 Wetlands",
-    "desert": "🏜️ Deserts",
-    "mountain": "⛰️ Mountains",
-    "rainforest": "🌴 Tropical Rainforests",
-    "agro": "🌾 Agricultural Fields"
-  }
+  
 }

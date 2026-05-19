@@ -12,6 +12,7 @@ import { Contact } from './contact/contact';
 import { AfterUpload } from './after-upload/after-upload';
 import { AfterUploadNotFound } from './after-upload-not-found/after-upload-not-found';
 import { Admin } from './admin/admin';
+import { BugMap } from './bug-map/bug-map';
 
 export const routes: Routes = [
     {
@@ -26,6 +27,10 @@ export const routes: Routes = [
     {
         path: 'login',
         component: Login
+    },
+    {
+        path: 'bugmap',
+        component: BugMap
     },
     {
         path: 'profile',

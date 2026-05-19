@@ -227,6 +227,16 @@ svg {
     background-color: $hb-dark-green;
 }
 
+.unknown-bonus-info{
+    align-self: center;
+    margin-top: 2rem;
+    text-align: center;
+
+    span{
+        color: $hb-light-green;
+    }
+}
+
 @media (max-width: 1300px) {
 
     .unknown-user-placed {

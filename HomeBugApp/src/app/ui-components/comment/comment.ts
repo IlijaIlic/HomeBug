@@ -1,15 +1,18 @@
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { NgIcon } from '@ng-icons/core';
 import { CommentModel } from '../../../models/comment.model';
 import { AuthService } from '../../auth/auth.service';
 import { CommentService } from '../../../services/comment.service';
 import { delay, switchMap } from 'rxjs';
+import { FormsModule } from '@angular/forms';
+import { Modal } from '../modal/modal';
+import { UnknownBugService } from '../../../services/unknown-bug.service';
 
 type ReputationKey = -2 | -1 | 0 | 1 | 2;
 
 @Component({
   selector: 'app-comment',
-  imports: [NgIcon],
+  imports: [NgIcon, FormsModule, Modal],
   templateUrl: './comment.html',
   styleUrl: './comment.scss',
 })
@@ -17,7 +20,15 @@ export class Comment implements OnInit {
 
   @Input()
   comment!: CommentModel;
-  
+  @Input()
+  userOwns: boolean = false
+
+  @Output() commDeleted = new EventEmitter<void>();
+  @Output() foundCorrect = new EventEmitter<void>();
+
+  modalVisible = false
+  errorModalVisible = false
+  markcorrectModalVisible = false
   disabled = false;
   liked = false;
   disliked = false
@@ -30,14 +41,14 @@ export class Comment implements OnInit {
   }
   userReputation: ReputationKey = -1;
 
-  constructor(private authService: AuthService, private comService: CommentService) { }
+  constructor(private authService: AuthService, private comService: CommentService, private ubugService: UnknownBugService) { }
 
   ngOnInit(): void {
 
     if (this.authService.currentUserSubject.value.sub == this.comment.user.id) {
       this.disabled = true
       console.log("TEST")
-    }else{
+    } else {
       console.log("TEST@ASDFASDF")
     }
 
@@ -115,6 +126,52 @@ export class Comment implements OnInit {
         },
         error: (response) => console.log(response)
       })
+  }
+
+  closeModal() {
+    this.modalVisible = false
+  }
+
+  openModal() {
+    this.modalVisible = true
+  }
+
+  closeErrorModal() {
+    this.errorModalVisible = false
+  }
+
+  openErrorModal() {
+    this.errorModalVisible = true
+  }
+
+  deleteComment() {
+
+
+    this.comService.deleteById(this.comment.id).subscribe({
+      next: (response) => {
+        console.log(response)
+        this.closeModal()
+        this.commDeleted.emit();
+      },
+      error: (response) => {
+        this.closeModal()
+        this.openErrorModal()
+        console.log(response)
+      }
+    })
+  }
+
+  openCorrectModal() {
+    this.markcorrectModalVisible = true
+  }
+
+  closeCorrectModal() {
+    this.markcorrectModalVisible = false
+  }
+
+  handleCorrect() {
+    this.foundCorrect.emit()
+    this.closeCorrectModal()
   }
 
 }

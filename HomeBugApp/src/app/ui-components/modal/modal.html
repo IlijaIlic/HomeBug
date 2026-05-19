@@ -1,0 +1,17 @@
+<div class="modal-gray-zone">
+    <div class="modal-cont">
+        <div class="modal-topbar">
+            <span>{{title}}</span>
+            <button (click)="onClose()">X</button>
+        </div>
+        <div class="modal-message">
+            <span>{{message}}</span>
+            <div class="modal-btn-cont">
+                @if (hasNegativeBtn) {
+                    <button class="negative-btn" (click)="onNegative()">{{negativeBtnText}}</button>
+                }
+                <button class="positive-btn" (click)="onPositive()">{{positiveBtnText}}</button>
+            </div>
+        </div>
+    </div>
+</div>

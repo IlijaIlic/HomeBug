@@ -1,0 +1,49 @@
+@use "styles/variables" as *;
+
+
+.map-page{
+    font-family: $hb-main-font;
+    background-color: $hb-background;
+    margin-bottom: -15rem;
+    padding-bottom: 15rem;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+
+.hb-logo {
+    width: 15rem;
+    cursor: pointer;
+    translate: 0px 0px;
+    transition: translate 0.1s ease-in;
+    border: none;
+    background-color: transparent;
+    margin-block: 1rem;
+
+}
+
+.hb-logo:hover {
+    translate: 0px -5px;
+}
+
+
+
+.known-location {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+    flex-wrap: wrap;
+    align-items: center;
+    width: 100%;
+
+    margin-bottom: 6rem;
+}
+
+#location-map {
+    width: 72rem;
+    height: 45rem;
+    border-radius: 15rem;
+    box-shadow: $hb-box-shadow;
+}
+

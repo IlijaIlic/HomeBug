@@ -21,7 +21,7 @@ export class KnownBug {
     @JoinTable()
     regions: Region[];
 
-    @Column("simple-array")
+    @Column('text', { array: true })
     habitats: string[];
 
     @OneToOne(() => Taxonomy)

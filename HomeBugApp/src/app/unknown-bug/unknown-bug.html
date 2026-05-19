@@ -2,7 +2,6 @@
 
 
     <div class="unknown-user-placed">
-
         <img class="unknown-bug-image" [src]="apirul + bug?.picture_url" alt="image" />
         <div class="unknown-bug-text">
             <div class="unknown-username">
@@ -21,6 +20,20 @@
             </div>
             <div class="unknown-comment">
                 {{bug?.description}}
+                <div class="unknown-bonus-info">
+                    <div>
+                        Color: <span>{{bug?.color}}</span>
+                    </div>
+                    <div>
+                        Size: <span>{{bug?.size}}</span>
+                    </div>
+                    <div>
+                        Number of legs: <span>{{bug?.legs}}</span>
+                    </div>
+                    <div>
+                        <span>{{bug?.wings ? "Has wings" : "No wings"}}</span>
+                    </div>
+                </div>
             </div>
             <div class="unknown-text-profile">
                 @if(this.bug?.user!.gender == "male"){
@@ -43,8 +56,9 @@
                     maxlength="300" [(ngModel)]="commentText"></textarea>
                 <button class="submit-comment" (click)="handleSubmitComment()">Comment</button>
             </div>
-            @for (com of bug?.comments; track $index) {
-            <app-comment [comment]=com></app-comment>
+            @for (com of bug?.comments; track com.id) {
+            <app-comment (commDeleted)="this.removeComment(com.id)" [comment]=com [userOwns]=userOwns
+                (foundCorrect)="this.handleCorrect(com.user.id)"></app-comment>
             }
         </div>
 

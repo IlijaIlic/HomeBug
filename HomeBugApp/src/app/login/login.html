@@ -36,23 +36,16 @@
 
             <div class="hb-flex-row">
 
-                <app-input-field placeholder="john.doe@gmail.com" label="Email"  [(value)]="loginData.email" />
-                <app-input-field placeholder="" label="Password" type="password"  [(value)]="loginData.password" />
+                <app-input-field placeholder="john.doe@gmail.com" label="Email" [(value)]="loginData.email" />
+                <app-input-field placeholder="" label="Password" type="password" [(value)]="loginData.password" />
             </div>
             <div class="login-cont">
 
                 <button type="submit" class="hb-register-button" (click)="handleLogin()">Login</button>
-                <p class="hb-already-have">You don't have an account? <span class="hb-login-color">Register</span> right
+               
+            </div>
+             <p class="hb-already-have">You don't have an account? <span class="hb-login-color">Register</span> right
                     here!</p>
-            </div>
-
-            <hr>
-            <div class="hb-flex-row hb-margintop">
-                <div class="hb-register-googleacc">Or sign up using Google</div>
-                <button class="hb-register-gbut">
-                    <img src="assets/google.png" />
-                </button>
-            </div>
         </form>
     </div>
 </div>

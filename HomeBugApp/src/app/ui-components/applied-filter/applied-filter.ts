@@ -1,4 +1,4 @@
-import { Component, Input } from '@angular/core';
+import { Component, EventEmitter, Input, Output } from '@angular/core';
 
 @Component({
   selector: 'app-applied-filter',
@@ -7,5 +7,12 @@ import { Component, Input } from '@angular/core';
   styleUrl: './applied-filter.scss',
 })
 export class AppliedFilter {
-  @Input() filter_name: String = ""
+  @Input() filter_name: string = ""
+  @Input() filter_key: string = '';
+  @Output() removed = new EventEmitter<{ key: string, value: string }>();
+
+  remove() {
+    this.removed.emit({ key: this.filter_key, value: this.filter_name });
+  }
+
 }

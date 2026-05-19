@@ -10,7 +10,7 @@
             </div>
             <div class="known-name">
                 <div class="name-common">
-                    Ladybug <span><button class="save-btn" (click)="handleSave()">
+                    {{this.bug.common_name || this.bug.latin_name}} <span><button class="save-btn" (click)="handleSave()">
                             @if(!saved){
                             <ng-icon name="featherBookmark"></ng-icon>
                             }
@@ -21,19 +21,19 @@
                 </div>
                 <hr>
                 <div class="name-latin">
-                    Species: <span style="font-style: italic;">{{this.bug.common_name}}</span>
+                    Species: <span style="font-style: italic;">{{this.bug.taxonomy.species}}</span>
                 </div>
                 <div class="name-latin">
-                    Genus: <span style="font-style: italic;">{{this.bug.common_name}} </span>
+                    Genus: <span style="font-style: italic;">{{this.bug.taxonomy.genus}} </span>
                 </div>
                 <div class="name-latin">
-                    Familiy: <span style="font-style: italic;">{{this.bug.common_name}}</span>
+                    Familiy: <span style="font-style: italic;">{{this.bug.taxonomy.family}}</span>
                 </div>
                 <div class="name-latin">
-                    Order: <span style="font-style: italic;">{{this.bug.common_name}}</span>
+                    Order: <span style="font-style: italic;">{{this.bug.taxonomy.order}}</span>
                 </div>
                 <div class="name-latin">
-                    Class: <span style="font-style: italic;">{{this.bug.common_name}}</span>
+                    Class: <span style="font-style: italic;">{{this.bug.taxonomy.taxonomyClass}}</span>
                 </div>
             </div>
         </div>
@@ -79,7 +79,7 @@
                 <div class="habitat-title">Prefered habitats</div>
                 <hr>
                 @for (hab of bug.habitats; track $index) {
-                <div class="habitat-info">{{habitats["agro"]}}</div>
+                <div class="habitat-info">{{this.habitatService.getLabel(hab)}}</div>
                 }
             </div>
             <div class="info-visual">

@@ -1,8 +1,22 @@
 <div class="comment">
+    @if (modalVisible) {
+    <app-modal [message]="'Do you want to delete your comment'" [title]="'Delete confirmation'" [hasNegativeBtn]="true"
+        (negativeClick)="closeModal()" (xClick)="closeModal()" (positiveClick)="deleteComment()"></app-modal>
+    }
+    @if (errorModalVisible) {
+    <app-modal [message]="'Error deleting your comment'" [title]="'Error'" [hasNegativeBtn]="false"
+        [positiveBtnText]="'OK'" (xClick)="closeErrorModal()" (positiveClick)="closeErrorModal()"></app-modal>
+    }
+    @if (markcorrectModalVisible) {
+    <app-modal [message]="'This will delete your unknown bug and mark it as found'" [title]="'Confirmation'" [hasNegativeBtn]="true"
+        [positiveBtnText]="'Proceed'" [negativeBtnText]="'Cancel'" (xClick)="closeCorrectModal()" (negativeClick)="closeCorrectModal()" (positiveClick)="handleCorrect()"></app-modal>
+    }
     <div class="rate-section">
-        <button (click)="handleLike()" [disabled]="this.disabled"><ng-icon class="icon-up" [class.active]="this.liked" name="featherArrowUp" size="1.5rem"></ng-icon></button>
+        <button (click)="handleLike()" [disabled]="this.disabled"><ng-icon class="icon-up" [class.active]="this.liked"
+                name="featherArrowUp" size="1.5rem"></ng-icon></button>
         <div class="rate-points">{{this.comment.rating}}</div>
-        <button (click)="handleDislike()"  [disabled]="this.disabled"><ng-icon class="icon-down" [class.active]="this.disliked" name="featherArrowDown" size="1.5rem"></ng-icon></button>
+        <button (click)="handleDislike()" [disabled]="this.disabled"><ng-icon class="icon-down"
+                [class.active]="this.disliked" name="featherArrowDown" size="1.5rem"></ng-icon></button>
     </div>
     <div>
 
@@ -16,4 +30,10 @@
             {{this.comment.text}}
         </div>
     </div>
+    @if (disabled) {
+    <button class="delete-btn" (click)="openModal()">X</button>
+    }
+    @if (!disabled && userOwns) {
+    <button class="correct-btn" (click)="openCorrectModal()">Mark as correct</button>
+    }
 </div>
