@@ -36,6 +36,12 @@ export class UnknownBugController {
     return this.unknownBugService.findAll(filters);
   }
 
+  @Get('/time')
+  findFromTime(@Query('dateTime') dateTimeString: string) {
+    const dateTime = new Date(dateTimeString)
+    return this.unknownBugService.findFromTime(dateTime)
+  }
+
   @Get(':id')
   findOne(@Param('id') id: string) {
     return this.unknownBugService.findOne(+id);

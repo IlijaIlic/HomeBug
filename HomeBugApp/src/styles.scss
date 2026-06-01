@@ -2,40 +2,73 @@
 
 @use 'styles/variables' as *;
 
-:root{
+:root {
     font-size: 16px;
 }
 
-html{
+html {
     margin: 0;
     padding: 0;
     height: 100%;
 }
 
-body{
+body {
     margin: 0;
     padding: 0;
     min-height: 100%;
 }
 
 
-h1,h2,h3,h4{
+h1,
+h2,
+h3,
+h4 {
     margin: 0;
     padding: 0;
 }
 
 .marker-pin {
-  width: 20px;
-  height: 20px;
-  background-color: #008a1e;
-  border: 2px solid white;
-  border-radius: 50%;
-  box-shadow: 0 2px 6px rgba(0,0,0,0.4);
-  cursor: pointer;
-  transition: transform 0.2s ease, background-color 0.2s ease;
+    width: 20px;
+    height: 20px;
+    background-color: #008a1e;
+    border: 2px solid white;
+    border-radius: 50%;
+    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.4);
+    cursor: pointer;
+    transition: transform 1s ease, background-color 0.2s ease;
+    animation: popupanim 0.2s ease-in-out forwards;
+}
+
+.marker-fade {
+    animation: fadeout 0.3s ease-in-out forwards !important;
+}
+
+@keyframes fadeout {
+    0% {
+        transform: scale(100%);
+    }
+
+    100% {
+        transform: scale(0%);
+    }
+}
+
+@keyframes popupanim {
+    0% {
+        transform: scale(0%);
+    }
+
+    50% {
+        transform: scale(120%);
+    }
+
+    100% {
+        transform: scale(100%);
+
+    }
 }
 
 .marker-pin:hover {
-  transform: scale(1.5);
-  background-color: #015e15;
+    transform: scale(150%);
+    background-color: #015e15;
 }

@@ -3,7 +3,7 @@ import { CreateUnknownBugDto } from './dto/create-unknown-bug.dto';
 import { UpdateUnknownBugDto } from './dto/update-unknown-bug.dto';
 import { InjectRepository } from '@nestjs/typeorm';
 import { UnknownBug } from './entities/unknown-bug.entity';
-import { Repository } from 'typeorm';
+import { MoreThan, Repository } from 'typeorm';
 import { User } from '@user/entities/user.entity';
 import { UnkFilterDto } from './dto/filter-unknown-bug.dto';
 import { filter } from '@modules/rxjs/dist/types';
@@ -96,6 +96,15 @@ export class UnknownBugService {
     return this.unknownBugRepo.findOne({
       where: { id },
       relations: ['user', 'comments', 'comments.user', 'comments.ratings']
+    })
+  }
+
+  async findFromTime(dateTime: Date) {
+    return this.unknownBugRepo.find({
+      where: {
+        dateCreated: MoreThan(dateTime)
+      },
+      relations: ['user']
     })
   }
 

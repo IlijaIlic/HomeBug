@@ -39,4 +39,10 @@ export class UnknownBugService {
     foundCorrect(ubugId: number, userId: number): Observable<any> {
         return this.http.delete(`${environment.apiUrl}/unknown-bug/correct/` + ubugId + `/` + userId)
     }
+
+    findFromTime(dateTime: any): Observable<UnknownBugModel[]> {
+        return this.http.get<UnknownBugModel[]>(`${environment.apiUrl}/unknown-bug/time`, {
+            params: { dateTime: dateTime }
+        })
+    }
 }
