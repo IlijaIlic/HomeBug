@@ -76,4 +76,9 @@ export class KnownFilterDto {
   @IsNumber()
   @Type(() => Number)
   legs?: number;
+
+  @IsOptional()
+  @IsArray()
+  @Transform(({ value }) => Array.isArray(value) ? value : [value])
+  regions?: string[];
 }

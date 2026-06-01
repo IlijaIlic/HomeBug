@@ -28,9 +28,21 @@
 
 
         </svg>
-        <button class="hb-search-imgdrop" routerLink="uploaded">
-            <img src="../../assets/draganddrop.png" alt="Image drag & drop" />
-        </button>
+        <div class="dragdrop-cont">
+            <div class="dragdrop-text">
+                <div class="dragdrop-textbig">
+                    Identify any insect instantly!
+                </div>
+                <div class="dragdrop-textsmall">
+                    Drop an image to begin...
+                </div>
+            </div>
+
+            <button class="hb-search-imgdrop" (click)="fileInput.click()">
+                <img src="../../assets/draganddrop.png" alt="Image drag & drop" />
+            </button>
+            <input type="file" accept="image/*" style="display: none;" (change)="onFileSelected($event)" #fileInput />
+        </div>
 
     </div>
 
@@ -59,7 +71,7 @@
                 </div>
                 }
             </div>
-            <label>Country dodati i naziv zemlje</label>
+            <label>Country</label>
             <div class="filter-regions-cont">
                 @for (country of this.filters_countries; track $index) {
                 <div class="filter-option">
@@ -68,19 +80,19 @@
                         (change)="toggleArrayFilter('countryCodes', country.countryCode)" />
                     <img class="unknown-comment-flag" [src]="'https://flagcdn.com/' + country.countryCode + '.svg'"
                         alt="countryCode" />
-                        <div class="country-fullname">{{this.countryData[country.countryCode].name}}</div>
+                    <div class="country-fullname">{{this.countryData[country.countryCode].name}}</div>
                 </div>
                 }
 
             </div>
             <label>Number of Legs</label>
-            <input class="filter-number-input" type="number" placeholder="0" min="0" [(ngModel)]="this.filters.legs" />
+            <input class="filter-number-input" type="number" placeholder="0" min="0" (change)="this.filterChange.next()"
+                [(ngModel)]="this.filters.legs" />
 
             <div class="cb-cont">
                 <input type="checkbox" [checked]="filters.wings === true" (change)="toggleBoolFilter('wings', true)" />
                 <label>Wings</label>
             </div>
-            <button class="filter-submit" type="submit" (click)="applyFilters()">Apply</button>
         </div>
 
         <div class="applied-results">
@@ -100,7 +112,7 @@
                 }
                 @if (this.filters.legs! != null) {
                 <app-applied-filter [filter_name]='`Number of Legs: `+this.filters.legs!.toString()'
-                    (removed)="this.filters.legs = null" />
+                    (removed)="removeLegs()" />
                 }
                 @if(this.filters.wings! == true){
                 <app-applied-filter [filter_name]="this.filters.wings === true ? `Has wings` : `Error`"
@@ -110,7 +122,8 @@
             </div>
             <div class="hb-search-unknown">
                 @for (bug of bugs; track $index) {
-                <app-unknown-bug-image [bug]="bug" [countryCode]="bug.countryCode" [size]="size_of_comp" [routerLink]="'unknown/' + bug.id" />
+                <app-unknown-bug-image [bug]="bug" [countryCode]="bug.countryCode" [size]="size_of_comp"
+                    [routerLink]="'unknown/' + bug.id" />
                 }
             </div>
             @if (this.isLoading) {

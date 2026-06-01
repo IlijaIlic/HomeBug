@@ -2,29 +2,38 @@
     <div class="page-cont">
         <div class="found-cont">
             <div class="found-title">This is our best guess</div>
-            <app-unknown-bug-image [size]="20" />
-            <div class="found-text">Insect name 67% match</div>
+            <app-unknown-bug-image [size]="20" [kbug]="this.bug" [country_show]="false" [unknown]="false" />
+            <div class="found-text">{{this.bug.common_name}} 67% match</div>
         </div>
 
-        <h1>Go to search/notfound if the results arent ok</h1>
         <div class="other-title">Also see</div>
         <div class="other-matches">
             <div class="found-img">
-                <app-unknown-bug-image [size]="size_of_comp"/>
-                <div class="found-text">Insect name 30% match</div>
+                <app-unknown-bug-image [size]="size_of_comp" [kbug]="this.bug" [country_show]="false"
+                    [unknown]="false" />
+                <div class="found-text">{{this.bug.common_name}} 30% match</div>
             </div>
             <div class="found-img">
-                <app-unknown-bug-image [size]="size_of_comp"/>
-                <div class="found-text">Insect name 20% match</div>
+                <app-unknown-bug-image [size]="size_of_comp" [kbug]="this.bug" [country_show]="false"
+                    [unknown]="false" />
+                <div class="found-text">{{this.bug.common_name}} 20% match</div>
             </div>
             <div class="found-img">
-                <app-unknown-bug-image [size]="size_of_comp"/>
-                <div class="found-text">Insect name 14% match</div>
+                <app-unknown-bug-image [size]="size_of_comp" [kbug]="this.bug" [country_show]="false"
+                    [unknown]="false" />
+                <div class="found-text">{{this.bug.common_name}} 14% match</div>
             </div>
             <div class="found-img">
-                <app-unknown-bug-image [size]="size_of_comp"/>
-                <div class="found-text">Insect name 12% match</div>
+                <app-unknown-bug-image [size]="size_of_comp" [kbug]="this.bug" [country_show]="false"
+                    [unknown]="false" />
+                <div class="found-text">{{this.bug.common_name}} 12% match</div>
             </div>
+        </div>
+        <div class="not-sati-cont">
+
+            <div class="not-sati-text">Not satisfied with our result? Our community of enthusiasts can help.</div>
+            <button class="not-sati-btn" (click)="handleNotSati()" routerLink="../notfound">Post for Community Review</button>
+
         </div>
     </div>
 </div>

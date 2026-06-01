@@ -9,6 +9,27 @@
 }
 
 
+.hb-flex-col {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-self: center;
+    gap: 2rem;
+}
+
+.hb-flex-col-error{
+display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-self: center;
+}
+
+.hb-input-error {
+    font-size: 0.9rem;
+    color: rgb(230, 58, 58);
+    margin-left: 1rem;
+}
+
 
 .hb-register-page {
     background-color: $hb-background;

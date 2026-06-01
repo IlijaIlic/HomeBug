@@ -3,7 +3,7 @@ import { UnknownBugImage } from '../ui-components/unknown-bug-image/unknown-bug-
 import { UserService } from '../../services/user.service';
 import { AuthService } from '../auth/auth.service';
 import { UserModel } from '../../models/user.model';
-import { switchMap } from 'rxjs';
+import { filter, switchMap, take } from 'rxjs';
 import { RouterLink, RouterModule } from "@angular/router";
 
 type Tab = 'info' | 'scans' | 'saved'
@@ -55,31 +55,35 @@ export class UserProfile implements OnInit {
 
   ngOnInit(): void {
     this.authService.currentUser$.pipe(
+      filter(usr => !!usr?.sub),
+      take(1),
       switchMap((usr: AuthUserModel) => this.userService.getById(usr.sub))
     ).subscribe({
-      next: (result) => this.user = result,
+      next: (result) => {
+        console.log(result)
+        console.log("TEST")
+        this.user = result
+        switch (true) {
+          case (this.user!.reputation < -200):
+            this.userReputation = -2;
+            break;
+          case (this.user!.reputation >= -200 && this.user!.reputation < -100):
+            this.userReputation = -1;
+            break;
+          case (this.user!.reputation > -50 && this.user!.reputation <= 50):
+            this.userReputation = 0;
+            break;
+          case (this.user!.reputation > 50 && this.user!.reputation <= 200):
+            this.userReputation = 1;
+            break;
+          case (this.user!.reputation > 200):
+            this.userReputation = 2;
+            break;
+
+        }
+      },
       error: (result) => console.log(result)
     })
-
-    switch (true) {
-      case (this.user!.reputation < -200):
-        this.userReputation = -2;
-        break;
-      case (this.user!.reputation >= -200 &&  this.user!.reputation < -100 ):
-        this.userReputation = -1;
-        break;
-      case (this.user!.reputation > -50 &&  this.user!.reputation <= 50 ):
-        this.userReputation = 0;
-        break;
-      case (this.user!.reputation > 50 &&  this.user!.reputation <= 200 ):
-        this.userReputation = 1;
-        break;
-      case (this.user!.reputation > 200):
-        this.userReputation = 2;
-        break;
-
-    }
-
   }
 
 

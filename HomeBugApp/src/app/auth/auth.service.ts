@@ -12,6 +12,7 @@ export interface LoginResponse {
     surname: string;
     email: string;
     gender?: string;
+    role: string;
   };
 }
 
@@ -30,8 +31,15 @@ export class AuthService {
     }
   }
 
-  register(userData: any): Observable<any> {
-    return this.http.post(`${environment.apiUrl}/auth/register`, userData);
+  register(userData: any): Observable<LoginResponse> {
+    return this.http.post<LoginResponse>(`${environment.apiUrl}/auth/register`,
+      userData).pipe(
+        tap(response => {
+          localStorage.setItem('access_token', response.access_token);
+          this.decodeToken(response.access_token)
+        })
+      );
+
   }
 
   login(email: string, password: string): Observable<LoginResponse> {
@@ -41,7 +49,7 @@ export class AuthService {
     }).pipe(
       tap(response => {
         localStorage.setItem('access_token', response.access_token);
-        this.currentUserSubject.next(response.user);
+        this.decodeToken(response.access_token)
       })
     );
   }
@@ -58,7 +66,7 @@ export class AuthService {
   private decodeToken(token: string) {
     try {
       const payload = JSON.parse(atob(token.split('.')[1]));
-       this.currentUserSubject.next(payload);
+      this.currentUserSubject.next(payload);
 
     } catch (e) {
       console.error('Invalid token');
@@ -67,5 +75,13 @@ export class AuthService {
 
   isLoggedIn(): boolean {
     return !!this.getToken();
+  }
+
+  getRole(): string | null {
+    return this.currentUserSubject.value?.role ?? null;
+  }
+
+  isAdmin(): boolean {
+    return this.getRole() === 'admin';
   }
 }

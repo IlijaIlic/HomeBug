@@ -20,9 +20,6 @@ import { HabitatsService } from '../../services/habitats.service';
   styleUrl: './admin.scss',
 })
 export class Admin {
-
-  public apiUrl = "http://localhost:3000/"
-
   constructor(
     private ubugService: UnknownBugService,
     private userService: UserService,
@@ -31,56 +28,15 @@ export class Admin {
     public habitatService: HabitatsService
   ) { }
 
+  public apiUrl = "http://localhost:3000/"
+  entityShown: string = "users";
+  isCreating: boolean = false
+
   previewUrl: string | ArrayBuffer | null = null;
   imgArray: File[] = [];
   index: number = 0;
 
-  onFileSelected(event: Event) {
-    const input = event.target as HTMLInputElement
-    if (input.files && input.files[0]) {
-      for (let i = 0; i < input.files.length; i++) {
-        this.imgArray!.push(input.files[i])
-      }
-      this.changeImage()
-    }
-  }
-
-  changeImage() {
-    if (this.imgArray) {
-      const reader = new FileReader()
-      reader.onload = () => this.previewUrl = reader.result
-      reader.readAsDataURL(this.imgArray![this.index])
-    }
-  }
-
-  nextImage() {
-    if (this.imgArray) {
-      this.index = (this.index + 1) % this.imgArray.length
-      this.changeImage()
-    }
-  }
-
-  prevImage() {
-    if (this.imgArray) {
-      this.index = (this.index - 1 + this.imgArray.length) % this.imgArray.length
-      this.changeImage()
-    }
-  }
-
-  deleteImage() {
-    if (this.imgArray) {
-      this.imgArray.splice(this.index, 1)
-      this.nextImage()
-    }
-  }
-
-  deleteUploadedImage() {
-
-  }
-
-  entityShown: string = "users";
-  isCreating: boolean = false
-
+  // USERS 
   users?: UserModel[] = [];
   selUser: UserModel = {
     id: -1,
@@ -99,6 +55,31 @@ export class Admin {
     unknown_scans: [],
   };
 
+
+  handleUsersClick() {
+    this.entityShown = 'user'
+
+    this.userService.getAll().subscribe({
+      next: (response) => this.users = response,
+      error: (response) => console.log(response)
+    })
+  }
+
+  handleUserInfo(userData: UserModel) {
+    this.selUser = userData
+    console.log(this.selUser)
+  }
+
+  handleDeleteUser(user: UserModel) {
+    this.userService.deleteById(user.id).subscribe({
+      next: (response) => {
+        console.log(response)
+        this.users = this.users!.filter(item => item !== user)
+      }, error: (response) => console.log(response)
+    })
+  }
+
+  // KNOWNBUG
   kbugs?: KnownBugModel[] = [];
   selBug: KnownBugModel = {
     id: -1,
@@ -129,36 +110,12 @@ export class Admin {
     bites: false,
   };
 
-
-  ubugs?: UnknownBugModel[] = [];
-  selUbug?: UnknownBugModel | null;
-
-  comments?: CommentModel[] = [];
-  selComment?: CommentModel | null;
-
-  regions?: RegionModel[] = [];
-  allRegions?: RegionModel[] = [];
-  selRegion: RegionModel = {
-    id: -1,
-    name: "",
-    coord: [[], [], [], []]
-  };
-
-  handleUsersClick() {
-    this.entityShown = 'user'
-
-    this.userService.getAll().subscribe({
-      next: (response) => this.users = response,
-      error: (response) => console.log(response)
-    })
-  }
-
   handleKnownClick() {
     this.entityShown = 'known'
 
     this.kbugService.getAll().subscribe({
       next: (response) => {
-        this.kbugs = response[0];
+        this.kbugs = response;
         console.log(response)
       },
       error: (response) => console.log(response)
@@ -171,41 +128,7 @@ export class Admin {
       },
       error: (response) => console.log(response)
     })
-
     this.allRegions = this.regions
-
-  }
-
-  handleUnknownClick() {
-    this.entityShown = 'unknown'
-
-    this.ubugService.getAll().subscribe({
-      next: (response) => this.ubugs = response,
-      error: (response) => console.log(response)
-    })
-  }
-
-  handleCommentsClick() {
-    this.entityShown = 'comments'
-
-    this.commService.getAll().subscribe({
-      next: (response) => this.comments = response,
-      error: (response) => console.log(response)
-    })
-  }
-
-  handleRegionsClick() {
-    this.entityShown = 'regions'
-
-    this.kbugService.getAllRegions().subscribe({
-      next: (response) => this.regions = response,
-      error: (response) => console.log(response)
-    })
-  }
-
-  handleUserInfo(userData: UserModel) {
-    this.selUser = userData
-    console.log(this.selUser)
   }
 
   handleKbugInfo(kBugData: KnownBugModel) {
@@ -218,36 +141,8 @@ export class Admin {
     this.regions = this.regions!.filter(
       reg => !this.selBug?.regions.some(r => r.id === reg.id)
     );
-
     console.log(this.selBug)
     console.log(this.regions)
-  }
-
-  handleUbugInfo(uBugData: UnknownBugModel) {
-    console.log(uBugData)
-  }
-
-  handleCommInfo(commData: CommentModel) {
-    console.log(commData)
-  }
-
-  switchChange() {
-    this.isCreating = !this.isCreating
-  }
-
-  handleRegionInfo(regionData: RegionModel) {
-    this.selRegion = regionData
-    console.log(this.selRegion)
-  }
-
-  handleDeleteRegion(region: RegionModel) {
-    this.kbugService.deleteRegion(region.id).subscribe({
-      next: (response) => {
-        console.log(response)
-        this.regions = this.regions!.filter(item => item !== region)
-      },
-      error: (response) => console.log(response)
-    })
   }
 
   handleDeleteKBug(kbug: KnownBugModel) {
@@ -258,73 +153,6 @@ export class Admin {
       },
       error: (response) => console.log(response)
     })
-  }
-
-  handleDeleteComment(comm: CommentModel) {
-    this.commService.deleteById(comm.id).subscribe({
-      next: (response) => {
-        console.log(response)
-        this.comments = this.comments!.filter(item => item !== comm)
-      }, error: (response) => console.log(response)
-    })
-  }
-
-  handleDeleteUbug(ubug: UnknownBugModel) {
-    this.ubugService.deleteById(ubug.id).subscribe({
-      next: (response) => {
-        console.log(response)
-        this.ubugs = this.ubugs!.filter(item => item !== ubug)
-      }, error: (response) => console.log(response)
-    })
-  }
-
-  handleDeleteUser(user: UserModel) {
-    this.userService.deleteById(user.id).subscribe({
-      next: (response) => {
-        console.log(response)
-        this.users = this.users!.filter(item => item !== user)
-      }, error: (response) => console.log(response)
-    })
-  }
-
-  handleSubmitRegions() {
-    if (this.isCreating) {
-      console.log(this.selRegion)
-      const newRegion = {
-        name: this.selRegion.name,
-        coord: this.selRegion.coord
-      };
-
-      this.kbugService.postRegion(newRegion).subscribe({
-        next: (response) => this.regions?.push(response),
-        error: (response) => console.log(response)
-      })
-
-
-      this.selRegion = {
-        id: -1,
-        name: "",
-        coord: [[], [], [], []]
-      };
-    } else {
-      console.log("UPDATE!")
-    }
-  }
-
-  addRegionToKbug(addRegion: RegionModel) {
-    this.selBug.regions.push(addRegion)
-    this.regions = this.regions!.filter(
-      reg => !this.selBug?.regions.some(r => r.id === reg.id)
-    );
-  }
-
-  removeRegionFromKbug(removeRegion: RegionModel) {
-    this.selBug.regions = this.selBug.regions.filter(item => item !== removeRegion)
-    this.regions = this.allRegions
-
-    this.regions = this.regions!.filter(
-      reg => !this.selBug?.regions.some(r => r.id === reg.id)
-    );
   }
 
   handleSubmitKBug() {
@@ -363,7 +191,6 @@ export class Admin {
       formData.append('venomous', String(this.selBug.venomous))
       formData.append('wings', String(this.selBug.wings))
       formData.append('bites', String(this.selBug.bites))
-
 
       this.kbugService.postKBug(formData).subscribe({
         next: (response) => {
@@ -406,5 +233,177 @@ export class Admin {
     else {
 
     }
+  }
+
+  // UNKNOWN BUG
+  ubugs?: UnknownBugModel[] = [];
+  selUbug?: UnknownBugModel | null;
+
+  handleUnknownClick() {
+    this.entityShown = 'unknown'
+
+    this.ubugService.getAll().subscribe({
+      next: (response) => this.ubugs = response[0],
+      error: (response) => console.log(response)
+    })
+  }
+
+  handleUbugInfo(uBugData: UnknownBugModel) {
+    console.log(uBugData)
+  }
+
+  handleDeleteUbug(ubug: UnknownBugModel) {
+    this.ubugService.deleteById(ubug.id).subscribe({
+      next: (response) => {
+        console.log(response)
+        this.ubugs = this.ubugs!.filter(item => item !== ubug)
+      }, error: (response) => console.log(response)
+    })
+  }
+
+  //COMMENTS
+  comments?: CommentModel[] = [];
+  selComment?: CommentModel | null;
+
+  handleCommentsClick() {
+    this.entityShown = 'comments'
+
+    this.commService.getAll().subscribe({
+      next: (response) => this.comments = response,
+      error: (response) => console.log(response)
+    })
+  }
+
+  handleCommInfo(commData: CommentModel) {
+    console.log(commData)
+  }
+
+  handleDeleteComment(comm: CommentModel) {
+    this.commService.deleteById(comm.id).subscribe({
+      next: (response) => {
+        console.log(response)
+        this.comments = this.comments!.filter(item => item !== comm)
+      }, error: (response) => console.log(response)
+    })
+  }
+
+  //REGIONS
+  regions?: RegionModel[] = [];
+  allRegions?: RegionModel[] = [];
+  selRegion: RegionModel = {
+    id: -1,
+    name: "",
+    coord: [[], [], [], []]
+  };
+
+  handleRegionsClick() {
+    this.entityShown = 'regions'
+
+    this.kbugService.getAllRegions().subscribe({
+      next: (response) => this.regions = response,
+      error: (response) => console.log(response)
+    })
+  }
+
+  handleRegionInfo(regionData: RegionModel) {
+    this.selRegion = regionData
+    console.log(this.selRegion)
+  }
+
+  handleDeleteRegion(region: RegionModel) {
+    this.kbugService.deleteRegion(region.id).subscribe({
+      next: (response) => {
+        console.log(response)
+        this.regions = this.regions!.filter(item => item !== region)
+      },
+      error: (response) => console.log(response)
+    })
+  }
+
+  handleSubmitRegions() {
+    if (this.isCreating) {
+      console.log(this.selRegion)
+      const newRegion = {
+        name: this.selRegion.name,
+        coord: this.selRegion.coord
+      };
+
+      this.kbugService.postRegion(newRegion).subscribe({
+        next: (response) => this.regions?.push(response),
+        error: (response) => console.log(response)
+      })
+
+      this.selRegion = {
+        id: -1,
+        name: "",
+        coord: [[], [], [], []]
+      };
+    } else {
+      console.log("UPDATE!")
+    }
+  }
+
+  // OTHER
+  switchChange() {
+    this.isCreating = !this.isCreating
+  }
+
+  addRegionToKbug(addRegion: RegionModel) {
+    this.selBug.regions.push(addRegion)
+    this.regions = this.regions!.filter(
+      reg => !this.selBug?.regions.some(r => r.id === reg.id)
+    );
+  }
+
+  removeRegionFromKbug(removeRegion: RegionModel) {
+    this.selBug.regions = this.selBug.regions.filter(item => item !== removeRegion)
+    this.regions = this.allRegions
+
+    this.regions = this.regions!.filter(
+      reg => !this.selBug?.regions.some(r => r.id === reg.id)
+    );
+  }
+
+  onFileSelected(event: Event) {
+    const input = event.target as HTMLInputElement
+    if (input.files && input.files[0]) {
+      for (let i = 0; i < input.files.length; i++) {
+        this.imgArray!.push(input.files[i])
+      }
+      this.changeImage()
+    }
+  }
+
+  changeImage() {
+    if (this.imgArray) {
+      const reader = new FileReader()
+      reader.onload = () => this.previewUrl = reader.result
+      reader.readAsDataURL(this.imgArray![this.index])
+    }
+  }
+
+  nextImage() {
+    if (this.imgArray) {
+      this.index = (this.index + 1) % this.imgArray.length
+      this.changeImage()
+    }
+  }
+
+  prevImage() {
+    if (this.imgArray) {
+      this.index = (this.index - 1 + this.imgArray.length) % this.imgArray.length
+      this.changeImage()
+    }
+  }
+
+  deleteImage() {
+    if (this.imgArray) {
+      this.imgArray.splice(this.index, 1)
+      this.nextImage()
+    }
+  }
+
+  deleteUploadedImage() {
+
   }
 }

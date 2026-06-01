@@ -1,12 +1,13 @@
 import { Component, HostListener, OnInit } from '@angular/core';
 import { UnknownBugImage } from '../ui-components/unknown-bug-image/unknown-bug-image';
-import { RouterModule } from '@angular/router';
+import { Router, RouterModule } from '@angular/router';
 import { AppliedFilter } from '../ui-components/applied-filter/applied-filter';
 import { UnknownBugModel } from '../../models/unknown-bug.model';
 import { UnknownBugService } from '../../services/unknown-bug.service';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import countryData from '../../data/coords.json'
+import { debounceTime, Subject } from 'rxjs';
 
 @Component({
   selector: 'app-search-page',
@@ -15,6 +16,7 @@ import countryData from '../../data/coords.json'
   styleUrl: './search-page.scss'
 })
 export class SearchPage implements OnInit {
+
 
   bugs: UnknownBugModel[] = []
   width: number = window.innerWidth;
@@ -29,6 +31,11 @@ export class SearchPage implements OnInit {
   filters_sizes: any;
   filters_countries: any;
 
+  filterChange = new Subject<void>();
+
+  selectedFile: File | null = null;
+
+
   public countryData = countryData as Record<string, { name: string; code3: string; coordinates: number[] }>;
 
   filters = {
@@ -40,7 +47,7 @@ export class SearchPage implements OnInit {
   };
 
 
-  constructor(private ubugService: UnknownBugService) { }
+  constructor(private ubugService: UnknownBugService, private router: Router) { }
 
   ngOnInit(): void {
 
@@ -50,6 +57,13 @@ export class SearchPage implements OnInit {
     } else {
       this.size_of_comp = 15
     }
+
+    this.filterChange.pipe(debounceTime(2000)).subscribe(() => this.loadUbugs(true))
+
+  }
+
+  ngOnDestroy(): void {
+    this.filterChange.complete();
   }
 
   loadUbugs(reset = false) {
@@ -117,23 +131,42 @@ export class SearchPage implements OnInit {
     const arr = this.filters[filterKey] as string[];
     const idx = arr.indexOf(value);
     idx === -1 ? arr.push(value) : arr.splice(idx, 1);
+
+    this.filterChange.next()
+
   }
 
   toggleBoolFilter(filterKey: keyof typeof this.filters, value: boolean) {
     (this.filters as any)[filterKey] = (this.filters[filterKey] === value ? null : value) as any;
+
+    this.filterChange.next()
+
   }
 
 
 
   @HostListener('window:scroll')
   onScroll() {
-    const threshold = 500; 
+    const threshold = 500;
     const position = window.innerHeight + window.scrollY;
     const height = document.documentElement.scrollHeight;
 
-    console.log(threshold, position, height)
     if (position >= height - threshold) {
       this.loadUbugs(false);
+    }
+  }
+
+  removeLegs() {
+    this.filters.legs = null
+    this.filterChange.next()
+  }
+
+
+  onFileSelected(event: Event) {
+    const input = event.target as HTMLInputElement
+    if (input.files && input.files[0]) {
+      this.selectedFile = input.files[0]
+      this.router.navigate(["/search/uploaded"], { state: { img: this.selectedFile } })
     }
   }
 

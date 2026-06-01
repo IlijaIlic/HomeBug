@@ -3,11 +3,12 @@ import * as L from 'leaflet'
 import { REGIONS } from '../../data/regions';
 import { KnownBugModel } from '../../models/known-bug.model';
 import { KnownBugService } from '../../services/known-bug-service';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { NgIcon } from '@ng-icons/core';
 import { UserService } from '../../services/user.service';
 import { AuthService } from '../auth/auth.service';
 import { HabitatsService } from '../../services/habitats.service';
+import * as GeoJSON from 'geojson';
 
 type HabitatKey = "grass" | "forest" | "garden" | "wet" | "desert" | "mountain" | "rainforest" | "agro";
 
@@ -24,7 +25,8 @@ export class KnownBug implements AfterViewInit, OnInit {
     private userService: UserService,
     private route: ActivatedRoute,
     private authService: AuthService,
-    public habitatService: HabitatsService
+    private router: Router,
+    public habitatService: HabitatsService,
   ) { }
 
   map!: L.Map;
@@ -68,6 +70,8 @@ export class KnownBug implements AfterViewInit, OnInit {
       next: (response) => {
         this.bug = response
         console.log(response)
+
+        this.addRegions()
       },
       error: (response) => console.log(response)
     })
@@ -94,18 +98,28 @@ export class KnownBug implements AfterViewInit, OnInit {
       attribution: '© OpenStreetMap'
     }).addTo(this.map);
 
-    this.addRegions();
   }
 
   addRegions() {
-    const southEurope = REGIONS["eastAsia"];
-
-    L.geoJSON(southEurope, {
-      style: {
-        color: "green",
-        fillOpacity: 0.3
-      }
-    }).addTo(this.map);
+    const colors = [
+      '#e74c3c', '#3498db', '#2ecc71', '#f39c12', '#9b59b6',
+      '#1abc9c', '#e67e22', '#e91e63', '#00bcd4', '#8bc34a'
+    ];
+    this.bug.regions.forEach((region, index) => {
+      const color = colors[index % colors.length];
+      L.geoJSON({
+        type: "Feature",
+        geometry: { type: "Polygon", coordinates: [region.coord] },
+        properties: {}
+      } as GeoJSON.Feature, {
+        style: {
+          color: color,
+          fillColor: color,
+          fillOpacity: 0.3,
+          weight: 2
+        }
+      }).addTo(this.map);
+    });
   }
 
   nextImage() {
@@ -136,6 +150,10 @@ export class KnownBug implements AfterViewInit, OnInit {
   }
 
 
+  goToEncyclopedia(filterKey: string, value: any) {
+    this.router.navigate(['/encyclopedia'], {
+      queryParams: { [filterKey]: value }
+    });
+  }
 
-  
 }

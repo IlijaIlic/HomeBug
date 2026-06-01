@@ -18,8 +18,6 @@ import countriesData from '../../data/coords.json'
 })
 export class AfterUploadNotFound implements OnInit {
 
-  constructor(private uBugService: UnknownBugService, private http: HttpClient) { }
-
 
   previewUrl: string | ArrayBuffer | null = null;
   selectedFile: File | null = null;
@@ -37,6 +35,16 @@ export class AfterUploadNotFound implements OnInit {
     comments: [],
     user: null,
     countryCode: ""
+  }
+
+  constructor(private uBugService: UnknownBugService, private router: Router) {
+    const state = this.router.currentNavigation()?.extras.state
+    this.selectedFile = state?.['img']
+    if (this.selectedFile) {
+      const reader = new FileReader()
+      reader.onload = () => this.previewUrl = reader.result
+      reader.readAsDataURL(this.selectedFile)
+    }
   }
 
   postUnknownBug(): void {

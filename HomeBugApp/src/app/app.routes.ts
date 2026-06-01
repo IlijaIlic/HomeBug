@@ -13,64 +13,25 @@ import { AfterUpload } from './after-upload/after-upload';
 import { AfterUploadNotFound } from './after-upload-not-found/after-upload-not-found';
 import { Admin } from './admin/admin';
 import { BugMap } from './bug-map/bug-map';
+import { authGuard } from './auth/auth.guard';
+import { adminGuard } from './auth/admin.guard';
 
 export const routes: Routes = [
-    {
-        path: '',
-        component: Landing,
+    { path: '', component: Landing },
+    { path: 'register', component: Register },
+    { path: 'login', component: Login },
+    { path: 'bugmap', component: BugMap },
+    { path: 'contact', component: Contact },
+    { path: 'encyclopedia', component: Encyclopedia},
 
-    },
-    {
-        path: 'register',
-        component: Register
-    },
-    {
-        path: 'login',
-        component: Login
-    },
-    {
-        path: 'bugmap',
-        component: BugMap
-    },
-    {
-        path: 'profile',
-        component: UserProfile
-    },
-    {
-        path: 'encyclopedia',
-        component: Encyclopedia
-    },
-    {
-        path: 'encyclopedia/known/:id',
-        component: KnownBug
-    },
-    {
-        path: 'search',
-        component: SearchPage
-    },
-    {
-        path: 'search/uploaded',
-        component: AfterUpload
-    },
-    {
-        path: "search/notfound",
-        component: AfterUploadNotFound
-    },
-    {
-        path: 'contact',
-        component: Contact
-    },
-    {
-        path: 'search/unknown/:id',
-        component: UnknownBug
-    },
-    {
-        path:'admin',
-        component: Admin
-    },
-    {
-        path: '**',
-        component: NotFound
-    },
+    { path: 'profile', component: UserProfile, canActivate: [authGuard] },
+    { path: 'encyclopedia/known/:id', component: KnownBug, canActivate: [authGuard] },
+    { path: 'search', component: SearchPage, canActivate: [authGuard] },
+    { path: 'search/uploaded', component: AfterUpload, canActivate: [authGuard] },
+    { path: "search/notfound", component: AfterUploadNotFound, canActivate: [authGuard] },
+    { path: 'search/unknown/:id', component: UnknownBug, canActivate: [authGuard] },
 
+    { path: 'admin', component: Admin, canActivate: [authGuard, adminGuard] },
+
+    { path: '**', component: NotFound },
 ];

@@ -121,11 +121,20 @@
         <div class="known-tags">
             <div class="tags-title">Tags:</div>
             <div class="tags-cont">
-                <button type="button" class="tag-item">Insecta</button>
-                <button type="button" class="tag-item">Oval</button>
-                <button type="button" class="tag-item">Color</button>
-                <button type="button" class="tag-item">Size</button>
-                <button type="button" class="tag-item">Wings</button>
+                <button type="button" class="tag-item" (click)="goToEncyclopedia('colors', bug.color)">{{bug.color}}</button>
+                <button type="button" class="tag-item" (click)="goToEncyclopedia('bodyTypes', bug.body_type)">{{bug.body_type}}</button>
+                <button type="button" class="tag-item" (click)="goToEncyclopedia('legs', bug.no_legs)">Number of legs: {{bug.no_legs}}</button>
+                <button type="button" class="tag-item" (click)="goToEncyclopedia('sizes', bug.size)">{{bug.size}}</button>
+                <button type="button" class="tag-item" (click)="goToEncyclopedia('wings', bug.wings)">{{bug.wings ? 'Has wings' : 'Doesn\'t have wings'}}</button>
+                @for (hab of bug.habitats; track $index) {
+                    <button type="button" class="tag-item" (click)="goToEncyclopedia('habitats', hab)">{{hab.toLocaleUpperCase()}}</button>
+                }
+                <button type="button" class="tag-item" (click)="goToEncyclopedia('diets', bug.diet)">{{bug.diet}}</button>
+                <button type="button" class="tag-item" (click)="goToEncyclopedia('dangerous', bug.danger_to_humans)">{{bug.danger_to_humans ? 'Dangerous' : 'Not dangerous'}}</button>
+                <button type="button" class="tag-item" (click)="goToEncyclopedia('behaviours', bug.behaviour)">{{bug.behaviour}}</button>
+                <button type="button" class="tag-item" (click)="goToEncyclopedia('venomous', bug.venomous)">{{bug.venomous ? 'Venomous' : 'Not venomous'}}</button>
+                <button type="button" class="tag-item" (click)="goToEncyclopedia('bites', bug.bites)">{{bug.bites ? 'Bites' : 'Doesn\'t bite'}}</button>
+                <button type="button" class="tag-item" (click)="goToEncyclopedia('stings', bug.stings)">{{bug.stings ? 'Stings' : 'Doesn\'t sting'}}</button>
             </div>
         </div>
     </div>

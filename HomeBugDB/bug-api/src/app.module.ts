@@ -13,6 +13,8 @@ import { ConfigModule } from '@nestjs/config';
 import { ServeStaticModule } from '@modules/@nestjs/serve-static';
 import { join } from 'path';
 import { RatingModule } from './rating/rating.module';
+import { APP_GUARD } from '@modules/@nestjs/core';
+import { RolesGuard } from '@auth/roles.guard';
 
 @Module({
   imports: [
@@ -32,6 +34,10 @@ import { RatingModule } from './rating/rating.module';
       synchronize: true,
     }), UserModule, KnownBugModule, UnknownBugModule, RegionModule, TaxonomyModule, CommentModule, AuthModule, RatingModule],
   controllers: [AppController],
-  providers: [AppService],
+  providers: [AppService,
+    {
+      provide: APP_GUARD, useClass: RolesGuard
+    }
+  ],
 })
 export class AppModule { }

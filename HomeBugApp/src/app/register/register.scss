@@ -8,7 +8,23 @@
     left: 0;
 }
 
+.hb-flex-col {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-self: center;
+}
 
+.hb-input-error {
+    font-size: 0.9rem;
+    color: rgb(230, 58, 58);
+    margin-left: 1rem;
+}
+
+.spacing {
+    font-size: 0.9rem;
+    color: rgb(255, 255, 255);
+}
 
 .hb-register-page {
     background-color: $hb-background;
@@ -226,7 +242,7 @@ hr {
     cursor: pointer;
 }
 
-.gender-button.active{
+.gender-button.active {
     background-color: $hb-dark-green;
 
 }

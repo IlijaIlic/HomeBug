@@ -31,34 +31,87 @@
             <h1 class="hb-register-text1">Sign Up</h1>
             <h5 class="hb-register-text2">Join the HomeBug community!</h5>
         </div>
-        <form class="hb-register-form">
+        <form class="hb-register-form" [formGroup]="regForm" (ngSubmit)="handleRegister()">
             <h1 class="hb-create-text">Create a <span>new</span> account.</h1>
 
 
 
 
             <div class="hb-flex-row">
-                <app-input-field placeholder="John" label="First Name" [(value)]="userData.name" />
-                <app-input-field placeholder="Doe" label="Last Name" [(value)]="userData.surname" />
+                <div class="hb-flex-col">
+
+                    <app-input-field placeholder="John" label="First Name" [(value)]="userData.name"
+                        formControlName="name" />
+                    @if (regForm.get('name')?.invalid && regForm.get('name')?.touched) {
+                    @if (regForm.get('name')?.errors?.['required']) {
+                    <div class="hb-input-error">Name is required.</div>
+                    }
+
+                    }
+                </div>
+                <div class="hb-flex-col">
+                    <app-input-field placeholder="Doe" label="Last Name" [(value)]="userData.surname"
+                        formControlName="surname" />
+                    @if (regForm.get('surname')?.invalid && regForm.get('surname')?.touched) {
+                    @if (regForm.get('surname')?.errors?.['required']) {
+                    <div class="hb-input-error">Surname is required.</div>
+                    }
+
+                    }
+                </div>
             </div>
 
-            <div class="hb-flex-row">
-                <app-input-field placeholder="john.doe@gmail.com" label="Email" [(value)]="userData.email" />
-                <app-input-field placeholder="" label="Password" type="password" [(value)]="userData.password" />
+            <div class="hb-flex-col">
+                <div class="hb-flex-col">
+
+                    <app-input-field placeholder="john.doe@gmail.com" label="Email" [(value)]="userData.email"
+                        formControlName="email" [width]="'20rem'" />
+
+                    @if (regForm.get('email')?.invalid && regForm.get('email')?.touched) {
+                    @if (regForm.get('email')?.errors?.['required']) {
+                    <div class="hb-input-error">Email is required.</div>
+                    }
+                    @if (regForm.get('email')?.errors?.['email']) {
+                    <div class="hb-input-error">Enter a valid email address.</div>
+                    }
+                    }
+                </div>
+
+                <div class="hb-flex-col">
+
+                    <app-input-field placeholder="" label="Password" type="password" [(value)]="userData.password"
+                        formControlName="password" [width]="'20rem'" />
+
+                    @if (regForm.get('password')?.invalid && regForm.get('password')?.touched) {
+                    @if (regForm.get('password')?.errors?.['required']) {
+                    <div class="hb-input-error">Password is required.</div>
+                    }
+                    @if (regForm.get('password')?.errors?.['minlength']) {
+                    <div class="hb-input-error">Password must be at least 8 characters long.</div>
+                    }
+                    @if (regForm.get('password')?.errors?.['maxlength']) {
+                    <div class="hb-input-error">Password can't be longer than 32 characters.</div>
+                    }
+                    }
+                </div>
             </div>
+
+
 
             <div class="hb-flex-row hb-margintop">
 
-                <button type="button" class="gender-button" (click)="this.userData.gender='female'" [class.active]="this.userData.gender === 'female'">
+                <button type="button" class="gender-button" (click)="this.userData.gender='female'"
+                    [class.active]="this.userData.gender === 'female'">
                     <img src="../../assets/profileavatarfemale.png" alt="female avatar" />
                 </button>
 
-                <button type="button" class="gender-button" (click)="this.userData.gender='male'" [class.active]="this.userData.gender === 'male'">
+                <button type="button" class="gender-button" (click)="this.userData.gender='male'"
+                    [class.active]="this.userData.gender === 'male'">
                     <img src="../../assets/profileavatarmale.png" alt="male avatar" />
                 </button>
-            </div> 
-            
-            <button type="submit" class="hb-register-button" (click)="handleRegister()">Register</button>
+            </div>
+
+            <button type="submit" class="hb-register-button">Register</button>
 
             <p class="hb-already-have">You already have an account? <span class="hb-login-color">Login</span> right
                 here!</p>

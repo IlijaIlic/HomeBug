@@ -62,7 +62,7 @@
 }
 
 .found-text {
-    font-size: clamp(0.5rem , 4vw, 1.5rem);
+    font-size: clamp(0.5rem, 4vw, 1.5rem);
     color: $hb-light-green;
 }
 
@@ -75,5 +75,43 @@
     justify-content: space-evenly;
 
     margin-bottom: 3rem;
+    border-radius: 2rem;
+    box-shadow: $hb-box-shadow;
+    padding: 2rem;
+    margin-inline: 3rem;
 
+    background-color: white;
+    border: 2px solid $hb-light-green;
+    outline: 2px solid white;
+
+}
+
+.not-sati-cont{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 2rem;
+}
+
+.not-sati-text {
+    color: $hb-dark-green;
+    font-size: 2rem;
+}
+
+.not-sati-btn {
+    width: fit-content;
+    font-family: $hb-main-font;
+    padding: 1rem;
+    font-size: 1.2rem;
+    border: none;
+    background-color: $hb-yellow;
+    border-radius: 2rem;
+    box-shadow: $hb-box-shadow;
+    color: $hb-dark-green;
+    font-weight: 600;
+}
+
+.not-sati-btn:hover {
+    background-color: $hb-yellow-hover;
+    cursor: pointer;
 }

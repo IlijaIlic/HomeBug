@@ -34,7 +34,12 @@ export class CommentService {
       user: { id: userID }
     });
 
-    return this.comRepo.save(com);
+    const [response, user] = await Promise.all([
+      this.comRepo.save(com),
+      this.userRepo.findOneBy({ id: userID })
+    ])
+
+    return [response, user]
   }
 
   async findAll() {

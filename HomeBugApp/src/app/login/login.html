@@ -31,21 +31,47 @@
             <h1 class="hb-register-text1">Login</h1>
             <h5 class="hb-register-text2">We are glad to have you back!</h5>
         </div>
-        <form class="hb-register-form">
+        <form class="hb-register-form" [formGroup]="logForm" (ngSubmit)="handleLogin()">
             <h1 class="hb-create-text">Sign in to an <span>existing</span> account.</h1>
 
-            <div class="hb-flex-row">
+            <div class="hb-flex-col">
+                <div class="hb-flex-col-error">
+                    <app-input-field placeholder="john.doe@gmail.com" label="Email" [(value)]="loginData.email"
+                        formControlName="email"  [width]="'20rem'" />
 
-                <app-input-field placeholder="john.doe@gmail.com" label="Email" [(value)]="loginData.email" />
-                <app-input-field placeholder="" label="Password" type="password" [(value)]="loginData.password" />
+                    @if (logForm.get('email')?.invalid && logForm.get('email')?.touched) {
+                    @if (logForm.get('email')?.errors?.['required']) {
+                    <div class="hb-input-error">Email is required.</div>
+                    }
+                    @if (logForm.get('email')?.errors?.['email']) {
+                    <div class="hb-input-error">Enter a valid email address.</div>
+                    }
+                    }
+                </div>
+                <div class="hb-flex-col-error">
+                    <app-input-field placeholder="" label="Password" type="password" [(value)]="loginData.password"
+                        formControlName="password"  [width]="'20rem'" />
+
+                    @if (logForm.get('password')?.invalid && logForm.get('password')?.touched) {
+                    @if (logForm.get('password')?.errors?.['required']) {
+                    <div class="hb-input-error">Password is required.</div>
+                    }
+                    @if (logForm.get('password')?.errors?.['minlength']) {
+                    <div class="hb-input-error">Password must be at least 8 characters long.</div>
+                    }
+                    @if (logForm.get('password')?.errors?.['maxlength']) {
+                    <div class="hb-input-error">Password can't be longer than 32 characters.</div>
+                    }
+                    }
+                </div>
             </div>
             <div class="login-cont">
 
-                <button type="submit" class="hb-register-button" (click)="handleLogin()">Login</button>
-               
+                <button type="submit" class="hb-register-button">Login</button>
+
             </div>
-             <p class="hb-already-have">You don't have an account? <span class="hb-login-color">Register</span> right
-                    here!</p>
+            <p class="hb-already-have">You don't have an account? <span class="hb-login-color">Register</span> right
+                here!</p>
         </form>
     </div>
 </div>

@@ -47,8 +47,13 @@ export class KnownBugController {
   }
 
   @Get()
-  findAll(@Query() filters: KnownFilterDto) {
-    return this.knownBugService.findAll(filters);
+  findFiltered(@Query() filters: KnownFilterDto) {
+    return this.knownBugService.findFiltered(filters);
+  }
+
+  @Get('/all')
+  findAll() {
+    return this.knownBugService.findAll();
   }
 
   @Get(':id')

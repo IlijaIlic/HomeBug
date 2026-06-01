@@ -54,34 +54,58 @@
 
 
 
-
-
-
-.hb-search-imgdrop {
+.dragdrop-cont {
     position: relative;
+    font-family: $hb-main-font;
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    gap: 4rem;
+    padding-inline: 2rem;
 }
 
-.hb-search-imgdrop img {
-    width: clamp(10rem, 20vw, 15rem);
-    background-color: $hb-background;
-    box-shadow: $hb-box-shadow;
-    padding-block: clamp(0.1rem, 1vw, 2rem);
-    padding-inline: clamp(2rem, 10vw, 10rem);
-    border-radius: 5rem;
+.dragdrop-textbig {
+    color: white;
+    font-size: clamp(1rem, 5vw, 4rem);
+    font-weight: 800;
 
+}
+
+.dragdrop-textsmall {
+    color: rgba(255, 255, 255, 0.664);
+    font-size: clamp(0.5rem, 3vw, 2.5rem);
+    font-weight: 400;
+}
+
+.hb-search-imgdrop {
+    background-color: transparent;
+    border: none;
+
+    img {
+        width: clamp(10rem, 20vw, 20rem);
+        background-color: white;
+        box-shadow: $hb-box-shadow;
+        border: $hb-light-green 2px solid;
+        outline: white 2px solid;
+        padding: clamp(1rem, 2vw, 5rem);
+        border-radius: 5rem;
+        transition: background-color 0.15s ease-in-out;
+    }
+
+    img:hover {
+        background-color: rgb(226, 243, 226);
+        cursor: pointer;
+    }
 }
 
 
 .hb-search-unknown {
-
     display: flex;
     flex-direction: row;
     flex-wrap: wrap;
     gap: 2rem;
-
     justify-content: center;
-
-
 }
 
 .hb-unknown img {
@@ -89,7 +113,6 @@
     height: 15rem;
     object-fit: cover;
     background-color: red;
-
 }
 
 .hb-filters {
@@ -112,7 +135,6 @@
     box-shadow: $hb-box-shadow;
     border: 2px solid $hb-light-green;
     outline: 2px solid white;
-
 }
 
 
@@ -179,7 +201,7 @@
 }
 
 
-.filter-submit{
+.filter-submit {
     cursor: pointer;
     border-radius: 1rem;
     box-shadow: $hb-box-shadow;
@@ -194,70 +216,73 @@
     margin-top: 2rem;
 }
 
-.filter-submit:hover{
+.filter-submit:hover {
     background-color: $hb-highlight-green;
 }
 
 .loader {
-  width: 48px;
-  height: 48px;
-  border-radius: 50%;
-  display: inline-block;
-  position: relative;
-  border: 3px solid;
-  border-color: $hb-dark-green $hb-dark-green transparent;
-  box-sizing: border-box;
-  animation: rotation 1s linear infinite;
-  align-self: center;
-  margin-block: 2rem;
-}
-.loader::after {
-  content: '';  
-  box-sizing: border-box;
-  position: absolute;
-  left: 0;
-  right: 0;
-  top: 0;
-  bottom: 0;
-  margin: auto;
-  border: 3px solid;
-  border-color: transparent $hb-light-green $hb-light-green;
-  width: 24px;
-  height: 24px;
-  border-radius: 50%;
-  animation: rotationBack 0.5s linear infinite;
-  transform-origin: center center;
-}
-
-.nomore{
+    width: 48px;
+    height: 48px;
+    border-radius: 50%;
+    display: inline-block;
+    position: relative;
+    border: 3px solid;
+    border-color: $hb-dark-green $hb-dark-green transparent;
+    box-sizing: border-box;
+    animation: rotation 1s linear infinite;
     align-self: center;
     margin-block: 2rem;
 }
 
-.country-fullname{
+.loader::after {
+    content: '';
+    box-sizing: border-box;
+    position: absolute;
+    left: 0;
+    right: 0;
+    top: 0;
+    bottom: 0;
+    margin: auto;
+    border: 3px solid;
+    border-color: transparent $hb-light-green $hb-light-green;
+    width: 24px;
+    height: 24px;
+    border-radius: 50%;
+    animation: rotationBack 0.5s linear infinite;
+    transform-origin: center center;
+}
+
+.nomore {
+    align-self: center;
+    margin-block: 2rem;
+}
+
+.country-fullname {
     font-size: 1rem;
     font-weight: 400;
     margin-left: 1.5rem;
 }
 
 @keyframes rotation {
-  0% {
-    transform: rotate(0deg);
-  }
-  100% {
-    transform: rotate(360deg);
-  }
-} 
-    
-@keyframes rotationBack {
-  0% {
-    transform: rotate(0deg);
-  }
-  100% {
-    transform: rotate(-360deg);
-  }
+    0% {
+        transform: rotate(0deg);
+    }
+
+    100% {
+        transform: rotate(360deg);
+    }
 }
-    
+
+@keyframes rotationBack {
+    0% {
+        transform: rotate(0deg);
+    }
+
+    100% {
+        transform: rotate(-360deg);
+    }
+}
+
 
 @media (max-width: 1200px) {
     .hb-search-cont {

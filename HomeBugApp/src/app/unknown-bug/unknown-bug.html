@@ -1,5 +1,8 @@
 <div class="unknown-bug-page">
-
+    @if (deleteModalVisible) {
+    <app-modal [message]="'Do you want to delete your unknown bug?'" [title]="'Delete confirmation'" [hasNegativeBtn]="true"
+        (negativeClick)="closeModal()" (xClick)="closeModal()" (positiveClick)="deleteUbug()" [negativeBtnText]="'Cancel'" [positiveBtnText]="'Delete'"></app-modal>
+    }
 
     <div class="unknown-user-placed">
         <img class="unknown-bug-image" [src]="apirul + bug?.picture_url" alt="image" />
@@ -33,6 +36,9 @@
                     <div>
                         <span>{{bug?.wings ? "Has wings" : "No wings"}}</span>
                     </div>
+                    @if(this.userOwns){
+                    <button class="delete-unk" (click)="handleDelete()">Delete your unknown bug!</button>
+                    }
                 </div>
             </div>
             <div class="unknown-text-profile">

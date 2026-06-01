@@ -3,6 +3,7 @@ import { Injectable } from "@angular/core";
 import { Observable } from "rxjs";
 import { CommentModel } from "../models/comment.model";
 import { environment } from "../environment/environment";
+import { UserModel } from "../models/user.model";
 
 @Injectable({ providedIn: 'root' })
 export class CommentService {
@@ -21,8 +22,8 @@ export class CommentService {
         return this.http.delete(`${environment.apiUrl}/comment/` + id)
     }
 
-    postComment(body: any): Observable<any> {
-        return this.http.post(`${environment.apiUrl}/comment`, body)
+    postComment(body: any): Observable<[CommentModel, UserModel]> {
+        return this.http.post<[CommentModel, UserModel]>(`${environment.apiUrl}/comment`, body)
     }
 
     likeComment(id: number): Observable<any>{

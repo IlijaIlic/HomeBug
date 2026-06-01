@@ -9,12 +9,12 @@ import { RegionModel } from "../models/region.model";
 export class KnownBugService {
     constructor(private http: HttpClient) { }
 
-    getAll(filters: any = {}): Observable<[KnownBugModel[], any, any, any, any, any, any, any]> {
-        return this.http.get<[KnownBugModel[], any, any, any, any, any, any, any]>(`${environment.apiUrl}/known-bug`, { params: this.buildParams(filters)})
+    getFiltered(filters: any = {}): Observable<[KnownBugModel[], any, any, any, any, any, any, any, any]> {
+        return this.http.get<[KnownBugModel[], any, any, any, any, any, any, any, any]>(`${environment.apiUrl}/known-bug`, { params: this.buildParams(filters) })
     }
 
     private buildParams(filters: any): HttpParams {
-        let params = new HttpParams();  
+        let params = new HttpParams();
         Object.entries(filters).forEach(([key, value]) => {
             if (Array.isArray(value)) {
                 value.forEach(v => params = params.append(key, v));
@@ -23,6 +23,11 @@ export class KnownBugService {
             }
         });
         return params;
+    }
+
+    getAll(): Observable<KnownBugModel[]> {
+        return this.http.get<KnownBugModel[]>(`${environment.apiUrl}/known-bug/all`)
+
     }
 
     getById(id: number): Observable<KnownBugModel> {

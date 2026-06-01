@@ -7,12 +7,13 @@ import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { CommentService } from '../../services/comment.service';
 import { AuthService } from '../auth/auth.service';
+import { Modal } from '../ui-components/modal/modal';
 
 type ReputationKey = -2 | -1 | 0 | 1 | 2;
 
 @Component({
   selector: 'app-unknown-bug',
-  imports: [Comment, CommonModule, FormsModule],
+  imports: [Comment, CommonModule, FormsModule, Modal],
   templateUrl: './unknown-bug.html',
   styleUrl: './unknown-bug.scss',
 })
@@ -22,6 +23,7 @@ export class UnknownBug implements OnInit {
   countryCode = 'rs';
   commentText = ""
   userOwns: boolean = false
+  deleteModalVisible = false
   public apirul = "http://localhost:3000/"
 
   reputations: Record<ReputationKey, string> = {
@@ -47,7 +49,13 @@ export class UnknownBug implements OnInit {
       this.ubugService.getById(id).subscribe({
         next: (response) => {
           this.bug = response;
-          this.bug.comments = this.bug!.comments.sort((a, b) => b.rating - a.rating)
+          this.bug.comments = this.bug.comments.sort((a, b) => {
+            const aIsOwner = a.user?.id == this.authService.currentUserSubject.value.sub ? 1 : 0;
+            const bIsOwner = b.user?.id == this.authService.currentUserSubject.value.sub ? 1 : 0;
+
+            if (aIsOwner !== bIsOwner) return bIsOwner - aIsOwner; 
+            return b.rating - a.rating; 
+          });
           if (this.bug.user?.id == this.authService.currentUserSubject.value.sub) {
             console.log("MOJ UBUG")
             this.userOwns = true
@@ -84,8 +92,11 @@ export class UnknownBug implements OnInit {
 
     this.commentService.postComment(com).subscribe({
       next: (response) => {
-        this.bug?.comments.push(response)
+        console.log(response)
+        response[0].user = response[1]
+        this.bug?.comments.push(response[0])
         this.commentText = ""
+        
       },
       error: (response) => console.log(response)
     })
@@ -110,4 +121,25 @@ export class UnknownBug implements OnInit {
       })
     }
   }
+
+  handleDelete(){
+    this.deleteModalVisible = true
+  }
+
+  closeModal(){
+    this.deleteModalVisible = false
+  }
+
+  deleteUbug(){
+    if(this.bug){
+      this.ubugService.deleteById(this.bug.id).subscribe({
+        next: (response) => {
+          console.log(response)
+          this.router.navigate(['/search'])
+        },
+        error: (response) => console.log(response)
+      })
+    }
+  }
+  
 }

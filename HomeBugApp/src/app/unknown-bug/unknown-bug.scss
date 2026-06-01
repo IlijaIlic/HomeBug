@@ -119,6 +119,23 @@ svg {
     
 }
 
+.delete-unk{
+    font-family: $hb-main-font;
+    padding: 0.7rem;
+    font-size: 1rem;
+    margin-top: 2rem;
+    border: none;
+    box-shadow: $hb-box-shadow;
+    border-radius:  2rem;
+    background-color: $hb-yellow;
+    color: $hb-dark-green;
+}
+
+.delete-unk:hover{
+    cursor: pointer;
+    background-color: $hb-yellow-hover;
+}
+
 
 .username-span:hover .user-popup {
     display: flex;

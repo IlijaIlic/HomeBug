@@ -3,6 +3,13 @@ import { KnownBug } from "@known-bug/entities/known-bug.entity";
 import { UnknownBug } from "@unknown-bug/entities/unknown-bug.entity";
 import { Column, Entity, JoinTable, ManyToMany, OneToMany, PrimaryGeneratedColumn } from "typeorm";
 
+
+export enum UserRole {
+    ADMIN = 'admin',
+    USER = 'user',
+    GUEST = 'guest'
+}
+
 @Entity()
 export class User {
 
@@ -52,5 +59,12 @@ export class User {
     @ManyToMany(() => KnownBug)
     @JoinTable()
     saved_bugs: KnownBug[];
+
+    @Column({
+        type: 'enum',
+        enum: UserRole,
+        default: UserRole.USER
+    })
+    role: UserRole
 
 }
