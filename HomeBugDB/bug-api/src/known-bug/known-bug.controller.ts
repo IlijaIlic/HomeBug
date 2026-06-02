@@ -56,6 +56,11 @@ export class KnownBugController {
     return this.knownBugService.findAll();
   }
 
+  @Get('/names')
+  findNames(@Query('searchField') searchField: string) {
+    return this.knownBugService.findNames(searchField);
+  }
+
   @Get(':id')
   findOne(@Param('id') id: string) {
     return this.knownBugService.findOne(+id);

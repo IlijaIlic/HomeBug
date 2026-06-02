@@ -47,6 +47,8 @@ export class UnknownBugController {
     return this.unknownBugService.findOne(+id);
   }
 
+  
+
   @Patch(':id')
   update(@Param('id') id: string, @Body() updateUnknownBugDto: UpdateUnknownBugDto) {
     return this.unknownBugService.update(+id, updateUnknownBugDto);

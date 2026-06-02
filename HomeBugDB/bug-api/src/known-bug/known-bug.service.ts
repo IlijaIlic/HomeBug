@@ -61,7 +61,10 @@ export class KnownBugService {
       .take(limit);
 
     if (filters.common_name) {
-      qb.andWhere('known-bug.common_name ILIKE :common_name', { common_name: `%${filters.common_name}%` });
+      qb.andWhere(
+        '(known-bug.common_name ILIKE :name OR known-bug.latin_name ILIKE :name)',
+        { name: `%${filters.common_name}%` }
+      );
     }
     if (filters.regions?.length) {
       qb.andWhere('regions.name IN (:...regions)', { regions: filters.regions });
@@ -171,5 +174,21 @@ export class KnownBugService {
     } else {
       return `No known bug found with this id:  #${id}`;
     }
+  }
+
+  async findNames(searchField: string) {
+    const results = await this.knownBugRepo
+      .createQueryBuilder('bug')
+      .select(['bug.common_name', 'bug.latin_name'])
+      .where('bug.common_name ILIKE :search', { search: `%${searchField}%` })
+      .orWhere('bug.latin_name ILIKE :search', { search: `%${searchField}%` })
+      .getMany();
+
+    const names = [
+      ...results.map(r => r.common_name),
+      ...results.map(r => r.latin_name)
+    ].filter(Boolean);
+
+    return [...new Set(names)];
   }
 }

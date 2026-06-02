@@ -38,6 +38,10 @@ export class KnownBugService {
         return this.http.get<RegionModel[]>(`${environment.apiUrl}/region`)
     }
 
+    getNames(searchField: string): Observable<string[]> {
+        return this.http.get<string[]>(`${environment.apiUrl}/known-bug/names`, {params: {searchField: searchField}})
+    }
+
     deleteRegion(id: number): Observable<any> {
         return this.http.delete(`${environment.apiUrl}/region/` + id)
     }

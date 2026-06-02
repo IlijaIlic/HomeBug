@@ -1,12 +1,19 @@
 <div class="input-cont" [ngStyle]="{ width: width }">
   <p>{{ label }}</p>
-  <input
-    [type]="type"
-    [placeholder]="placeholder"
-    spellcheck="false"
-    [value]="value"
-    [disabled]="isDisabled"
-    (input)="onInput($event)"
-    (blur)="onBlur()"
-  />
+
+  @if (this.suggetsions) {
+  <input [type]="type" [placeholder]="placeholder" spellcheck="false" [value]="value" [disabled]="isDisabled"
+    (input)="onInput($event)" (blur)="onBlur()" list="suges" />
+
+  <datalist id="suges">
+    @for (sug of this.suggetsions; track $index) {
+    <option [value]="sug"></option>
+    }
+  </datalist>
+  }
+
+  @if(this.suggetsions == null){
+  <input [type]="type" [placeholder]="placeholder" spellcheck="false" [value]="value" [disabled]="isDisabled"
+    (input)="onInput($event)" (blur)="onBlur()" />
+  }
 </div>

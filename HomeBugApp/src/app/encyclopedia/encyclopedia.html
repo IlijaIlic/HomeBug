@@ -10,7 +10,7 @@
         <div class="hb-filters">
             <div class="filters-title">FILTERS</div>
             <app-input-field [(value)]="filters.common_name" label="Search by name" width="20rem"
-                placeholder="Ladybug..." (valueChange)="filterChange.next()" />
+                placeholder="Ladybug..." (valueChange)="valueChanged($event)" [suggetsions]="this.nameSuggestions"/>
             <label>Region</label>
             <div class="filter-regions-cont">
                @for (reg of this.filter_regions; track $index) {

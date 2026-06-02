@@ -8,7 +8,7 @@ import { KnownBugModel } from '../../models/known-bug.model';
 import { InputField } from '../ui-components/input-field/input-field';
 import { HabitatsService } from '../../services/habitats.service';
 import { FormsModule } from '@angular/forms';
-import { debounceTime, Subject, take } from 'rxjs';
+import { debounceTime, distinctUntilChanged, filter, Subject, switchAll, switchMap, take } from 'rxjs';
 
 @Component({
   selector: 'app-encyclopedia',
@@ -17,6 +17,7 @@ import { debounceTime, Subject, take } from 'rxjs';
   styleUrl: './encyclopedia.scss',
 })
 export class Encyclopedia implements OnInit {
+
 
   constructor(private kBugService: KnownBugService, public habService: HabitatsService, private route: ActivatedRoute) { }
 
@@ -39,7 +40,9 @@ export class Encyclopedia implements OnInit {
   hasMore: boolean = true;
 
   filterChange = new Subject<void>();
+  searchInput = new Subject<string>();
 
+  nameSuggestions: string[] = []
 
   filters = {
     common_name: '',
@@ -87,6 +90,26 @@ export class Encyclopedia implements OnInit {
       this.loadKBugs(true);
     });
 
+    this.searchInput.pipe(
+      debounceTime(1000),
+      distinctUntilChanged(),
+      filter(value => {
+        if (value.trim().length <= 3) {
+          this.nameSuggestions = [];
+          return false;
+        }
+        return value.trim().length > 3;
+      }),
+      switchMap(value => {
+        this.filters.common_name = value;
+        return this.kBugService.getNames(value)
+      })
+    ).subscribe({
+      next: (response) => {
+        console.log(response)
+        this.nameSuggestions = response
+      }
+    })
   }
 
   ngOnDestroy(): void {
@@ -204,5 +227,10 @@ export class Encyclopedia implements OnInit {
   removeLegs() {
     this.filters.legs = null
     this.filterChange.next()
+  }
+
+  valueChanged(event: string) {
+    this.filterChange.next()
+    this.searchInput.next(event)
   }
 }

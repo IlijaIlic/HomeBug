@@ -22,6 +22,8 @@ export class InputField implements ControlValueAccessor {
   @Input() width: String = "11rem";
   @Input() value = "";
   @Output() valueChange = new EventEmitter<string>();
+  
+  @Input() suggetsions: string[] | null = null
 
   isDisabled = false;
   private onChange = (_: any) => {};
