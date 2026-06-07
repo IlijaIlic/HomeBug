@@ -1,14 +1,12 @@
 <div class="hb-page-landing">
-    @if (isModalOpen) {
-    <app-modal (positiveClick)="positiveModal()" (negativeClick)="negativeModal()" (xClick)="xModal()"></app-modal>
-    }
+
     <div class="hb-landing-findout">
         <div class="hb-findout-background">
             <h1>Don't panic. <span style="color: #153e42;">Identify it!</span></h1>
             <p class="hb-findout-text">Find out what’s crawling around your house.</p>
             <div class="hb-image-cont">
 
-                <img class="hb-landing-picture3" src="assets/soba.png" alt="Woman with a bug" loading="eager"/>
+                <img class="hb-landing-picture3" src="assets/soba.png" alt="Woman with a bug" loading="eager" />
 
             </div>
         </div>
@@ -45,7 +43,104 @@
     </div>
 
 
-    <div class="hb-landing-explain">
+    <section class="basic-info-cont fade-in-left" scrollAnimate>
+        <div class="basic-info">
+            <div class="basic-main">
+                250
+            </div>
+            <div class="basic-desc">
+                Species in database
+            </div>
+        </div>
+        <div class="verical-line"></div>
+        <div class="basic-info">
+            <div class="basic-main">
+                50+
+            </div>
+            <div class="basic-desc">
+                Active users
+            </div>
+        </div>
+        <div class="verical-line"></div>
+        <div class="basic-info">
+            <div class="basic-main">
+                2m
+            </div>
+            <div class="basic-desc">
+                Average response time
+            </div>
+        </div>
+    </section>
+
+    <section class="howit-cont fade-in-up" scrollAnimate>
+        <div class="howit-small">How it works</div>
+        <div class="howit-title">A world of crawlers, decoded</div>
+        <div class="howit-explain">
+            Our database is filled with
+            different insects, spiders,
+            myriapods, and many more cute
+            and creepyarthropods.
+        </div>
+        <div class="cards-cont">
+            <div class="howit-card fade-in-left" scrollAnimate [threshold]="0.3">
+                <div class="howit-icon-title">
+
+                    <div class="card-icon">
+                        <ng-icon name="featherCamera" size="1.5rem"></ng-icon>
+                    </div>
+                    <div class="card-title">Upload</div>
+                </div>
+                <div class="card-text">Take a clear photo of the bug and upload it to our website. The better the
+                    lighting and focus, the more accurate your result will be</div>
+            </div>
+
+            <div class="howit-card fade-in-up" scrollAnimate [threshold]="0.5">
+                <div class="howit-icon-title">
+                    <div class="card-icon">
+                        <ng-icon name="featherLoader" size="1.5rem"></ng-icon>
+                    </div>
+                    <div class="card-title">Analyze</div>
+                </div>
+                <div class="card-text">Our AI scans your photo and matches it against thousands of insects, spiders, and
+                    arthropods in our database, delivering a result in seconds</div>
+            </div>
+
+            <div class="howit-card fade-in-right" scrollAnimate [threshold]="0.8">
+                <div class="howit-icon-title">
+                    <div class="card-icon">
+                        <ng-icon name="featherMessageCircle" size="1.5rem"></ng-icon>
+                    </div>
+                    <div class="card-title">Ask</div>
+                </div>
+                <div class="card-text">Stuck? Bring in the community. Post your mystery bug and get answers from real
+                    people who love arthropods as much as they hate finding them in the kitchen.</div>
+            </div>
+        </div>
+    </section>
+
+    <section class="howit-cont fade-in-up" scrollAnimate>
+        <div class="howit-small">Brave or just bugged?</div>
+        <div class="howit-title">Upload your discovery</div>
+        <div class="howit-explain">If you have the courage to take a photo of it, we will tell you if you are trully
+            brave or just
+            freaking
+            out because of a ladybug.</div>
+        <div class="sample-card fade-in-up" scrollAnimate [threshold]="0.5">
+            <div class="sample-title">Sample result</div>
+            <div class="sample-common">Straight Snouted Weevil</div>
+            <div class="sample-latin">Brentus mexicanus</div>
+            <div class="sample-img-cont">
+                <div class="sample-confid">
+                    <div class="card-title">
+                        92%
+                    </div>
+                    <div class="sample-small">Confidence...</div>
+                </div>
+                <app-unknown-bug-image [country_show]="false" [kbug]="this.bug"
+                    [routerLink]="`encyclopedia/known/` + this.bug.id"></app-unknown-bug-image>
+            </div>
+        </div>
+        <!-- <div class="hb-landing-explain">
         <div class="hb-explain-search">
             <div class="hb-explain-text1">
 
@@ -90,6 +185,7 @@
         </div>
 
 
-    </div>
+    </div> -->
 
+    </section>
 </div>

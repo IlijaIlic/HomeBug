@@ -37,7 +37,7 @@
 .hb-filters {
     display: flex;
     flex-direction: column;
-    gap: 1rem;
+    gap: 1.5rem;
 
     padding: 4rem;
     height: fit-content;
@@ -45,7 +45,7 @@
     font-size: 2rem;
     font-weight: 600;
 
-    
+
     min-width: 20rem;
     max-width: 20rem;
 
@@ -57,10 +57,16 @@
     outline: 2px solid white;
 }
 
-.filters-title {
-    font-size: 3rem;
+.filt-title {
     color: $hb-dark-green;
+}
 
+
+.filters-title {
+    font-size: 3.5rem;
+    color: $hb-dark-green;
+    font-weight: 900;
+    text-align: center;
 }
 
 .filter-submit {
@@ -107,6 +113,7 @@
     flex-direction: row;
     flex-wrap: wrap;
     gap: 2rem;
+    justify-content: center;
 }
 
 .hb-numeration {

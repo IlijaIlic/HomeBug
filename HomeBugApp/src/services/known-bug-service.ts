@@ -1,6 +1,6 @@
 import { HttpClient, HttpParams } from "@angular/common/http";
 import { Injectable } from "@angular/core";
-import { Observable } from "rxjs";
+import { filter, Observable } from "rxjs";
 import { KnownBugModel } from "../models/known-bug.model";
 import { environment } from "../environment/environment";
 import { RegionModel } from "../models/region.model";
@@ -27,11 +27,22 @@ export class KnownBugService {
 
     getAll(): Observable<KnownBugModel[]> {
         return this.http.get<KnownBugModel[]>(`${environment.apiUrl}/known-bug/all`)
-
     }
 
     getById(id: number): Observable<KnownBugModel> {
         return this.http.get<KnownBugModel>(`${environment.apiUrl}/known-bug/` + id)
+    }
+
+    getSimilar(filters: any = {}, excludeId: number): Observable<KnownBugModel[]> {
+        return this.http.get<KnownBugModel[]>(`${environment.apiUrl}/known-bug/similar`, {
+            params: {
+                excludeId: excludeId,
+                ...(filters.color && { colors: filters.color }),
+                ...(filters.size && { sizes: filters.size }),
+                ...(filters.bodyType && { bodyTypes: filters.bodyType }),
+                ...(filters.regions?.length && { regions: filters.regions }),
+            }
+        });
     }
 
     getAllRegions(): Observable<RegionModel[]> {
@@ -39,7 +50,7 @@ export class KnownBugService {
     }
 
     getNames(searchField: string): Observable<string[]> {
-        return this.http.get<string[]>(`${environment.apiUrl}/known-bug/names`, {params: {searchField: searchField}})
+        return this.http.get<string[]>(`${environment.apiUrl}/known-bug/names`, { params: { searchField: searchField } })
     }
 
     deleteRegion(id: number): Observable<any> {
@@ -56,5 +67,9 @@ export class KnownBugService {
 
     postKBug(kbug: any): Observable<KnownBugModel> {
         return this.http.post<KnownBugModel>(`${environment.apiUrl}/known-bug`, kbug)
+    }
+
+    patchKBug(id: number, kbug: FormData): Observable<KnownBugModel> {
+        return this.http.patch<KnownBugModel>(`${environment.apiUrl}/known-bug/` + id, kbug)
     }
 }

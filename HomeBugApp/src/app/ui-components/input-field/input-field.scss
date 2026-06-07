@@ -1,8 +1,7 @@
 @use 'styles/variables' as *;
 
 .input-cont {
-    font-family: "Josefin Sans", sans-serif;
-    position: relative;
+    font-family: $hb-main-font;    position: relative;
     height: 3.5rem;
     padding: 0;
     margin: clamp(0rem, 1vw, 1rem);
@@ -19,8 +18,7 @@ p {
 }
 
 input {
-    font-family: "Josefin Sans", sans-serif;
-    width: 90%;
+    font-family: $hb-main-font;    width: 90%;
     height: 1.5rem;
     font-size: 1rem;
     border: none;

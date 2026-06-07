@@ -7,7 +7,7 @@ import { UnknownBugService } from '../../services/unknown-bug.service';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import countryData from '../../data/coords.json'
-import { debounceTime, Subject } from 'rxjs';
+import { debounceTime, filter, fromEvent, map, Subject, throttleTime } from 'rxjs';
 
 @Component({
   selector: 'app-search-page',
@@ -59,6 +59,32 @@ export class SearchPage implements OnInit {
     }
 
     this.filterChange.pipe(debounceTime(2000)).subscribe(() => this.loadUbugs(true))
+
+
+    //     @HostListener('window:scroll')
+    // onScroll() {
+    //   const threshold = 500;
+    //   const position = window.innerHeight + window.scrollY;
+    //   const height = document.documentElement.scrollHeight;
+
+    //   if (position >= height - threshold) {
+    //     this.loadUbugs(false);
+    //   }
+    // }
+
+    const treshold = 500
+    fromEvent(window, 'scroll').pipe(
+      throttleTime(200),
+      map(() => ({
+        position: window.innerHeight + window.scrollY,
+        height: document.documentElement.scrollHeight
+      })),
+      filter(({ position, height }) => position >= height - treshold),
+      filter(() => !this.isLoading && this.hasMore)
+    ).subscribe(() => {
+      this.loadUbugs(false)
+    }
+    )
 
   }
 
@@ -133,28 +159,14 @@ export class SearchPage implements OnInit {
     idx === -1 ? arr.push(value) : arr.splice(idx, 1);
 
     this.filterChange.next()
-
   }
 
   toggleBoolFilter(filterKey: keyof typeof this.filters, value: boolean) {
     (this.filters as any)[filterKey] = (this.filters[filterKey] === value ? null : value) as any;
 
     this.filterChange.next()
-
   }
 
-
-
-  @HostListener('window:scroll')
-  onScroll() {
-    const threshold = 500;
-    const position = window.innerHeight + window.scrollY;
-    const height = document.documentElement.scrollHeight;
-
-    if (position >= height - threshold) {
-      this.loadUbugs(false);
-    }
-  }
 
   removeLegs() {
     this.filters.legs = null

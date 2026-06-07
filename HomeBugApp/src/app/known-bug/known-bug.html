@@ -137,5 +137,12 @@
                 <button type="button" class="tag-item" (click)="goToEncyclopedia('stings', bug.stings)">{{bug.stings ? 'Stings' : 'Doesn\'t sting'}}</button>
             </div>
         </div>
+        <div class="important-title">Similar insects</div>
+        <div class="known-similar-bugs">
+            @for (similar of this.similarBugs; track $index) {
+                <app-unknown-bug-image [country_show]="false" [routerLink]="`../../known/` + similar.id" 
+                    [kbug]=similar [unknown]=true ></app-unknown-bug-image>
+            }
+        </div>
     </div>
 </div>

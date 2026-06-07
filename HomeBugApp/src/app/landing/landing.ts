@@ -1,9 +1,13 @@
 import { Component } from '@angular/core';
-import { Modal } from '../ui-components/modal/modal';
+import { NgIcon } from '@ng-icons/core';
+import { UnknownBugImage } from '../ui-components/unknown-bug-image/unknown-bug-image';
+import { KnownBugModel } from '../../models/known-bug.model';
+import { RouterModule } from '@angular/router';
+import { ScrollAnimateDirective } from '../directives/scroll-animate.directive';
 
 @Component({
   selector: 'app-landing',
-  imports: [Modal],
+  imports: [NgIcon, UnknownBugImage, RouterModule, ScrollAnimateDirective],
   templateUrl: './landing.html',
   styleUrl: './landing.scss',
 
@@ -13,31 +17,35 @@ export class Landing {
   isHoveredMagn = false
   isModalOpen = false
 
-  onHoverMagn(state: boolean) {
-    this.isHoveredMagn = state;
-    this.openModal()
-  }
+  public bug: KnownBugModel = {
+    id: 132,
+    common_name: "",
+    latin_name: "",
+    picture_urls: ["uploads/files-1776445436864-268246958.jpg"],
+    taxonomy: {
+      id: -1,
+      taxonomyClass: "",
+      order: "",
+      family: "",
+      genus: "",
+      species: "",
+    },
+    overview: "",
+    regions: [],
+    habitats: [],
+    behaviour: "",
+    body_type: "",
+    color: "",
+    diet: "",
+    no_legs: 0,
+    size: "",
+    danger_to_humans: false,
+    stings: false,
+    venomous: false,
+    wings: false,
+    bites: false,
+  };
 
-  openModal() {
-    this.isModalOpen = true
-  }
 
-  closeModal() {
-    this.isModalOpen = false
-  }
-
-  positiveModal() {
-    console.log("POS")
-    this.closeModal();
-  }
-
-  negativeModal() {
-    console.log("NEG")
-    this.closeModal();
-  }
-
-  xModal() {
-    this.closeModal();
-  }
 
 }

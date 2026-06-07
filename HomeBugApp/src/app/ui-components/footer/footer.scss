@@ -1,3 +1,6 @@
+@use 'styles/variables' as *;
+
+
 .hb-footer {
 
     position: relative;
@@ -7,7 +10,7 @@
 .hb-footer-sqarepart {
     background-image: linear-gradient(#153E42, #4D9F71);
     padding: 2rem;
-    font-family: "Josefin Sans", sans-serif;
+    font-family: $hb-main-font;
     color: white;
     margin: 0;
 }
@@ -60,7 +63,7 @@
 
     .hb-footer-sqarepart {
         background-image: linear-gradient(#153E42, #4D9F71);
-        font-family: "Josefin Sans", sans-serif;
+        font-family: $hb-main-font;
         color: white;
     }
 
@@ -79,7 +82,7 @@
     border: none;
     background-color: transparent;
     color: white;
-    font-family: "Josefin Sans", sans-serif;
+    font-family: $hb-main-font;
     cursor: pointer;
     font-size: clamp(0.9rem, 2vw, 1.2rem);
     padding: 0;

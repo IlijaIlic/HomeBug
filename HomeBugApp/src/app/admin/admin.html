@@ -11,6 +11,7 @@
         <button class="entity-btn" [class.active]="entityShown === 'regions' "
             (click)="handleRegionsClick()">Regions</button>
     </div>
+    @if(entityShown == 'known'){
     <div class="switch-cont">
         <label>Update</label>
         <label class="switch">
@@ -19,11 +20,23 @@
         </label>
         <label>Create</label>
     </div>
+    }
     @switch (entityShown) {
     @case ('user') {
     <div class="table-cont">
         <table>
-            @for (user of users; track $index) {
+            <tr style="position: sticky; top: 0; left: 0; background-color: rgb(68, 68, 68); color: white;">
+                <th>ID</th>
+                <th>Name</th>
+                <th>Surname</th>
+                <th>Email</th>
+                <th>Gender</th>
+                <th>Reputation</th>
+                <th>Comments</th>
+                <th>Unknown-Scans</th>
+                <th>Delete command</th>
+            </tr>
+            @for (user of filteredUsers; track $index) {
             <tr class="test" (click)="handleUserInfo(user)">
                 <th>{{user.id}}</th>
                 <th>{{user.name}}</th>
@@ -32,33 +45,29 @@
                 <th>{{user.gender}}</th>
                 <th>{{user.reputation}}</th>
                 <th>{{user.comments_helping_others}}</th>
-                <th>{{user.known_scans}}</th>
-                <th>{{user.other_users_rated}}</th>
-                <th>{{user.saved_bugs}}</th>
                 <th>{{user.unknown_bugs_scanned}}</th>
-                <th>{{user.unknown_scans}}</th>
                 <th><button type="button" (click)="handleDeleteUser(user)">Delete User</button></th>
             </tr>
             }
         </table>
+
     </div>
-    <div>Selected ID: {{this.selUser.id}}</div>
-    <div class="admin-form-update">
-        <input type="text" placeholder="Name" [(ngModel)]="this.selUser!.name">
-        <input type="text" placeholder="Surname" [(ngModel)]="this.selUser!.surname">
-        <div>
-            <select name="gender">
-                <option value="male">Male</option>
-                <option value="female">Female</option>
-            </select>
-        </div>
-    </div>
+    <input type="text" placeholder="Search by email..." class="search-input" [ngModel]="this.usersQuery"
+        (input)="handleUserSearch($event)">
+
+
     }
     @case ('known') {
 
 
     <div class="table-cont">
         <table>
+            <tr style="position: sticky; top: 0; left: 0; background-color: rgb(68, 68, 68); color: white;">
+                <th>ID</th>
+                <th>Common Name</th>
+                <th>Latin Name</th>
+                <th>Delete Command</th>
+            </tr>
             @for (kbug of kbugs; track $index) {
             <tr class="test" (click)="handleKbugInfo(kbug)">
                 <th>{{kbug.id}}</th>
@@ -181,7 +190,8 @@
 
         <div class="table-cont-selection">
             <table>
-                <tr class="column-name">
+                <tr class="column-name"
+                    style="position: sticky; top: 0; left: 0; background-color: rgb(68, 68, 68); color: white;">
                     <th>Added Regions</th>
                 </tr>
                 @for (region of selBug.regions; track $index) {
@@ -194,7 +204,8 @@
 
         <div class="table-cont-selection">
             <table>
-                <tr class="column-name">
+                <tr class="column-name"
+                    style="position: sticky; top: 0; left: 0; background-color: rgb(68, 68, 68); color: white;">
                     <th>Available Regions</th>
                 </tr>
                 @for (region of regions; track $index) {
@@ -209,9 +220,11 @@
     <h3 class="upload-title">Upload new images</h3>
     <div class="kbug-img-cont">
         <img class="kbug-imgs" [src]="previewUrl || '../../assets/bee.jpg'" alt="test img" />
+        @if(this.imgArray.length != 0){
         <button class="next-img" (click)="nextImage()"><ng-icon name="featherArrowRight"></ng-icon></button>
         <button class="prev-img" (click)="prevImage()"><ng-icon name="featherArrowLeft"></ng-icon></button>
         <button class="delete-img" (click)="deleteImage()">Delete <ng-icon name="featherTrash2"></ng-icon> </button>
+        }
         <input type="file" multiple accept="image/*" style="display: none;" (change)="onFileSelected($event)"
             #fileInput />
     </div>
@@ -224,7 +237,8 @@
         @for (url of this.selBug.picture_urls; track $index) {
         <div class="uploaded-img-cont">
             <img class="uploaded-img" [src]="apiUrl + url" />
-            <button class="delete-img" (click)="deleteUploadedImage()">Delete <ng-icon name="featherTrash2"></ng-icon>
+            <button class="delete-img" (click)="deleteUploadedImage($index)">Delete <ng-icon
+                    name="featherTrash2"></ng-icon>
             </button>
         </div>
         }
@@ -237,6 +251,12 @@
     @case ('unknown') {
     <div class="table-cont">
         <table>
+            <tr style="position: sticky; top: 0; left: 0; background-color: rgb(68, 68, 68); color: white;">
+                <th>ID</th>
+                <th>User email</th>
+                <th>Description</th>
+                <th>Delete Command</th>
+            </tr>
             @for (ubug of ubugs; track $index) {
             <tr class="test" (click)="handleUbugInfo(ubug)">
                 <th>{{ubug.id}}</th>
@@ -247,25 +267,43 @@
             }
         </table>
     </div>
+    <div class="uploaded-img-cont">
+        <img class="uploaded-img" [src]="apiUrl + this.selUbug?.picture_url" />
+
+    </div>
     }
     @case ('comments') {
     <div class="table-cont">
         <table>
+             <tr style="position: sticky; top: 0; left: 0; background-color: rgb(68, 68, 68); color: white;">
+                <th>ID</th>
+                <th>User email</th>
+                <th>Ubug ID</th>
+                <th>Comment Text</th>
+                <th>Delete Command</th>
+            </tr>
             @for (comm of comments; track $index) {
             <tr class="test" (click)="handleCommInfo(comm)">
                 <th>{{comm.id}}</th>
-                <th>{{comm.text}}</th>
-                <th>{{comm.ubug.id}}</th>
                 <th>{{comm.user.email}}</th>
+                <th>{{comm.ubug.id}}</th>
+                <th>{{comm.text}}</th>
                 <th><button type="button" (click)="handleDeleteComment(comm)">Delete Comment</button></th>
             </tr>
             }
         </table>
     </div>
+    <textarea >{{this.selComment?.text}}</textarea>
     }
     @case ('regions') {
     <div class="table-cont">
         <table>
+             <tr style="position: sticky; top: 0; left: 0; background-color: rgb(68, 68, 68); color: white;">
+                <th>ID</th>
+                <th>Name</th>
+                <th>Coordinates</th>
+                <th>Delete command</th>
+            </tr>
             @for (region of regions; track $index) {
             <tr class="test" (click)="handleRegionInfo(region)">
                 <th>{{region.id}}</th>
@@ -338,7 +376,7 @@
         </div>
 
     </div>
-    <button class="submit-btn" (click)="handleSubmitRegions()">{{isCreating ? "Create": "Update"}}</button>
+    <button class="submit-btn" (click)="handleSubmitRegions()">Create</button>
     }
     }
 </div>

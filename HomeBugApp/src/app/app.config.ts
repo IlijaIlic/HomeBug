@@ -16,6 +16,9 @@ import {
   featherArrowRight,
   featherBookmark,
   featherXCircle,
+  featherCamera,
+  featherDatabase,
+  featherLoader
 
 } from '@ng-icons/feather-icons'
 import { authInterceptor } from './interceptors/auth.interceptor';
@@ -50,8 +53,9 @@ export const appConfig: ApplicationConfig = {
       featherArrowRight,
       featherBookmark,
       featherXCircle,
-
+      featherCamera,
+      featherDatabase,
+      featherLoader,
     }),
-
   ]
 };

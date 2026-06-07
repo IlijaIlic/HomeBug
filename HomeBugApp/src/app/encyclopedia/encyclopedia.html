@@ -11,7 +11,7 @@
             <div class="filters-title">FILTERS</div>
             <app-input-field [(value)]="filters.common_name" label="Search by name" width="20rem"
                 placeholder="Ladybug..." (valueChange)="valueChanged($event)" [suggetsions]="this.nameSuggestions"/>
-            <label>Region</label>
+            <label class="filt-title">Region</label>
             <div class="filter-regions-cont">
                @for (reg of this.filter_regions; track $index) {
 
@@ -22,7 +22,7 @@
                 </div>
                 }
             </div>
-            <label>Habitats</label>
+            <label class="filt-title">Habitats</label>
             <div class="filter-regions-cont">
                 @for (habitat of this.habService.getAll() | keyvalue; track $index) {
 
@@ -33,7 +33,7 @@
                 </div>
                 }
             </div>
-            <label>Body type</label>
+            <label class="filt-title">Body type</label>
             <div class="filter-regions-cont">
                 @for (body of this.filter_bodytypes; track $index) {
 
@@ -45,7 +45,7 @@
                 }
 
             </div>
-            <label>Color</label>
+            <label class="filt-title">Color</label>
             <div class="filter-regions-cont">
                 @for (clr of this.filter_colors; track $index) {
                 <div class="filter-option">
@@ -55,7 +55,7 @@
                 </div>
                 }
             </div>
-            <label>Size</label>
+            <label class="filt-title">Size</label>
             <div class="filter-regions-cont">
                 @for (size of this.filter_size; track $index) {
 
@@ -67,7 +67,7 @@
                 }
             </div>
 
-            <label>Diet</label>
+            <label class="filt-title">Diet</label>
             <div class="filter-regions-cont">
                 @for (diet of this.filter_diet; track $index) {
 
@@ -79,7 +79,7 @@
                 }
             </div>
 
-            <label>Behaviour</label>
+            <label class="filt-title">Behaviour</label>
             <div class="filter-regions-cont">
                 @for (behav of this.filter_behaviour; track $index) {
 
@@ -91,31 +91,31 @@
                 </div>
                 }
             </div>
-            <label>Number of Legs</label>
+            <label class="filt-title">Number of Legs</label>
             <input class="filter-number-input" [(ngModel)]="filters.legs" type="number" placeholder="0" min="0" (change)="this.filterChange.next()"/>
 
             <div class="cb-cont">
                 <input type="checkbox" [checked]="filters.dangerous === true"
                     (change)="toggleBoolFilter('dangerous', true)" />
-                <label>Dangerous</label>
+                <label class="filt-title">Dangerous</label>
             </div>
             <div class="cb-cont">
                 <input type="checkbox" [checked]="filters.wings === true" (change)="toggleBoolFilter('wings', true)" />
-                <label>Wings</label>
+                <label class="filt-title">Wings</label>
             </div>
             <div class="cb-cont">
                 <input type="checkbox" [checked]="filters.venomous === true"
                     (change)="toggleBoolFilter('venomous', true)" />
-                <label>Venomous</label>
+                <label class="filt-title">Venomous</label>
             </div>
             <div class="cb-cont">
                 <input type="checkbox" [checked]="filters.bites === true" (change)="toggleBoolFilter('bites', true)" />
-                <label>Bites</label>
+                <label class="filt-title">Bites</label>
             </div>
             <div class="cb-cont">
                 <input type="checkbox" [checked]="filters.stings === true"
                     (change)="toggleBoolFilter('stings', true)" />
-                <label>Stings</label>
+                <label class="filt-title">Stings</label>
             </div>
         </div>
         <div class="hb-filt-bugs">

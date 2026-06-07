@@ -381,6 +381,12 @@ hr {
     cursor: pointer;
 }
 
+.known-similar-bugs{
+    display: flex;
+    flex-direction: row;
+    justify-content: space-evenly;
+}
+
 @media (max-width: 1400px) {
     .known-name {
         text-align: center;

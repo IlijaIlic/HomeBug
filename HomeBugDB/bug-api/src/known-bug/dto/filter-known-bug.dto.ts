@@ -81,4 +81,7 @@ export class KnownFilterDto {
   @IsArray()
   @Transform(({ value }) => Array.isArray(value) ? value : [value])
   regions?: string[];
+
+  @IsOptional()
+  excludeId?: number
 }

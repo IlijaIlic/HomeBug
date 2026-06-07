@@ -5,17 +5,20 @@
     margin: 0;
     border: none;
     padding: 0;
-    background-color: $hb-background;
-    margin-bottom: -10rem;
-    padding-bottom: 10rem;
+background: radial-gradient(circle,rgba(233, 247, 211, 1) 0%, rgba(250, 255, 201, 1) 71%, rgba(255, 250, 184, 1) 100%);    display: flex;
+    flex-direction: column;
+
+    margin-bottom: -15rem;
+    padding-bottom: 15rem;
+    font-family: $hb-main-font;
+
 }
 
 .hb-landing-findout {
     display: flex;
     flex-direction: column;
     justify-content: center;
-    font-family: "Josefin Sans", sans-serif;
-
+    font-family: $hb-main-font;
 }
 
 hr {
@@ -67,7 +70,7 @@ hr {
 .hb-findout-text {
     color: rgba(255, 255, 255, 0.5);
     z-index: 3;
-    font-family: "Josefin Sans", sans-serif;
+    font-family: $hb-main-font;
     font-weight: 800;
     font-style: normal;
     font-size: clamp(1.5rem, 3vw, 2rem);
@@ -77,14 +80,174 @@ hr {
 
 }
 
+.basic-info-cont {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-evenly;
+    font-family: $hb-main-font;
+    margin-top: 1rem;
+}
 
+.verical-line {
+    border-left: 2px solid #0a650c48;
+    height: 150px;
+}
 
+.basic-info {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.basic-main {
+    font-size: 3rem;
+    color: $hb-light-green;
+}
+
+.basic-desc {
+    color: $hb-dark-green;
+    font-size: 1.2rem;
+}
 
 
 
 .hb-landing-picture3 {
     width: clamp(10rem, 85vw, 50rem);
 
+}
+
+.howit-cont {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    margin-inline: 2rem;
+    margin-top: 7rem;
+    width: 70%;
+    align-self: center;
+}
+
+.howit-small {
+    font-family: $hb-second-font;
+    font-size: 2rem;
+    color: $hb-dark-green;
+    margin-bottom: 1rem;
+    font-weight: 800;
+}
+
+.howit-title {
+    font-size: 3.5rem;
+    color: $hb-light-green;
+}
+
+.howit-explain {
+    font-size: 1.5rem;
+    color: gray;
+}
+
+.cards-cont {
+    display: flex;
+    flex-direction: row;
+    margin-block: 2rem;
+    justify-content: space-between;
+    width: 100%;
+
+}
+
+.howit-card {
+    background-color: rgb(241, 255, 239);
+    border-radius: 2rem;
+    box-shadow: $hb-box-shadow;
+    border: 1px solid #4d9f71a4;
+    padding: 2rem;
+    width: 15rem;
+}
+
+.card-icon {
+    background-color: #4d9f712d;
+    width: fit-content;
+    height: fit-content;
+    padding: 1rem;
+    color: white;
+    border-radius: 1rem;
+}
+
+ng-icon {
+    color: $hb-dark-green;
+}
+
+.howit-icon-title {
+    display: flex;
+    flex-direction: row;
+    gap: 1rem;
+    margin-bottom: 2rem;
+    margin-top: 1rem;
+}
+
+
+.card-title {
+    font-size: 1.5rem;
+    color: $hb-light-green;
+    font-weight: 700;
+    align-self: center;
+}
+
+.card-text {
+    color: gray;
+    font-size: 1.2rem;
+}
+
+.sample-title {
+    font-size: 2rem;
+    color: $hb-dark-green;
+    font-weight: 200;
+    align-self: center;
+    font-family: $hb-main-font;
+}
+
+.sample-common {
+    font-family: $hb-second-font;
+    font-size: 3rem;
+    color: $hb-dark-green;
+    margin-top: 1rem;
+}
+
+.sample-latin {
+    font-family: $hb-main-font;
+    font-size: 1.5rem;
+    color: $hb-dark-green;
+}
+
+.sample-card {
+    background-color: rgb(241, 255, 239);
+    border-radius: 2rem;
+    box-shadow: $hb-box-shadow;
+    border: 1px solid #4d9f71a4;
+    padding: 2rem;
+    align-self: center;
+    margin-block: 3rem;
+}
+
+.sample-img-cont {
+    display: flex;
+    flex-direction: row;
+    margin-block: 2rem;
+    justify-content: center;
+    align-items: center;
+    gap: 5rem;
+
+}
+
+.sample-confid {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+
+}
+
+.sample-small {
+    font-size: 1rem;
+    color: gray;
 }
 
 
@@ -129,28 +292,28 @@ hr {
     gap: 2rem;
     display: grid;
     grid-template-columns: 2fr 1fr;
-    font-family: "Josefin Sans", sans-serif;
+    font-family: $hb-main-font;
     color: $hb-dark-green;
     font-size: clamp(1rem, 5vw, 2rem);
     text-align: center;
     max-width: 80vw;
 }
 
-.hb-explain-text1{
+.hb-explain-text1 {
     align-self: center;
     text-align: left;
 }
 
-.hb-explain-text2{
+.hb-explain-text2 {
     align-self: center;
     text-align: right;
 }
 
-.hb-explain-text1 h2{
+.hb-explain-text1 h2 {
     color: $hb-light-green;
 }
 
-.hb-explain-text2 h2{
+.hb-explain-text2 h2 {
     color: $hb-light-green;
 }
 
@@ -163,7 +326,7 @@ hr {
 .magnifying-image-1 {
     width: 100%;
     display: block;
-    
+
 }
 
 .magnifying-image-2 {
@@ -173,25 +336,25 @@ hr {
     width: 60%;
     filter: blur(0.5rem);
     transition: filter 1s ease-in-out;
-    
+
 }
 
 .magnifying-image-2:hover {
-    filter:blur(0rem);
+    filter: blur(0rem);
 }
 
-.hb-magn-popup{
+.hb-magn-popup {
     position: absolute;
     overflow: hidden;
     border-radius: 50px;
-    background-image:linear-gradient(to bottom right,#153E42 , #4D9F71) ;
+    background-image: linear-gradient(to bottom right, #153E42, #4D9F71);
     box-shadow: 0 0 1rem 1rem rgba(0, 0, 0, 0.219);
     color: white;
     padding: 1rem;
     visibility: hidden;
 
     pointer-events: none;
-    font-size:  clamp(1rem, 2vw, 2rem);
+    font-size: clamp(1rem, 2vw, 2rem);
     transform-origin: center;
 }
 
@@ -235,7 +398,7 @@ hr {
     gap: 2rem;
     display: grid;
     grid-template-columns: 1fr 2fr;
-    font-family: "Josefin Sans", sans-serif;
+    font-family: $hb-main-font;
     color: #153E42;
     font-size: clamp(1rem, 5vw, 2rem);
     text-align: center;
@@ -247,7 +410,7 @@ hr {
     gap: 2rem;
     display: grid;
     grid-template-columns: 2fr 1fr;
-    font-family: "Josefin Sans", sans-serif;
+    font-family: $hb-main-font;
     color: #153E42;
     font-size: clamp(1rem, 5vw, 2rem);
     text-align: center;
@@ -259,7 +422,7 @@ hr {
     gap: 2rem;
     display: grid;
     grid-template-columns: 1fr 2fr;
-    font-family: "Josefin Sans", sans-serif;
+    font-family: $hb-main-font;
     color: #153E42;
     font-size: clamp(1rem, 5vw, 2rem);
     text-align: center;
@@ -278,7 +441,7 @@ hr {
         gap: 2rem;
         display: flex;
         flex-direction: column-reverse;
-        font-family: "Josefin Sans", sans-serif;
+        font-family: $hb-main-font;
         color: #153E42;
         font-size: clamp(1rem, 5vw, 2rem);
         text-align: center;
@@ -292,7 +455,7 @@ hr {
         gap: 2rem;
         display: flex;
         flex-direction: column;
-        font-family: "Josefin Sans", sans-serif;
+        font-family: $hb-main-font;
         color: #153E42;
         font-size: clamp(1rem, 5vw, 2rem);
         text-align: center;
@@ -305,7 +468,7 @@ hr {
         gap: 2rem;
         display: flex;
         flex-direction: column-reverse;
-        font-family: "Josefin Sans", sans-serif;
+        font-family: $hb-main-font;
         color: #153E42;
         font-size: clamp(1rem, 5vw, 2rem);
         text-align: center;
@@ -318,7 +481,7 @@ hr {
         gap: 2rem;
         display: flex;
         flex-direction: column;
-        font-family: "Josefin Sans", sans-serif;
+        font-family: $hb-main-font;
         color: #153E42;
         font-size: clamp(1rem, 5vw, 2rem);
         text-align: center;
@@ -327,5 +490,5 @@ hr {
 
     }
 
-   
+
 }

@@ -6,6 +6,8 @@ import { KnownBug } from './entities/known-bug.entity';
 import { Repository } from 'typeorm';
 import { Taxonomy } from '@taxonomy/entities/taxonomy.entity';
 import { KnownFilterDto } from './dto/filter-known-bug.dto';
+import * as fs from 'fs';
+import * as path from 'path';
 
 @Injectable()
 export class KnownBugService {
@@ -139,12 +141,50 @@ export class KnownBugService {
         .addSelect('region.name', 'name')
         .distinct(true)
         .getRawMany(),
-      (() => {
-        const qb = this.knownBugRepo.createQueryBuilder('known-bug');
-        return qb.getCount()
-      })()
     ])
     return [insects, colors, bodyTypes, habitats, sizes, diets, behaviours, regions, total];
+  }
+
+  async findSimilar(filters: KnownFilterDto) {
+    const excludeId = filters.excludeId;
+
+    const run = (applyFilter: (qb: any) => void) => {
+      const qb = this.knownBugRepo
+        .createQueryBuilder('known-bug')
+        .leftJoinAndSelect('known-bug.regions', 'regions')
+        .leftJoinAndSelect('known-bug.taxonomy', 'taxonomy')
+        .where('known-bug.id != :excludeId', { excludeId })
+        .take(5);
+      applyFilter(qb);
+      return qb.getMany();
+    };
+
+    const [byColor, byRegion, byBodyType, bySize] = await Promise.all([
+      filters.colors?.length
+        ? run(qb => qb.andWhere('known-bug.color IN (:...colors)', { colors: filters.colors }))
+        : [],
+      filters.regions?.length
+        ? run(qb => qb.andWhere('regions.name IN (:...regions)', { regions: filters.regions }))
+        : [],
+      filters.bodyTypes?.length
+        ? run(qb => qb.andWhere('known-bug.body_type IN (:...bodyTypes)', { bodyTypes: filters.bodyTypes }))
+        : [],
+      filters.sizes?.length
+        ? run(qb => qb.andWhere('known-bug.size IN (:...sizes)', { sizes: filters.sizes }))
+        : [],
+    ]);
+
+    const seen = new Set<number>();
+    const result: KnownBug[] = [];
+
+    for (const bug of [...byColor, ...byRegion, ...byBodyType, ...bySize]) {
+      if (!seen.has(bug.id)) {
+        seen.add(bug.id);
+        result.push(bug);
+      }
+    }
+
+    return result;
   }
 
   async findAll() {
@@ -163,8 +203,45 @@ export class KnownBugService {
     });
   }
 
-  async update(id: number, updateKnownBugDto: UpdateKnownBugDto) {
-    return `This action updates a #${id} knownBug`;
+  async update(id: number, updateKnownBugDto: UpdateKnownBugDto, incomingUrls: string[]) {
+    const kbug = await this.findOne(id);
+    if (!kbug) return `No known bug found with id: #${id}`;
+
+    const removedUrls = kbug.picture_urls.filter(url => !incomingUrls.includes(url));
+    for (const url of removedUrls) {
+      const filePath = path.join(process.cwd(), url);
+      if (fs.existsSync(filePath)) {
+        fs.unlinkSync(filePath);
+      }
+    }
+
+    if (updateKnownBugDto.taxonomy && kbug.taxonomy?.id) {
+      await this.taxRepo.save({ id: kbug.taxonomy.id, ...updateKnownBugDto.taxonomy });
+    }
+
+    kbug.common_name = updateKnownBugDto.common_name ?? kbug.common_name;
+    kbug.latin_name = updateKnownBugDto.latin_name ?? kbug.latin_name;
+    kbug.picture_urls = updateKnownBugDto.picture_urls ?? kbug.picture_urls;
+    kbug.habitats = updateKnownBugDto.habitats ?? kbug.habitats;
+    kbug.no_legs = updateKnownBugDto.no_legs ?? kbug.no_legs;
+    kbug.body_type = updateKnownBugDto.body_type ?? kbug.body_type;
+    kbug.color = updateKnownBugDto.color ?? kbug.color;
+    kbug.size = updateKnownBugDto.size ?? kbug.size;
+    kbug.wings = updateKnownBugDto.wings ?? kbug.wings;
+    kbug.diet = updateKnownBugDto.diet ?? kbug.diet;
+    kbug.danger_to_humans = updateKnownBugDto.danger_to_humans ?? kbug.danger_to_humans;
+    kbug.behaviour = updateKnownBugDto.behaviour ?? kbug.behaviour;
+    kbug.venomous = updateKnownBugDto.venomous ?? kbug.venomous;
+    kbug.bites = updateKnownBugDto.bites ?? kbug.bites;
+    kbug.stings = updateKnownBugDto.stings ?? kbug.stings;
+    kbug.overview = updateKnownBugDto.overview ?? kbug.overview;
+
+    if (updateKnownBugDto.regionsIds) {
+      kbug.regions = updateKnownBugDto.regionsIds.map(id => ({ id } as any));
+    }
+
+    await this.knownBugRepo.save(kbug);
+    return this.findOne(id);
   }
 
   async remove(id: number) {

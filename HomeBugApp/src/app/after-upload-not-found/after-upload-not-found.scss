@@ -16,7 +16,7 @@
 }
 
 .country-input-cont {
-    font-family: "Josefin Sans", sans-serif;
+    font-family: $hb-main-font;
     position: relative;
     width: 20rem;
     height: 3.5rem;
@@ -36,7 +36,7 @@
 
 
 .country-input {
-    font-family: "Josefin Sans", sans-serif;
+    font-family: $hb-main-font;
     width: 90%;
     height: 1.5rem;
     font-size: 1rem;

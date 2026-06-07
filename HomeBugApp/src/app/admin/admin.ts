@@ -38,6 +38,7 @@ export class Admin {
 
   // USERS 
   users?: UserModel[] = [];
+  filteredUsers?: UserModel[] = []
   selUser: UserModel = {
     id: -1,
     name: "",
@@ -54,15 +55,25 @@ export class Admin {
     unknown_bugs_scanned: 0,
     unknown_scans: [],
   };
+  usersQuery: string = ""
 
 
   handleUsersClick() {
     this.entityShown = 'user'
 
     this.userService.getAll().subscribe({
-      next: (response) => this.users = response,
+      next: (response) => {
+        this.users = response
+        this.filteredUsers = [...this.users]
+      },
       error: (response) => console.log(response)
     })
+  }
+
+  handleUserSearch(event: Event) {
+    this.usersQuery = (event.target as HTMLInputElement).value.toLocaleLowerCase().trim()
+
+    this.filteredUsers = this.usersQuery ? this.users?.filter(user => user.email.toLocaleLowerCase().includes(this.usersQuery)) : [...this.users!];
   }
 
   handleUserInfo(userData: UserModel) {
@@ -75,9 +86,13 @@ export class Admin {
       next: (response) => {
         console.log(response)
         this.users = this.users!.filter(item => item !== user)
+        this.filteredUsers = [...this.users]
+        this.usersQuery = ""
       }, error: (response) => console.log(response)
     })
   }
+
+
 
   // KNOWNBUG
   kbugs?: KnownBugModel[] = [];
@@ -131,9 +146,18 @@ export class Admin {
     this.allRegions = this.regions
   }
 
+  selectKBug(kBugData: KnownBugModel) {
+    this.selBug = {
+      ...kBugData,
+      picture_urls: [...kBugData.picture_urls],
+      regions: [...kBugData.regions],
+      habitats: [...kBugData.habitats],
+    }
+  }
+
   handleKbugInfo(kBugData: KnownBugModel) {
-    this.selBug = kBugData
-    const tempHabitat = kBugData.habitats.join(';')
+    this.selectKBug(kBugData)
+    const tempHabitat = this.selBug.habitats.join(';')
     this.selBug.habitats = []
     this.selBug.habitats[0] = tempHabitat
     this.regions = this.allRegions
@@ -155,13 +179,21 @@ export class Admin {
     })
   }
 
-  handleSubmitKBug() {
+  async handleSubmitKBug() {
     if (this.isCreating) {
       const formData = new FormData()
 
+      await Promise.all(this.selBug.picture_urls.map((url, i) =>
+        fetch(this.apiUrl + url)
+          .then(res => res.blob())
+          .then(blob => {
+            const filename = url.split('/').pop() || `image_${i}.jpg`;
+            this.imgArray.push(new File([blob], filename, { type: blob.type }));
+          })
+      ))
 
       this.imgArray.forEach(file => {
-        formData.append('files', file); // key must match backend interceptor
+        formData.append('files', file);
       });
 
       formData.append('common_name', this.selBug.common_name)
@@ -192,9 +224,11 @@ export class Admin {
       formData.append('wings', String(this.selBug.wings))
       formData.append('bites', String(this.selBug.bites))
 
+
       this.kbugService.postKBug(formData).subscribe({
         next: (response) => {
           this.kbugs?.push(response);
+          this.selectKBug(response)
           console.log(response)
         },
         error: (response) => console.log(response)
@@ -229,9 +263,50 @@ export class Admin {
         bites: false,
       };
       this.regions = this.allRegions
+      this.imgArray = []
+      this.previewUrl = null
     }
     else {
+      const formData = new FormData();
 
+      formData.append('picture_urls', JSON.stringify(this.selBug.picture_urls));
+
+      this.imgArray.forEach(file => formData.append('files', file));
+
+      formData.append('common_name', this.selBug.common_name);
+      formData.append('latin_name', this.selBug.latin_name);
+      formData.append('taxonomy', JSON.stringify({
+        taxonomyClass: this.selBug.taxonomy.taxonomyClass,
+        order: this.selBug.taxonomy.order,
+        family: this.selBug.taxonomy.family,
+        genus: this.selBug.taxonomy.genus,
+        species: this.selBug.taxonomy.species,
+      }));
+      formData.append('overview', this.selBug.overview);
+      formData.append('regionsIds', JSON.stringify(this.selBug.regions.map(r => r.id)));
+      formData.append('habitats', JSON.stringify(
+        this.selBug.habitats[0].split(';').map((s: string) => s.trim()).filter((s: string) => s.length)
+      ));
+      formData.append('behaviour', this.selBug.behaviour);
+      formData.append('body_type', this.selBug.body_type);
+      formData.append('color', this.selBug.color);
+      formData.append('diet', this.selBug.diet);
+      formData.append('no_legs', String(this.selBug.no_legs));
+      formData.append('size', this.selBug.size);
+      formData.append('danger_to_humans', String(this.selBug.danger_to_humans));
+      formData.append('stings', String(this.selBug.stings));
+      formData.append('venomous', String(this.selBug.venomous));
+      formData.append('wings', String(this.selBug.wings));
+      formData.append('bites', String(this.selBug.bites));
+
+      this.kbugService.patchKBug(this.selBug.id, formData).subscribe({
+        next: (response) => {
+          const i = this.kbugs!.findIndex(b => b.id === this.selBug.id);
+          if (i !== -1) this.kbugs![i] = response;
+          console.log(response);
+        },
+        error: (response) => console.log(response)
+      });
     }
   }
 
@@ -249,7 +324,7 @@ export class Admin {
   }
 
   handleUbugInfo(uBugData: UnknownBugModel) {
-    console.log(uBugData)
+    this.selUbug = { ...uBugData }
   }
 
   handleDeleteUbug(ubug: UnknownBugModel) {
@@ -275,7 +350,7 @@ export class Admin {
   }
 
   handleCommInfo(commData: CommentModel) {
-    console.log(commData)
+    this.selComment = { ...commData }
   }
 
   handleDeleteComment(comm: CommentModel) {
@@ -306,7 +381,7 @@ export class Admin {
   }
 
   handleRegionInfo(regionData: RegionModel) {
-    this.selRegion = regionData
+    this.selRegion = { ...regionData }
     console.log(this.selRegion)
   }
 
@@ -315,32 +390,34 @@ export class Admin {
       next: (response) => {
         console.log(response)
         this.regions = this.regions!.filter(item => item !== region)
+        this.selRegion = {
+          id: -1,
+          name: "",
+          coord: [[], [], [], []]
+        };
       },
       error: (response) => console.log(response)
     })
   }
 
   handleSubmitRegions() {
-    if (this.isCreating) {
-      console.log(this.selRegion)
-      const newRegion = {
-        name: this.selRegion.name,
-        coord: this.selRegion.coord
-      };
+    console.log(this.selRegion)
+    const newRegion = {
+      name: this.selRegion.name,
+      coord: this.selRegion.coord
+    };
 
-      this.kbugService.postRegion(newRegion).subscribe({
-        next: (response) => this.regions?.push(response),
-        error: (response) => console.log(response)
-      })
+    this.kbugService.postRegion(newRegion).subscribe({
+      next: (response) => this.regions?.push(response),
+      error: (response) => console.log(response)
+    })
 
-      this.selRegion = {
-        id: -1,
-        name: "",
-        coord: [[], [], [], []]
-      };
-    } else {
-      console.log("UPDATE!")
-    }
+    this.selRegion = {
+      id: -1,
+      name: "",
+      coord: [[], [], [], []]
+    };
+
   }
 
   // OTHER
@@ -362,6 +439,8 @@ export class Admin {
     this.regions = this.regions!.filter(
       reg => !this.selBug?.regions.some(r => r.id === reg.id)
     );
+
+
   }
 
   onFileSelected(event: Event) {
@@ -403,7 +482,7 @@ export class Admin {
     }
   }
 
-  deleteUploadedImage() {
-
+  deleteUploadedImage(urlIndex: number) {
+    this.selBug.picture_urls.splice(urlIndex, 1)
   }
 }

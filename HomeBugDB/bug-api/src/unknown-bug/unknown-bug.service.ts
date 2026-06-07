@@ -53,41 +53,38 @@ export class UnknownBugService {
     const limit = filters.limit ?? 20;
     const skip = (page - 1) * limit;
 
-    const [insects, colors, sizes, countryCodes, total] = await Promise.all([
-      (() => {
-        const qb = this.unknownBugRepo
-          .createQueryBuilder('unknown-bug')
-          .leftJoinAndSelect('unknown-bug.user', 'user')
-          .leftJoinAndSelect('unknown-bug.comments', 'comments')
-          .leftJoinAndSelect('comments.user', 'comments_user')
-          .leftJoinAndSelect('comments.ratings', 'ratings')
-          .skip(skip)
-          .take(limit);
+    const qb = this.unknownBugRepo
+      .createQueryBuilder('unknown-bug')
+      .leftJoinAndSelect('unknown-bug.user', 'user')
+      .leftJoinAndSelect('unknown-bug.comments', 'comments')
+      .leftJoinAndSelect('comments.user', 'comments_user')
+      .leftJoinAndSelect('comments.ratings', 'ratings')
+      .skip(skip)
+      .take(limit);
 
-        if (filters.colors?.length) {
-          qb.andWhere('unknown-bug.color IN (:...colors)', { colors: filters.colors })
-        }
-        if (filters.sizes?.length) {
-          qb.andWhere('unknown-bug.size IN (:...sizes)', { sizes: filters.sizes })
-        }
-        if (filters.countryCodes?.length) {
-          qb.andWhere('unknown-bug.countryCode IN (:...countryCodes)', { countryCodes: filters.countryCodes })
-        }
-        if (filters.legs !== undefined) {
-          qb.andWhere('unknown-bug.legs = :legs', { legs: filters.legs })
-        }
-        if (filters.wings !== undefined) {
-          qb.andWhere('unknown-bug.wings = :wings', { wings: filters.wings });
-        }
-        return qb.getMany()
+    if (filters.colors?.length) {
+      qb.andWhere('unknown-bug.color IN (:...colors)', { colors: filters.colors })
+    }
+    if (filters.sizes?.length) {
+      qb.andWhere('unknown-bug.size IN (:...sizes)', { sizes: filters.sizes })
+    }
+    if (filters.countryCodes?.length) {
+      qb.andWhere('unknown-bug.countryCode IN (:...countryCodes)', { countryCodes: filters.countryCodes })
+    }
+    if (filters.legs !== undefined) {
+      qb.andWhere('unknown-bug.legs = :legs', { legs: filters.legs })
+    }
+    if (filters.wings !== undefined) {
+      qb.andWhere('unknown-bug.wings = :wings', { wings: filters.wings });
+    }
+
+    const [[insects, total], colors, sizes, countryCodes] = await Promise.all([
+      (() => {
+        return qb.getManyAndCount()
       })(),
       this.unknownBugRepo.createQueryBuilder('unknown-bug').select("DISTINCT unknown-bug.color", "color").getRawMany(),
       this.unknownBugRepo.createQueryBuilder('unknown-bug').select("DISTINCT unknown-bug.size", "size").getRawMany(),
       this.unknownBugRepo.createQueryBuilder('unknown-bug').select("DISTINCT unknown-bug.countryCode", "countryCode").getRawMany(),
-      () => {
-        const qb = this.unknownBugRepo.createQueryBuilder('unknown-bug');
-        return qb.getCount()
-      }
     ])
     return [insects, colors, sizes, countryCodes, total]
   }
@@ -137,5 +134,5 @@ export class UnknownBugService {
     await this.unknownBugRepo.remove(ubug)
   }
 
- 
+
 }

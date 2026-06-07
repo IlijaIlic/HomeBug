@@ -8,7 +8,7 @@ import { KnownBugModel } from '../../models/known-bug.model';
 import { InputField } from '../ui-components/input-field/input-field';
 import { HabitatsService } from '../../services/habitats.service';
 import { FormsModule } from '@angular/forms';
-import { debounceTime, distinctUntilChanged, filter, Subject, switchAll, switchMap, take } from 'rxjs';
+import { debounceTime, distinctUntilChanged, filter, fromEvent, map, Subject, switchAll, switchMap, take, throttleTime } from 'rxjs';
 
 @Component({
   selector: 'app-encyclopedia',
@@ -110,6 +110,32 @@ export class Encyclopedia implements OnInit {
         this.nameSuggestions = response
       }
     })
+
+    //   @HostListener('window:scroll')
+    // onScroll() {
+    //   const threshold = 500;
+    //   const position = window.innerHeight + window.scrollY;
+    //   const height = document.documentElement.scrollHeight;
+
+    //   console.log(threshold, position, height)
+    //   if (position >= height - threshold) {
+    //     this.loadKBugs(false);
+    //   }
+    // }
+
+    const treshold = 500
+    fromEvent(window, 'scroll').pipe(
+      throttleTime(200),
+      map(() => ({
+        position: window.innerHeight + window.scrollY,
+        height: document.documentElement.scrollHeight
+      })),
+      filter(({ position, height }) => position >= height - treshold),
+      filter(() => !this.isLoading && this.hasMore)
+    ).subscribe(() => {
+      this.loadKBugs(false)
+    }
+    )
   }
 
   ngOnDestroy(): void {
@@ -212,17 +238,7 @@ export class Encyclopedia implements OnInit {
     }
   }
 
-  @HostListener('window:scroll')
-  onScroll() {
-    const threshold = 500;
-    const position = window.innerHeight + window.scrollY;
-    const height = document.documentElement.scrollHeight;
 
-    console.log(threshold, position, height)
-    if (position >= height - threshold) {
-      this.loadKBugs(false);
-    }
-  }
 
   removeLegs() {
     this.filters.legs = null

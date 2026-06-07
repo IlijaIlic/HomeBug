@@ -3,18 +3,20 @@ import * as L from 'leaflet'
 import { REGIONS } from '../../data/regions';
 import { KnownBugModel } from '../../models/known-bug.model';
 import { KnownBugService } from '../../services/known-bug-service';
-import { ActivatedRoute, Router } from '@angular/router';
+import { ActivatedRoute, Router, RouterModule } from '@angular/router';
 import { NgIcon } from '@ng-icons/core';
 import { UserService } from '../../services/user.service';
 import { AuthService } from '../auth/auth.service';
 import { HabitatsService } from '../../services/habitats.service';
 import * as GeoJSON from 'geojson';
+import { forkJoin, switchMap } from 'rxjs';
+import { UnknownBugImage } from '../ui-components/unknown-bug-image/unknown-bug-image';
 
 type HabitatKey = "grass" | "forest" | "garden" | "wet" | "desert" | "mountain" | "rainforest" | "agro";
 
 @Component({
   selector: 'app-known-bug',
-  imports: [NgIcon],
+  imports: [NgIcon, UnknownBugImage, RouterModule],
   templateUrl: './known-bug.html',
   styleUrl: './known-bug.scss',
 })
@@ -63,35 +65,49 @@ export class KnownBug implements AfterViewInit, OnInit {
     bites: false,
   };
 
+  filters = {
+    color: "" as string,
+    bodyType: "" as string,
+    size: "" as string,
+    regions: [] as string[],
+  };
+
+
+  public similarBugs: KnownBugModel[] = []
+
   ngOnInit(): void {
-    const id = Number(this.route.snapshot.paramMap.get('id'))
+    const userId = this.authService.currentUserSubject.value.sub
 
-    this.kbugService.getById(id).subscribe({
-      next: (response) => {
-        this.bug = response
-        console.log(response)
-
+    this.route.paramMap.pipe(
+      switchMap(params => {
+        const bugId = Number(params.get('id'));
+        return this.kbugService.getById(bugId);
+      }),
+      switchMap(result => {
+        this.bug = result
+        console.log(result)
         this.addRegions()
+        this.filters.bodyType = result.body_type
+        this.filters.color = result.color
+        this.filters.size = result.size
+
+        return forkJoin({
+          similar: this.kbugService.getSimilar(this.filters, result.id),
+          user: this.userService.getById(userId)
+        })
+      })
+    ).subscribe({
+      next: ({ similar, user }) => {
+        this.similarBugs = similar
+        console.log(similar)
+        this.saved = user.saved_bugs?.some(x => x.id == this.bug.id) ?? false
       },
       error: (response) => console.log(response)
     })
 
-    this.userService.getById(this.authService.currentUserSubject.value.sub).subscribe({
-      next: (res) => {
-        if (res.saved_bugs?.some(x => x.id == this.bug.id)) {
-          this.saved = true
-        } else {
-          this.saved = false
-        }
-      },
-      error: (res) => console.log(res)
-    })
-
-
   }
 
   ngAfterViewInit(): void {
-
     this.map = L.map('location-map').setView([35, 50], 1);
 
     L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
@@ -101,6 +117,13 @@ export class KnownBug implements AfterViewInit, OnInit {
   }
 
   addRegions() {
+
+    this.map.eachLayer(layer => {
+    if (!(layer instanceof L.TileLayer)) {
+      this.map.removeLayer(layer);
+    }
+  });
+
     const colors = [
       '#e74c3c', '#3498db', '#2ecc71', '#f39c12', '#9b59b6',
       '#1abc9c', '#e67e22', '#e91e63', '#00bcd4', '#8bc34a'
@@ -155,5 +178,7 @@ export class KnownBug implements AfterViewInit, OnInit {
       queryParams: { [filterKey]: value }
     });
   }
+
+
 
 }

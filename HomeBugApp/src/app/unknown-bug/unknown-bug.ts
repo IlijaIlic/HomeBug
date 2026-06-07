@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnDestroy, OnInit } from '@angular/core';
 import { Comment } from '../ui-components/comment/comment';
 import { UnknownBugModel } from '../../models/unknown-bug.model';
 import { UnknownBugService } from '../../services/unknown-bug.service';
@@ -8,6 +8,7 @@ import { FormsModule } from '@angular/forms';
 import { CommentService } from '../../services/comment.service';
 import { AuthService } from '../auth/auth.service';
 import { Modal } from '../ui-components/modal/modal';
+import { Subject, switchMap, takeUntil, timer } from 'rxjs';
 
 type ReputationKey = -2 | -1 | 0 | 1 | 2;
 
@@ -17,7 +18,7 @@ type ReputationKey = -2 | -1 | 0 | 1 | 2;
   templateUrl: './unknown-bug.html',
   styleUrl: './unknown-bug.scss',
 })
-export class UnknownBug implements OnInit {
+export class UnknownBug implements OnInit, OnDestroy {
 
   bug?: UnknownBugModel;
   countryCode = 'rs';
@@ -34,6 +35,7 @@ export class UnknownBug implements OnInit {
     "2": "Bug Whisperer 🦋",
   }
   userReputation: ReputationKey = -1;
+  protected destroy$ = new Subject<void>();
 
   constructor(
     private ubugService: UnknownBugService,
@@ -43,45 +45,63 @@ export class UnknownBug implements OnInit {
     private router: Router
   ) { }
 
+
   ngOnInit(): void {
     const id = Number(this.route.snapshot.paramMap.get('id'))
     if (id) {
-      this.ubugService.getById(id).subscribe({
-        next: (response) => {
-          this.bug = response;
-          this.bug.comments = this.bug.comments.sort((a, b) => {
-            const aIsOwner = a.user?.id == this.authService.currentUserSubject.value.sub ? 1 : 0;
-            const bIsOwner = b.user?.id == this.authService.currentUserSubject.value.sub ? 1 : 0;
 
-            if (aIsOwner !== bIsOwner) return bIsOwner - aIsOwner; 
-            return b.rating - a.rating; 
-          });
-          if (this.bug.user?.id == this.authService.currentUserSubject.value.sub) {
-            console.log("MOJ UBUG")
-            this.userOwns = true
+      timer(0, 10000).pipe(
+        switchMap(() => this.ubugService.getById(id)),
+        takeUntil(this.destroy$)
+      ).subscribe({
+        next: (response) => {
+          if (response) {
+
+            this.bug = response;
+            this.bug.comments = this.bug.comments.sort((a, b) => {
+              const aIsOwner = a.user?.id == this.authService.currentUserSubject.value.sub ? 1 : 0;
+              const bIsOwner = b.user?.id == this.authService.currentUserSubject.value.sub ? 1 : 0;
+
+              if (aIsOwner !== bIsOwner) return bIsOwner - aIsOwner;
+              return b.rating - a.rating;
+            });
+            if (this.bug.user?.id == this.authService.currentUserSubject.value.sub) {
+              this.userOwns = true
+            }
+            switch (true) {
+              case (this.bug?.user!.reputation < -200):
+                this.userReputation = -2;
+                break;
+              case (this.bug?.user!.reputation >= -200 && this.bug?.user!.reputation <= -50):
+                this.userReputation = -1;
+                break;
+              case (this.bug?.user!.reputation > -50 && this.bug?.user!.reputation <= 50):
+                this.userReputation = 0;
+                break;
+              case (this.bug?.user!.reputation > 50 && this.bug?.user!.reputation <= 200):
+                this.userReputation = 1;
+                break;
+              case (this.bug?.user!.reputation > 200):
+                this.userReputation = 2;
+                break;
+            }
           }
-          switch (true) {
-            case (this.bug?.user!.reputation < -200):
-              this.userReputation = -2;
-              break;
-            case (this.bug?.user!.reputation >= -200 && this.bug?.user!.reputation <= -50):
-              this.userReputation = -1;
-              break;
-            case (this.bug?.user!.reputation > -50 && this.bug?.user!.reputation <= 50):
-              this.userReputation = 0;
-              break;
-            case (this.bug?.user!.reputation > 50 && this.bug?.user!.reputation <= 200):
-              this.userReputation = 1;
-              break;
-            case (this.bug?.user!.reputation > 200):
-              this.userReputation = 2;
-              break;
+          else {
+            this.router.navigate(['/'])
           }
         },
-        error: (response) => console.log(response)
+        error: (response) => {
+          console.log(response)
+          this.router.navigate(['/'])
+        }
       })
 
     }
+  }
+
+  ngOnDestroy(): void {
+    this.destroy$.next()
+    this.destroy$.complete()
   }
 
   handleSubmitComment() {
@@ -96,7 +116,7 @@ export class UnknownBug implements OnInit {
         response[0].user = response[1]
         this.bug?.comments.push(response[0])
         this.commentText = ""
-        
+
       },
       error: (response) => console.log(response)
     })
@@ -122,16 +142,16 @@ export class UnknownBug implements OnInit {
     }
   }
 
-  handleDelete(){
+  handleDelete() {
     this.deleteModalVisible = true
   }
 
-  closeModal(){
+  closeModal() {
     this.deleteModalVisible = false
   }
 
-  deleteUbug(){
-    if(this.bug){
+  deleteUbug() {
+    if (this.bug) {
       this.ubugService.deleteById(this.bug.id).subscribe({
         next: (response) => {
           console.log(response)
@@ -141,5 +161,5 @@ export class UnknownBug implements OnInit {
       })
     }
   }
-  
+
 }
