@@ -20,24 +20,35 @@ import { RolesGuard } from '@auth/roles.guard';
   imports: [
     ServeStaticModule.forRoot({
       rootPath: join(__dirname, '..', 'uploads'),
-      serveRoot: '/uploads'
+      serveRoot: '/uploads',
     }),
     ConfigModule.forRoot({ isGlobal: true }),
     TypeOrmModule.forRoot({
       type: 'postgres',
-      host: 'localhost',
-      port: 5432,
-      username: 'buguser',
-      password: 'bugpass',
-      database: 'bugdb',
-      entities: [__dirname + '/**/*.entity{.ts,.js}'],
+      host: process.env.DATABASE_HOST || 'localhost',
+      port: parseInt(process.env.DATABASE_PORT!) || 5432,
+      username: process.env.DATABASE_USER || 'buguser',
+      password: process.env.DATABASE_PASSWORD || 'bugpass',
+      database: process.env.DATABASE_NAME || 'bugdb',
+      autoLoadEntities: true,
       synchronize: true,
-    }), UserModule, KnownBugModule, UnknownBugModule, RegionModule, TaxonomyModule, CommentModule, AuthModule, RatingModule],
+    }),
+    UserModule,
+    KnownBugModule,
+    UnknownBugModule,
+    RegionModule,
+    TaxonomyModule,
+    CommentModule,
+    AuthModule,
+    RatingModule,
+  ],
   controllers: [AppController],
-  providers: [AppService,
+  providers: [
+    AppService,
     {
-      provide: APP_GUARD, useClass: RolesGuard
-    }
+      provide: APP_GUARD,
+      useClass: RolesGuard,
+    },
   ],
 })
-export class AppModule { }
+export class AppModule {}

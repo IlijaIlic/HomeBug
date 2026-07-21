@@ -10,4 +10,33 @@ services:
       POSTGRES_PASSWORD: bugpass
       POSTGRES_DB: bugdb
     ports:
-      - "5432:5432"
+      - '5432:5432'
+    volumes:
+      - postgres-data:/var/lib/postgresql/data
+    healthcheck:
+      test: ['CMD-SHELL', 'pg_isready -U buguser -d bugdb']
+      interval: 5s
+      timeout: 5s
+      retries: 5
+
+  api:
+    build:
+      context: ./
+      dockerfile: Dockerfile
+    container_name: bug-api
+    restart: always
+    ports:
+      - '3000:3000'
+    environment:
+      DATABASE_HOST: postgres
+      DATABASE_PORT: 5432
+      DATABASE_USER: buguser
+      DATABASE_PASSWORD: bugpass
+      DATABASE_NAME: bugdb
+      JWT_SECRET: your_secret_here
+    depends_on:
+      postgres:
+        condition: service_healthy
+
+volumes:
+  postgres-data:
